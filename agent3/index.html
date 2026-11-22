@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CCagent · 原子习惯生成</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/favicon.png">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="brand">原子习惯生成</div>
+      <nav class="agent-nav" aria-label="Agent 切换"></nav>
+    </div>
+    <div class="top-actions">
+      <span id="engine-badge" class="engine-badge">引擎就绪</span>
+      <button id="btn-council" class="btn-ghost" type="button">智囊团</button>
+      <button id="btn-history" class="btn-ghost" type="button">历史方案</button>
+      <button id="btn-settings" class="btn-ghost" type="button">设置</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- 1. 输入习惯区（参考 Agent1） -->
+    <section id="input-card" class="card input-section">
+      <div id="input-collapsed" class="input-collapsed hidden">
+        <span id="desc-preview" class="muted"></span>
+        <button id="btn-edit-desc" class="btn-ghost" type="button">修改</button>
+      </div>
+      <div id="input-expanded">
+        <textarea
+          id="raw-input"
+          rows="4"
+          placeholder="写下你想养成的习惯、目标，或者直接粘贴一套已有计划：&#10;例如：想养成每天晨间阅读的习惯，但平时总是早起刷手机，一晃就该上班了。"
+        ></textarea>
+        <div class="input-footer">
+          <div class="examples">
+            <span class="muted">示例：</span>
+            <button class="chip" type="button" data-example="想养成每天晨间阅读的习惯，平时早上7点起床，刷牙洗脸后总是忍不住看手机，希望能读完几本专业书。">晨间阅读</button>
+            <button class="chip" type="button" data-example="想每天坚持运动减脂，以前办过健身卡但下班太累去了两次就放弃了，家里有瑜伽垫和跑鞋。">每日运动</button>
+            <button class="chip" type="button" data-example="想养成每天睡前复盘的习惯，记录今天做了什么和明天最重要的一件事，但晚上常常拖到太晚直接睡了。">睡前复盘</button>
+            <button class="chip" type="button" data-example="已有方案重构：第一步每天6点起床，第二步做20个俯卧撑，第三步背50个单词，总是坚持不到3天。">粘贴已有方案重构</button>
+          </div>
+          <button id="btn-extract" class="btn-primary" type="button">提取并完善信息</button>
+        </div>
+      </div>
+      <div id="skeleton-bar" class="skeleton hidden">
+        <div class="skel-line"></div>
+        <div class="skel-line short"></div>
+      </div>
+      <div id="error-box" class="error-box hidden"></div>
+    </section>
+
+    <!-- 2. 完善信息清单（填表模式，参考 Agent1） -->
+    <section id="refine-section" class="card hidden">
+      <div class="section-header">
+        <div>
+          <h2>完善习惯信息清单</h2>
+          <p id="extract-summary-note" class="muted" style="margin: 4px 0 0;"></p>
+        </div>
+        <div class="completeness-wrap">
+          <span class="muted">信息完整度 <strong id="completeness-pct">0%</strong></span>
+          <div class="completeness-track"><div id="completeness-bar" class="completeness-fill"></div></div>
+        </div>
+      </div>
+
+      <div id="form-groups-container" class="form-groups"></div>
+
+      <div class="refine-footer">
+        <span id="refine-hint" class="muted">空白项可留空由智囊团代为设计，补充越具体拆解越贴合。</span>
+        <div class="refine-actions">
+          <button id="btn-reset-all" class="btn-ghost" type="button">重新输入</button>
+          <button id="btn-generate" class="btn-primary" type="button">由智囊团分解为原子习惯</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. 原子习惯分解结果 -->
+    <section id="result-section" class="hidden">
+      <div class="card result-hero">
+        <div class="result-hero-top">
+          <div>
+            <div class="result-tags">
+              <span id="res-engine-tag" class="tag-pill">AI 智囊团</span>
+              <span id="res-fallback-tag" class="tag-pill tag-warn hidden"></span>
+            </div>
+            <h1 id="res-name" class="result-title"></h1>
+            <p id="res-desc" class="result-desc"></p>
+          </div>
+          <div class="export-actions">
+            <button id="btn-copy-md" class="btn-ghost" type="button">复制 Markdown</button>
+            <button id="btn-dl-md" class="btn-ghost" type="button">下载 .md</button>
+            <button id="btn-dl-json" class="btn-ghost" type="button">导出 JSON</button>
+          </div>
+        </div>
+
+        <div class="key-pillars">
+          <div class="pillar-box">
+            <div class="pillar-label">触发公式</div>
+            <div id="res-trigger" class="pillar-val"></div>
+          </div>
+          <div class="pillar-box">
+            <div class="pillar-label">身份投票</div>
+            <div id="res-identity" class="pillar-val"></div>
+          </div>
+          <div class="pillar-box pillar-fallback">
+            <div class="pillar-label">低电量防崩盘保底（2 分钟）</div>
+            <div id="res-fallback-plan" class="pillar-val"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3~5 个原子习惯递进节点 -->
+      <div class="card">
+        <div class="section-header">
+          <div>
+            <h2>原子习惯递进节点</h2>
+            <p class="muted" style="margin: 4px 0 0;">从启动阻力最低的两分钟动作开始，逐级建立稳定节律（支持点击文字直接微调）。</p>
+          </div>
+          <span id="nodes-count-badge" class="muted"></span>
+        </div>
+        <div id="nodes-list" class="nodes-list"></div>
+      </div>
+
+      <!-- 智囊团 4 人点评 -->
+      <div class="card">
+        <div class="section-header">
+          <div>
+            <h2>习惯智囊团点评</h2>
+            <p class="muted" style="margin: 4px 0 0;">4 位智囊分别从触发、阶梯、防崩盘与身份认同四个维度给出的执行建议。</p>
+          </div>
+        </div>
+        <div id="council-notes-grid" class="council-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 智囊团说明弹窗 -->
+  <div id="modal-council" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>原子习惯智囊团（4 位常驻顾问）</h3>
+        <button class="btn-ghost btn-close-modal" data-close="modal-council" type="button">关闭</button>
+      </div>
+      <div id="council-roster-list" class="roster-list"></div>
+    </div>
+  </div>
+
+  <!-- 历史方案弹窗 -->
+  <div id="modal-history" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>历史习惯方案</h3>
+        <button class="btn-ghost btn-close-modal" data-close="modal-history" type="button">关闭</button>
+      </div>
+      <div id="history-list" class="history-list"></div>
+    </div>
+  </div>
+
+  <!-- 设置弹窗（共用 API 配置） -->
+  <div id="modal-settings" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>API 与模型设置</h3>
+        <button class="btn-ghost btn-close-modal" data-close="modal-settings" type="button">关闭</button>
+      </div>
+      <div class="settings-body">
+        <p id="hosted-notice" class="muted hidden" style="margin-top:0;">
+          当前为公网托管模式，默认共享服务端免费额度；你也可以填入自己的 API Key（仅保存在当前浏览器）继续使用。
+        </p>
+        <div class="field-row">
+          <label for="cfg-provider">服务商</label>
+          <select id="cfg-provider">
+            <option value="gemini">Google Gemini（默认）</option>
+            <option value="xai">xAI Grok</option>
+            <option value="deepseek">DeepSeek</option>
+          </select>
+        </div>
+        <div class="field-row">
+          <label for="cfg-model">模型名称</label>
+          <input id="cfg-model" type="text" placeholder="gemini-3.5-flash-lite" />
+        </div>
+        <div class="field-row">
+          <label for="cfg-key">API Key（留空则使用服务端默认 Key）</label>
+          <input id="cfg-key" type="password" placeholder="输入自定义 API Key（可选）" />
+        </div>
+        <div class="field-row">
+          <label for="cfg-base-url">Base URL（可选）</label>
+          <input id="cfg-base-url" type="text" placeholder="https://generativelanguage.googleapis.com" />
+        </div>
+        <div id="settings-status" class="muted" style="min-height: 18px;"></div>
+        <div class="settings-actions">
+          <button id="btn-test-conn" class="btn-ghost" type="button">测试连接</button>
+          <button id="btn-save-cfg" class="btn-primary" type="button">保存设置</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script src="/shared/nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+{
+  "timestamp": "2026-11-12T15:21:44.261157+00:00",
+  "model": "gemini-3.5-flash",
+  "prompt": "default",
+  "with_corrections": false,
+  "total_runs": 3,
+  "total_expected_tasks": 3,
+  "domain_accuracy": 0.3333,
+  "quadrant_accuracy": 0.3333,
+  "low_confidence_ratio": 0.0,
+  "avg_latency_sec": 8.054,
+  "confusion_domain": {
+    "work": {
+      "missing": 1
+    },
+    "life": {
+      "missing": 1
+    },
+    "play": {
+      "play": 1
+    }
+  },
+  "confusion_quadrant": {
+    "q1": {
+      "missing": 2
+    },
+    "q4": {
+      "q4": 1
+    }
+  },
+  "details": [
+    {
+      "case_id": "case_001",
+      "input": "明天下午2点前必须把客户A的项目核心代码交付上线，否则延期违约扣款",
+      "engine": "ai",
+      "latency_sec": 8.815,
+      "tasks": [
+        {
+          "expected_title": "明天下午2点前必须把客户A的项目核心代码交付上线，否则延期违约扣款",
+          "actual_title": "(未拆出此任务)",
+          "expected": {
+            "domain": "work",
+            "quadrant": "q1"
+          },
+          "actual": {
+            "domain": "missing",
+            "quadrant": "missing",
+            "confidence": "none"
+          },
+          "domain_match": false,
+          "quadrant_match": false
+        }
+      ],
+      "unmatched_actual_count": 1
+    },
+    {
+      "case_id": "case_002",
+      "input": "交本月工作室电费和房租账单，明天最后扣费宽限期，避免断网",
+      "engine": "ai",
+      "latency_sec": 9.082,
+      "tasks": [
+        {
+          "expected_title": "交本月工作室电费和房租账单，明天最后扣费宽限期，避免断网",
+          "actual_title": "(未拆出此任务)",
+          "expected": {
+            "domain": "life",
+            "quadrant": "q1"
+          },
+          "actual": {
+            "domain": "missing",
+            "quadrant": "missing",
+            "confidence": "none"
+          },
+          "domain_match": false,
+          "quadrant_match": false
+        }
+      ],
+      "unmatched_actual_count": 1
+    },
+    {
+      "case_id": "case_003",
+      "input": "晚上做完工作后想玩两局黑神话悟空放松一下神经",
+      "engine": "ai",
+      "latency_sec": 6.266,
+      "tasks": [
+        {
+          "expected_title": "晚上做完工作后想玩两局黑神话悟空放松一下神经",
+          "actual_title": "玩两局黑神话悟空放松",
+          "expected": {
+            "domain": "play",
+            "quadrant": "q4"
+          },
+          "actual": {
+            "domain": "play",
+            "quadrant": "q4",
+            "confidence": "high"
+          },
+          "domain_match": true,
+          "quadrant_match": true
+        }
+      ],
+      "unmatched_actual_count": 0
+    }
+  ]
+}

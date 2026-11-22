@@ -1,0 +1,73 @@
+{
+  "timestamp": "2026-11-12T11:53:56.574063+00:00",
+  "model": "gemini-3.5-flash",
+  "total_cases": 3,
+  "domain_accuracy": 1.0,
+  "quadrant_accuracy": 1.0,
+  "confusion_domain": {
+    "work": {
+      "work": 1
+    },
+    "life": {
+      "life": 1
+    },
+    "play": {
+      "play": 1
+    }
+  },
+  "confusion_quadrant": {
+    "q1": {
+      "q1": 2
+    },
+    "q4": {
+      "q4": 1
+    }
+  },
+  "details": [
+    {
+      "id": "case_001",
+      "input": "明天下午2点前必须把客户A的项目核心代码交付上线，否则延期违约扣款",
+      "expected": {
+        "domain": "work",
+        "quadrant": "q1"
+      },
+      "actual": {
+        "domain": "work",
+        "quadrant": "q1"
+      },
+      "domain_match": true,
+      "quadrant_match": true,
+      "engine": "ai"
+    },
+    {
+      "id": "case_002",
+      "input": "交本月工作室电费和房租账单，明天最后扣费宽限期，避免断网",
+      "expected": {
+        "domain": "life",
+        "quadrant": "q1"
+      },
+      "actual": {
+        "domain": "life",
+        "quadrant": "q1"
+      },
+      "domain_match": true,
+      "quadrant_match": true,
+      "engine": "ai"
+    },
+    {
+      "id": "case_003",
+      "input": "晚上做完工作后想玩两局黑神话悟空放松一下神经",
+      "expected": {
+        "domain": "play",
+        "quadrant": "q4"
+      },
+      "actual": {
+        "domain": "play",
+        "quadrant": "q4"
+      },
+      "domain_match": true,
+      "quadrant_match": true,
+      "engine": "ai"
+    }
+  ]
+}

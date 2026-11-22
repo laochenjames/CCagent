@@ -1,0 +1,15 @@
+{
+  "name": "ccagent-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "eslint app.js",
+    "test": "npm run lint && node --test tests/js/*.test.js",
+    "e2e": "python tests/e2e/advisors.e2e.py"
+  },
+  "devDependencies": {
+    "eslint": "^9.0.0",
+    "jsdom": "^25.0.0"
+  }
+}

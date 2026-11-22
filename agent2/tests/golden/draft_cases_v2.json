@@ -1,0 +1,111 @@
+[
+  {
+    "case_id": "draft_v2_001",
+    "source_run_id": "run_20261112204222_6d4a50",
+    "raw_input": "今天早上吃，今天要去吃个饭，然后健身，然后做一些髋关节锻炼。然后把那个自媒体给做一下，视频做一下。有 5 个 APP 要做一下。然后是推特上面去进行一个宠物的这个一个一个连接吧，把那个小游戏连接到这个宠物的这个桌宠上面去，然后去发布到谷歌页面。然后其他的话，基本上就保证休息吧。然后平时玩玩游戏啊，看看圣经啊，然后就看看李敖啊",
+    "context": "本周攻坚自媒体脚本与核心交付",
+    "confirmed": false,
+    "needs_review_reason": "包含用户手动拖拽或修改过的任务，需确认是否为真实偏好而非临时测试",
+    "notes": "来源于 AI 运行 run_20261112204222_6d4a50 (gemini-3.5-flash)，共拆分 7 条任务",
+    "expected_tasks": [
+      {
+        "task_id": "t_20261112204316_1d2aa7",
+        "title": "保证充分休息",
+        "expected_domain": "play",
+        "expected_quadrant": "q2",
+        "user_moved": false,
+        "correction_ignored": false,
+        "ai_domain": "play",
+        "ai_quadrant": "q2",
+        "archetype": "PLAY_RIGID_RECOVERY",
+        "reason_hint": "因为休息是保持持续高产出的机体维护底线，所以划入Q2；若其实只是无目的打瞌睡消磨时间，则应为Q4。",
+        "advice_hint": null,
+        "confidence": "high"
+      },
+      {
+        "task_id": "t_20261112204316_a41c4d",
+        "title": "制作并剪辑自媒体视频",
+        "expected_domain": "work",
+        "expected_quadrant": "q1",
+        "user_moved": false,
+        "correction_ignored": false,
+        "ai_domain": "work",
+        "ai_quadrant": "q1",
+        "archetype": "WORK_CORE_DELIVERY",
+        "reason_hint": "因为符合本周自媒体脚本核心交付目标，所以划入Q1；若其实只是随意收集素材，则应为Q2。",
+        "advice_hint": null,
+        "confidence": "high"
+      },
+      {
+        "task_id": "t_20261112204316_b370de",
+        "title": "玩游戏放松",
+        "expected_domain": "play",
+        "expected_quadrant": "q4",
+        "user_moved": false,
+        "correction_ignored": false,
+        "ai_domain": "play",
+        "ai_quadrant": "q4",
+        "archetype": "PLAY_LEISURE_RELAX",
+        "reason_hint": "因为属于纯粹的个人休闲娱乐消遣，所以划入Q4；若其实是游戏行业的竞品拆解调研，则应为Q2。",
+        "advice_hint": null,
+        "confidence": "high"
+      },
+      {
+        "task_id": "t_20261112204316_cbfab0",
+        "title": "处理 5 个 APP 相关事项",
+        "expected_domain": "work",
+        "expected_quadrant": "candidate",
+        "user_moved": false,
+        "correction_ignored": false,
+        "ai_domain": "work",
+        "ai_quadrant": "candidate",
+        "archetype": "WORK_SHALLOW_NOISE",
+        "reason_hint": "因为意图与具体操作极其模糊，所以划入待决备选；若其实是紧急线上Bug修复，则应为Q1。",
+        "advice_hint": null,
+        "confidence": "low"
+      },
+      {
+        "task_id": "t_20261112204316_d3d4cd",
+        "title": "阅读圣经与李敖著作",
+        "expected_domain": "study",
+        "expected_quadrant": "q4",
+        "user_moved": true,
+        "correction_ignored": true,
+        "ai_domain": "study",
+        "ai_quadrant": "q4",
+        "archetype": "STUDY_BROAD_HORIZON",
+        "reason_hint": "因为属于无紧迫交付关联的泛知识阅读，所以划入Q4；若其实有本周相关的写作研究目标，则应为Q2。",
+        "advice_hint": null,
+        "confidence": "high"
+      },
+      {
+        "task_id": "t_20261112204316_d77282",
+        "title": "健身与髋关节训练",
+        "expected_domain": "play",
+        "expected_quadrant": "q2",
+        "user_moved": false,
+        "correction_ignored": false,
+        "ai_domain": "play",
+        "ai_quadrant": "q2",
+        "archetype": "PLAY_RIGID_RECOVERY",
+        "reason_hint": "因为身体维护与恢复是维持持续产出的底线，所以划入Q2；若其实身体严重不适需就医，则应为Q1。",
+        "advice_hint": null,
+        "confidence": "high"
+      },
+      {
+        "task_id": "t_20261112204316_dd9825",
+        "title": "桌宠小游戏连接推特并发布至谷歌页面",
+        "expected_domain": "work",
+        "expected_quadrant": "q1",
+        "user_moved": false,
+        "correction_ignored": false,
+        "ai_domain": "work",
+        "ai_quadrant": "q1",
+        "archetype": "WORK_CORE_DELIVERY",
+        "reason_hint": "因为涉及产品上线与平台发布窗口，所以划入Q1；若其实仅为内部无期限Demo测试，则应为Q2。",
+        "advice_hint": null,
+        "confidence": "high"
+      }
+    ]
+  }
+]

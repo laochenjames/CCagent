@@ -1,0 +1,236 @@
+{
+  "label": "dryrun_test",
+  "timestamp": "2026-11-13T04:34:03.849816+00:00",
+  "model": "fallback",
+  "prompt_file": "default (prompts/triage_prompt.md)",
+  "corrections_file": "none",
+  "engine": "fallback",
+  "total_runs": 3,
+  "successful_runs": 3,
+  "error_runs": 0,
+  "total_expected_tasks": 3,
+  "total_actual_tasks": 3,
+  "domain_accuracy": 0.6667,
+  "quadrant_accuracy": 0.6667,
+  "split_recall": 1.0,
+  "over_split_ratio": 0.0,
+  "low_confidence_ratio": 1.0,
+  "latency": {
+    "avg_sec": 0.008,
+    "max_sec": 0.02,
+    "min_sec": 0.001
+  },
+  "confusion_domain": {
+    "work": {
+      "work": 1
+    },
+    "life": {
+      "life": 1
+    },
+    "play": {
+      "work": 1
+    }
+  },
+  "confusion_quadrant": {
+    "q1": {
+      "q1": 2
+    },
+    "q4": {
+      "q2": 1
+    }
+  },
+  "cases": [
+    {
+      "case_id": "case_001",
+      "input": "明天下午2点前必须把客户A的项目核心代码交付上线，否则延期违约扣款",
+      "context": "",
+      "status": "success",
+      "all_correct": true,
+      "engine": "fallback",
+      "latency_sec": 0.02,
+      "expected_tasks": [
+        {
+          "title": "明天下午2点前必须把客户A的项目核心代码交付上线，否则延期违约扣款",
+          "expected_domain": "work",
+          "expected_quadrant": "q1"
+        }
+      ],
+      "actual_tasks": [
+        {
+          "id": "t_20261113123403_00f9ce",
+          "title": "明天下午2点前必须把客户A的项目核心代码交付上线，否则延期违约扣款",
+          "domain": "work",
+          "quadrant": "q1",
+          "action": "",
+          "status": "open",
+          "timeframe": "tomorrow",
+          "due_date": null,
+          "est_minutes": 0,
+          "fixed_time": null,
+          "reason": "因为属于work领域常规事项，所以置于Q1；若有紧急外部约束则应调整。",
+          "advice": "锁定整块黄金专注时段全力攻坚明天下午2点前必须把客户A的项目核心代码交付上线，否则延期违约扣款，拆出前10分钟启动动作。",
+          "factors": "{\"deadline\": \"无/模糊\", \"consequence\": \"无明显不可逆损失\", \"reversible\": true, \"waiting_party\": \"无\", \"money_related\": false}",
+          "assumptions": "[]",
+          "confidence": "low",
+          "probe": "",
+          "expert_id": "WORK_CORE_DELIVERY",
+          "ai_quadrant": "q1",
+          "ai_domain": "work",
+          "user_moved": 0,
+          "engine": "fallback",
+          "run_id": null,
+          "created_at": "2026-11-13T04:34:03.827656Z",
+          "updated_at": "2026-11-13T04:34:03.827656Z",
+          "done_at": null
+        }
+      ],
+      "matched_pairs": [
+        {
+          "expected_title": "明天下午2点前必须把客户A的项目核心代码交付上线，否则延期违约扣款",
+          "actual_title": "明天下午2点前必须把客户A的项目核心代码交付上线，否则延期违约扣款",
+          "expected_domain": "work",
+          "actual_domain": "work",
+          "expected_quadrant": "q1",
+          "actual_quadrant": "q1",
+          "confidence": "low",
+          "domain_match": true,
+          "quadrant_match": true,
+          "reason": "因为属于work领域常规事项，所以置于Q1；若有紧急外部约束则应调整。",
+          "advice": "锁定整块黄金专注时段全力攻坚明天下午2点前必须把客户A的项目核心代码交付上线，否则延期违约扣款，拆出前10分钟启动动作。",
+          "factors": "{\"deadline\": \"无/模糊\", \"consequence\": \"无明显不可逆损失\", \"reversible\": true, \"waiting_party\": \"无\", \"money_related\": false}",
+          "assumptions": "[]",
+          "expert_id": "WORK_CORE_DELIVERY"
+        }
+      ],
+      "unmatched_actuals": []
+    },
+    {
+      "case_id": "case_002",
+      "input": "交本月工作室电费和房租账单，明天最后扣费宽限期，避免断网",
+      "context": "",
+      "status": "success",
+      "all_correct": true,
+      "engine": "fallback",
+      "latency_sec": 0.001,
+      "expected_tasks": [
+        {
+          "title": "交本月工作室电费和房租账单，明天最后扣费宽限期，避免断网",
+          "expected_domain": "life",
+          "expected_quadrant": "q1"
+        }
+      ],
+      "actual_tasks": [
+        {
+          "id": "t_20261113123403_5c29a2",
+          "title": "交本月工作室电费和房租账单，明天最后扣费宽限期，避免断网",
+          "domain": "life",
+          "quadrant": "q1",
+          "action": "",
+          "status": "open",
+          "timeframe": "tomorrow",
+          "due_date": null,
+          "est_minutes": 0,
+          "fixed_time": null,
+          "reason": "因为属于life领域常规事项，所以置于Q1；若有紧急外部约束则应调整。",
+          "advice": "今日优先处理交本月工作室电费和房租账单，明天最后扣费宽限期，避免断网，并建议设置自动扣款或周期提醒。",
+          "factors": "{\"deadline\": \"无/模糊\", \"consequence\": \"无明显不可逆损失\", \"reversible\": true, \"waiting_party\": \"无\", \"money_related\": false}",
+          "assumptions": "[]",
+          "confidence": "low",
+          "probe": "",
+          "expert_id": "LIFE_HARD_DEADLINE",
+          "ai_quadrant": "q1",
+          "ai_domain": "life",
+          "user_moved": 0,
+          "engine": "fallback",
+          "run_id": null,
+          "created_at": "2026-11-13T04:34:03.846013Z",
+          "updated_at": "2026-11-13T04:34:03.846013Z",
+          "done_at": null
+        }
+      ],
+      "matched_pairs": [
+        {
+          "expected_title": "交本月工作室电费和房租账单，明天最后扣费宽限期，避免断网",
+          "actual_title": "交本月工作室电费和房租账单，明天最后扣费宽限期，避免断网",
+          "expected_domain": "life",
+          "actual_domain": "life",
+          "expected_quadrant": "q1",
+          "actual_quadrant": "q1",
+          "confidence": "low",
+          "domain_match": true,
+          "quadrant_match": true,
+          "reason": "因为属于life领域常规事项，所以置于Q1；若有紧急外部约束则应调整。",
+          "advice": "今日优先处理交本月工作室电费和房租账单，明天最后扣费宽限期，避免断网，并建议设置自动扣款或周期提醒。",
+          "factors": "{\"deadline\": \"无/模糊\", \"consequence\": \"无明显不可逆损失\", \"reversible\": true, \"waiting_party\": \"无\", \"money_related\": false}",
+          "assumptions": "[]",
+          "expert_id": "LIFE_HARD_DEADLINE"
+        }
+      ],
+      "unmatched_actuals": []
+    },
+    {
+      "case_id": "case_003",
+      "input": "晚上做完工作后想玩两局黑神话悟空放松一下神经",
+      "context": "",
+      "status": "success",
+      "all_correct": false,
+      "engine": "fallback",
+      "latency_sec": 0.002,
+      "expected_tasks": [
+        {
+          "title": "晚上做完工作后想玩两局黑神话悟空放松一下神经",
+          "expected_domain": "play",
+          "expected_quadrant": "q4"
+        }
+      ],
+      "actual_tasks": [
+        {
+          "id": "t_20261113123403_418a8c",
+          "title": "晚上做完工作后想玩两局黑神话悟空放松一下神经",
+          "domain": "work",
+          "quadrant": "q2",
+          "action": "",
+          "status": "open",
+          "timeframe": "tomorrow",
+          "due_date": null,
+          "est_minutes": 0,
+          "fixed_time": null,
+          "reason": "因为属于work领域常规事项，所以置于Q2；若有紧急外部约束则应调整。",
+          "advice": "按计划推进晚上做完工作后想玩两局黑神话悟空放松一下神经，关注是否符合本周重点。",
+          "factors": "{\"deadline\": \"无/模糊\", \"consequence\": \"无明显不可逆损失\", \"reversible\": true, \"waiting_party\": \"无\", \"money_related\": false}",
+          "assumptions": "[]",
+          "confidence": "low",
+          "probe": "",
+          "expert_id": null,
+          "ai_quadrant": "q2",
+          "ai_domain": "work",
+          "user_moved": 0,
+          "engine": "fallback",
+          "run_id": null,
+          "created_at": "2026-11-13T04:34:03.848552Z",
+          "updated_at": "2026-11-13T04:34:03.848552Z",
+          "done_at": null
+        }
+      ],
+      "matched_pairs": [
+        {
+          "expected_title": "晚上做完工作后想玩两局黑神话悟空放松一下神经",
+          "actual_title": "晚上做完工作后想玩两局黑神话悟空放松一下神经",
+          "expected_domain": "play",
+          "actual_domain": "work",
+          "expected_quadrant": "q4",
+          "actual_quadrant": "q2",
+          "confidence": "low",
+          "domain_match": false,
+          "quadrant_match": false,
+          "reason": "因为属于work领域常规事项，所以置于Q2；若有紧急外部约束则应调整。",
+          "advice": "按计划推进晚上做完工作后想玩两局黑神话悟空放松一下神经，关注是否符合本周重点。",
+          "factors": "{\"deadline\": \"无/模糊\", \"consequence\": \"无明显不可逆损失\", \"reversible\": true, \"waiting_party\": \"无\", \"money_related\": false}",
+          "assumptions": "[]",
+          "expert_id": null
+        }
+      ],
+      "unmatched_actuals": []
+    }
+  ]
+}

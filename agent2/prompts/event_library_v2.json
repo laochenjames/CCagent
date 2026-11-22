@@ -1,0 +1,115 @@
+{
+  "version": "2.1-freelancer",
+  "user_profile": {
+    "role": "独立创作者 / 自由职业者",
+    "core_interest": "最大化真实时薪(ROI)、保障核心项目交付与可复用SOP沉淀、在工作生活混合态中保护高认知心力带宽",
+    "golden_hours_rule": "高认知心力时段仅允许分配给 Q1 核心攻坚与 Q2 高杠杆基建，严禁生活琐事与低价值沟通穿插"
+  },
+  "event_archetypes": [
+    {
+      "id": "WORK_CORE_DELIVERY",
+      "category": "工作-核心产出",
+      "quadrant": "Q1",
+      "quadrant_name": "第一象限：重要且紧急（核心生计与攻坚）",
+      "trigger_patterns": ["交付", "定稿", "变现", "主线项目", "核心脚本", "分镜攻坚", "客户尾款", "上线"],
+      "trap_warning": "高认知阻力容易引发拖延，警惕用生活琐事或边缘微调来逃避启动。",
+      "advisory_board_actions": {
+        "cfo": "全天最高ROI事项，锁定第一优先级，未推进前冻结一切非必要杂务。",
+        "anti_procrastination": "强制拆解出10分钟内可无脑完成的最小启动步（如：只拉出粗略骨架），先动起来。",
+        "energy_gatekeeper": "锁死在今日精力最旺盛的黄金整块时段，开启免打扰。"
+      },
+      "scheduling_rule": "DEEP_WORK_BLOCK_1"
+    },
+    {
+      "id": "LIFE_HARD_DEADLINE",
+      "category": "生活-硬性底线",
+      "quadrant": "Q1",
+      "quadrant_name": "第一象限：重要且紧急（生存底线与防爆雷）",
+      "trigger_patterns": ["水电费", "房租", "报税", "看病", "买药", "断网", "服务器续费", "签证证件", "定时签收"],
+      "trap_warning": "拖延会导致工作环境停摆或高额罚款，但处理时极易顺手刷手机导致时间失控。",
+      "advisory_board_actions": {
+        "architect": "执行15分钟极速清零，顺手设置自动扣款或周期提醒，绝不留后患。",
+        "energy_gatekeeper": "安排在深度工作正式开始前的热身间隙快速打勾，释放大脑后台内存。"
+      },
+      "scheduling_rule": "QUICK_CLEAR_SLOT"
+    },
+    {
+      "id": "WORK_LEVERAGE_SOP",
+      "category": "工作-长期复利",
+      "quadrant": "Q2",
+      "quadrant_name": "第二象限：重要不紧急（复利资产与基建）",
+      "trigger_patterns": ["SOP搭建", "工作流优化", "提示词库", "素材库沉淀", "自动化脚本", "深度调研", "长线IP"],
+      "trap_warning": "警惕陷入『基建成瘾』，花大量时间造轮子却不产出实际作品。",
+      "advisory_board_actions": {
+        "cfo": "核算回本周期：这套工具/调研能省下未来多少小时？砍掉过度设计，只做最小可用闭环(MVP)。",
+        "energy_gatekeeper": "严格执行时间盒封顶（限时60-90分钟），绝不允许反客为主挤占Q1交付。"
+      },
+      "scheduling_rule": "DEEP_WORK_BLOCK_2"
+    },
+    {
+      "id": "LIFE_ENERGY_RECOVERY",
+      "category": "生活-刚性回血",
+      "quadrant": "Q2",
+      "quadrant_name": "第二象限：重要不紧急（生产设备维护）",
+      "trigger_patterns": ["健身", "运动", "跑步", "买菜做饭", "午休", "早睡", "冥想", "散步充电"],
+      "trap_warning": "自由职业者最容易牺牲健康的睡眠与运动去填补效率低下的窟窿，导致次日精力崩盘。",
+      "advisory_board_actions": {
+        "energy_gatekeeper": "你本人就是最核心的赚钱机器，身心维护属于刚性折旧保养，必须锁死日程，禁止带着负罪感休息。",
+        "architect": "将运动或散步穿插在两段高强度用脑之间，充当物理换脑阀门。"
+      },
+      "scheduling_rule": "RECHARGE_BLOCK"
+    },
+    {
+      "id": "WORK_SHALLOW_NOISE",
+      "category": "工作-突发杂音",
+      "quadrant": "Q3",
+      "quadrant_name": "第三象限：紧急不重要（低价值工作配合）",
+      "trigger_patterns": ["回消息", "小修改", "导出格式", "开发票", "对账", "群聊沟通", "帮别人看东西"],
+      "trap_warning": "随时响应会把黄金创作期切成碎片，造成『忙了一整天却没干正事』的假象。",
+      "advisory_board_actions": {
+        "architect": "严禁随时处理！全部打包塞进下午低脑力时段集中批处理，能用AI或模板3分钟糊弄的绝不花10分钟。",
+        "cfo": "执行60分及格标准，快速交付脱身，保护核心时薪。"
+      },
+      "scheduling_rule": "BATCH_SHALLOW_SLOT"
+    },
+    {
+      "id": "LIFE_INTRUSIVE_CHORES",
+      "category": "生活-日常琐事",
+      "quadrant": "Q3",
+      "quadrant_name": "第三象限：紧急不重要（侵入式家务与跑腿）",
+      "trigger_patterns": ["取快递", "寄快递", "买日用品", "买猫粮", "洗衣服", "晾衣服", "倒垃圾", "洗碗", "简单收拾"],
+      "trap_warning": "在家办公极易因为视线内看到杂物而随时中断工作去收拾，击穿心流。",
+      "advisory_board_actions": {
+        "cfo": "算清时薪账：能花几块钱跑腿、外卖或用机器代劳的，坚决花钱买时间。",
+        "energy_gatekeeper": "打包作为『高脑力工作90分钟后的肢体活动休息』，只有脑子累了才允许起身集中干完这波家务。"
+      },
+      "scheduling_rule": "PHYSICAL_BUFFER_SLOT"
+    },
+    {
+      "id": "WORK_FAKE_PRODUCTIVITY",
+      "category": "工作-伪勤奋陷阱",
+      "quadrant": "Q4",
+      "quadrant_name": "第四象限：不重要不紧急（完美主义自嗨与内耗）",
+      "trigger_patterns": ["微调边缘细节", "试用新插件", "换笔记软件", "整理旧文件夹", "无目的看行业八卦", "死磕非核心像素"],
+      "trap_warning": "最高危陷阱！用低认知阻力的表面勤奋，掩盖对主线任务的逃避。",
+      "advisory_board_actions": {
+        "anti_procrastination": "【触发防逃避警报】立刻停手！这件事对你的核心商业闭环零贡献，你只是在找安全感。",
+        "energy_gatekeeper": "直接从今日待办中剥离，丢入『周末闲暇玩具池』，主线未完严禁触碰。"
+      },
+      "scheduling_rule": "DROP_OR_FREEZE"
+    },
+    {
+      "id": "LIFE_ESCAPE_DRAIN",
+      "category": "生活-逃避型消耗",
+      "quadrant": "Q4",
+      "quadrant_name": "第四象限：不重要不紧急（考前擦桌子与精力黑洞）",
+      "trigger_patterns": ["全屋大扫除", "深度断舍离", "整理旧照片", "刷短视频", "全网比价凑单", "无脑刷剧"],
+      "trap_warning": "典型的『考前擦桌子』心理防御机制，或者多巴胺透支导致彻底废掉半天。",
+      "advisory_board_actions": {
+        "anti_procrastination": "一针见血戳破：工作日突然想大扫除/深度整理，100%是因为主线工作卡壳了在逃避！立刻回到桌前干10分钟正事。",
+        "cfo": "为省十几块钱比价一小时，是自由职业者最亏本的买卖，直接砍掉。"
+      },
+      "scheduling_rule": "HARD_DROP"
+    }
+  ]
+}

@@ -1,0 +1,379 @@
+{
+  "session_id": "s_fixture_excl",
+  "version": 1,
+  "rules_version": "2.3",
+  "decision": "开源工具",
+  "score": {
+    "point": 55,
+    "low": 15,
+    "high": 95,
+    "label": "还看不出来",
+    "action": "",
+    "confidence": 0.0,
+    "confidence_pct": 0,
+    "confidence_note": "置信度表示信息够不够，不表示结论一定对。",
+    "red_line": false,
+    "excluded": [
+      {
+        "id": "MONETIZATION",
+        "name": "变现与需求",
+        "reason": "你标记为不适用",
+        "rating_if_included": "无法判断"
+      }
+    ]
+  },
+  "factors": [
+    {
+      "id": "CAPABILITY",
+      "name": "能力与渠道",
+      "rating": "无法判断",
+      "rule_note": "经验/作品（skill_evidence）与渠道（channel_access）均未提供。",
+      "known": false,
+      "interval": [
+        15,
+        95
+      ]
+    },
+    {
+      "id": "EXECUTION",
+      "name": "时间与执行",
+      "rating": "无法判断",
+      "rule_note": "执行力三个信号（实际/计划工时、连续周数、过去项目）均不足。（以上阈值为经验阈值，仅供参考）",
+      "known": false,
+      "interval": [
+        15,
+        95
+      ]
+    },
+    {
+      "id": "OPPORTUNITY",
+      "name": "划算程度",
+      "rating": "无法判断",
+      "rule_note": "缺少单价、到手比例或对应底线，无法判断机会成本。",
+      "known": false,
+      "interval": [
+        15,
+        95
+      ]
+    },
+    {
+      "id": "STOPLOSS",
+      "name": "止损设置",
+      "rating": "无法判断",
+      "rule_note": "缺少预计首个付费月或验证期，无法判断止损线。",
+      "known": false,
+      "interval": [
+        15,
+        95
+      ]
+    }
+  ],
+  "synthesis": {
+    "weakest": null,
+    "strongest": null,
+    "group": null,
+    "sentence": ""
+  },
+  "flags": [],
+  "groups": [
+    {
+      "id": "基本情况",
+      "name": "基本情况",
+      "state": "已评",
+      "gain": 0,
+      "excludable": false,
+      "excluded": false,
+      "auto_excluded": false,
+      "fields": [
+        {
+          "id": "purpose",
+          "ui_label": "你最想从中得到什么",
+          "type": "enum",
+          "unit": "",
+          "choices": [
+            {
+              "value": "money",
+              "label": "赚钱"
+            },
+            {
+              "value": "learn",
+              "label": "学东西"
+            },
+            {
+              "value": "transition",
+              "label": "换方向"
+            },
+            {
+              "value": "hedge",
+              "label": "对冲现有风险"
+            }
+          ],
+          "item_fields": [],
+          "value": "money",
+          "status": "given",
+          "unsure": false,
+          "sensitive": false,
+          "clarify": null
+        },
+        {
+          "id": "needs_cash",
+          "ui_label": "需要花钱吗",
+          "type": "bool",
+          "unit": "",
+          "choices": [],
+          "item_fields": [],
+          "value": false,
+          "status": "given",
+          "unsure": false,
+          "sensitive": false,
+          "clarify": null
+        },
+        {
+          "id": "affects_main_job",
+          "ui_label": "会占用主业的时间精力吗",
+          "type": "bool",
+          "unit": "",
+          "choices": [],
+          "item_fields": [],
+          "value": false,
+          "status": "given",
+          "unsure": false,
+          "sensitive": false,
+          "clarify": null
+        }
+      ]
+    },
+    {
+      "id": "能力与渠道",
+      "name": "能力与渠道",
+      "state": "未评",
+      "gain": 22,
+      "excludable": false,
+      "excluded": false,
+      "auto_excluded": false,
+      "fields": [
+        {
+          "id": "skill_evidence",
+          "ui_label": "做这件事需要的本事，你有相关经验或作品吗",
+          "type": "enum",
+          "unit": "",
+          "choices": [
+            {
+              "value": "direct",
+              "label": "有直接相关的经验或作品"
+            },
+            {
+              "value": "adjacent",
+              "label": "有相近的经验"
+            },
+            {
+              "value": "none",
+              "label": "基本没有"
+            }
+          ],
+          "item_fields": [],
+          "value": null,
+          "status": "missing",
+          "unsure": false,
+          "sensitive": false,
+          "clarify": null
+        },
+        {
+          "id": "channel_access",
+          "ui_label": "你有能接触到目标对象的渠道吗",
+          "type": "enum",
+          "unit": "",
+          "choices": [
+            {
+              "value": "has",
+              "label": "已有能触达目标客户/受众的渠道"
+            },
+            {
+              "value": "untested",
+              "label": "有渠道，但没试过"
+            },
+            {
+              "value": "none",
+              "label": "还没有"
+            }
+          ],
+          "item_fields": [],
+          "value": null,
+          "status": "missing",
+          "unsure": false,
+          "sensitive": false,
+          "clarify": null
+        }
+      ]
+    },
+    {
+      "id": "时间与执行",
+      "name": "时间与执行",
+      "state": "部分",
+      "gain": 22,
+      "excludable": false,
+      "excluded": false,
+      "auto_excluded": false,
+      "fields": [
+        {
+          "id": "weekly_hours_actual_recent",
+          "ui_label": "近期每周实际投入（小时）",
+          "type": "number",
+          "unit": "小时/周",
+          "choices": [],
+          "item_fields": [],
+          "value": 8,
+          "status": "given",
+          "unsure": false,
+          "sensitive": false,
+          "clarify": null
+        },
+        {
+          "id": "continuity_weeks_12m",
+          "ui_label": "过去一年真正在做的周数",
+          "type": "number",
+          "unit": "周",
+          "choices": [],
+          "item_fields": [],
+          "value": null,
+          "status": "missing",
+          "unsure": false,
+          "sensitive": false,
+          "clarify": null
+        },
+        {
+          "id": "weekly_hours_planned",
+          "ui_label": "打算每周投入（小时）",
+          "type": "number",
+          "unit": "小时/周",
+          "choices": [],
+          "item_fields": [],
+          "value": null,
+          "status": "missing",
+          "unsure": false,
+          "sensitive": false,
+          "clarify": null
+        }
+      ]
+    },
+    {
+      "id": "划算程度",
+      "name": "划算程度",
+      "state": "未评",
+      "gain": 22,
+      "excludable": true,
+      "excluded": false,
+      "auto_excluded": false,
+      "fields": [
+        {
+          "id": "floor_take_home_per_unit",
+          "ui_label": "你自己到手，每次最低多少才愿意做",
+          "type": "number",
+          "unit": "元",
+          "choices": [],
+          "item_fields": [],
+          "value": null,
+          "status": "missing",
+          "unsure": false,
+          "sensitive": false,
+          "clarify": null
+        },
+        {
+          "id": "unit_price",
+          "ui_label": "打算收多少钱（一单/一节/一个周期，对方付的价）",
+          "type": "number",
+          "unit": "元",
+          "choices": [],
+          "item_fields": [],
+          "value": null,
+          "status": "missing",
+          "unsure": false,
+          "sensitive": false,
+          "clarify": null
+        },
+        {
+          "id": "take_home_ratio",
+          "ui_label": "你自己能拿到几成（%）",
+          "type": "number",
+          "unit": "0-1",
+          "choices": [],
+          "item_fields": [],
+          "value": null,
+          "status": "missing",
+          "unsure": false,
+          "sensitive": false,
+          "clarify": null
+        }
+      ]
+    },
+    {
+      "id": "止损设置",
+      "name": "止损设置",
+      "state": "未评",
+      "gain": 6,
+      "excludable": false,
+      "excluded": false,
+      "auto_excluded": false,
+      "fields": [
+        {
+          "id": "first_paid_month",
+          "ui_label": "预计第几个月有第一笔收入",
+          "type": "number",
+          "unit": "月",
+          "choices": [],
+          "item_fields": [],
+          "value": null,
+          "status": "missing",
+          "unsure": false,
+          "sensitive": false,
+          "clarify": null
+        },
+        {
+          "id": "validation_months",
+          "ui_label": "没结果最多做到第几个月",
+          "type": "number",
+          "unit": "月",
+          "choices": [],
+          "item_fields": [],
+          "value": null,
+          "status": "missing",
+          "unsure": false,
+          "sensitive": false,
+          "clarify": null
+        },
+        {
+          "id": "will_really_stop",
+          "ui_label": "到时候没结果你真的会停吗",
+          "type": "bool",
+          "unit": "",
+          "choices": [],
+          "item_fields": [],
+          "value": null,
+          "status": "missing",
+          "unsure": false,
+          "sensitive": false,
+          "clarify": null
+        }
+      ]
+    },
+    {
+      "id": "变现与需求",
+      "name": "变现与需求",
+      "state": "不适用",
+      "gain": 0,
+      "excludable": true,
+      "excluded": true,
+      "auto_excluded": false,
+      "fields": []
+    }
+  ],
+  "headline": "目前信息太少，还看不出来。把下面几项补一补，判断会更有依据。\n这是基于你提供的信息的大致判断，不是精确数字。",
+  "clarify": [],
+  "analysis": null,
+  "analysis_stale": false,
+  "lint": {
+    "dropped": [],
+    "hidden_count": 0
+  },
+  "disclaimer": "本评估基于你提供的信息做出的初步判断，不构成财务、法律或职业保证。AI 对具体职业的影响属判断，不是数据。"
+}

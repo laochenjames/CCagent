@@ -1,0 +1,24 @@
+[
+  {
+    "id": "case_001",
+    "input": "明天下午2点前必须把客户A的项目核心代码交付上线，否则延期违约扣款",
+    "expected_domain": "work",
+    "expected_quadrant": "q1",
+    "notes": "直接阻断现金流与交付的硬性单向门攻坚"
+  },
+  {
+    "id": "case_002",
+    "input": "交本月工作室电费和房租账单，明天最后扣费宽限期，避免断网",
+    "expected_domain": "life",
+    "expected_quadrant": "q1",
+    "notes": "生存底线与硬性防爆雷，不做会立即导致停摆"
+  },
+  {
+    "id": "case_003",
+    "input": "晚上做完工作后想玩两局黑神话悟空放松一下神经",
+    "expected_domain": "play",
+    "expected_quadrant": "q4",
+    "notes": "中性休闲娱乐，属于非紧急非阻断的放松"
+  }
+]
+

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CCagent · 双轨思维（A 轨稳态 + B 轨高赔率）</title>
+  <link rel="stylesheet" href="/shared/thinking.css" />
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/favicon.png">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="brand">双轨思维</div>
+      <nav class="agent-nav" aria-label="Agent 切换"></nav>
+    </div>
+    <div class="top-actions">
+      <span id="engine-badge" class="engine-badge">引擎就绪</span>
+      <button id="btn-council" class="btn-ghost" type="button">智囊团</button>
+      <button id="btn-history" class="btn-ghost" type="button">历史记录</button>
+      <button id="btn-settings" class="btn-ghost" type="button">设置</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="input-card" class="card input-section">
+      <div id="input-collapsed" class="input-collapsed hidden">
+        <span id="desc-preview" class="muted"></span>
+        <button id="btn-edit-desc" class="btn-ghost" type="button">修改</button>
+      </div>
+      <div id="input-expanded">
+        <textarea id="raw-input" rows="4" placeholder="写下你当前需要“稳态托底 + 高赔率探索”的双轨抉择：&#10;例如：主业月薪稳定但看不到天花板，想同时探索 AI 独立产品，不知道怎么分配精力和何时切轨。"></textarea>
+        <div class="input-footer">
+          <div class="examples">
+            <span class="muted">示例：</span>
+            <button class="chip" type="button" data-example="目前主业稳定月入2万，但成长停滞；想利用业余时间做 AI 小工具矩阵，既怕影响主业又怕副业一直起不来。">主业托底 + AI副业</button>
+            <button class="chip" type="button" data-example="手头有一个成熟但增速放缓的外包业务（维持生活），想抽精力孵化自己的 SaaS 产品，怎么配比最安全？">老业务现金流 + 新方向</button>
+            <button class="chip" type="button" data-example="资金配置上想一边用低风险资产守住本金，一边用小仓位做高赔率策略，怎么设计仓位和止损切轨规则？">稳健投资 + 高赔率博弈</button>
+          </div>
+          <button id="btn-extract" class="btn-primary" type="button">提取并完善信息</button>
+        </div>
+      </div>
+      <div id="skeleton-bar" class="skeleton hidden">
+        <div class="skel-line"></div>
+        <div class="skel-line short"></div>
+      </div>
+      <div id="error-box" class="error-box hidden"></div>
+    </section>
+
+    <section id="refine-section" class="card hidden">
+      <div class="section-header">
+        <div>
+          <h2>完善分析信息清单</h2>
+          <p id="extract-summary-note" class="muted" style="margin: 4px 0 0;"></p>
+        </div>
+        <div class="completeness-wrap">
+          <span class="muted">信息完整度 <strong id="completeness-pct">0%</strong></span>
+          <div class="completeness-track"><div id="completeness-bar" class="completeness-fill"></div></div>
+        </div>
+      </div>
+      <div id="form-groups-container" class="form-groups"></div>
+      <div class="refine-footer">
+        <span class="muted">空白项可留空由智囊团代为推演，补充越具体结论越犀利。</span>
+        <div class="refine-actions">
+          <button id="btn-reset-all" class="btn-ghost" type="button">重新输入</button>
+          <button id="btn-generate" class="btn-primary" type="button">由智囊团设计「双轨并行」方案</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="result-section" class="hidden">
+      <div class="card result-hero">
+        <div class="result-hero-top">
+          <div>
+            <div class="result-tags">
+              <span id="res-engine-tag" class="tag-pill">AI 智囊团</span>
+              <span id="res-fallback-tag" class="tag-pill tag-warn hidden"></span>
+            </div>
+            <h1 id="res-title" class="result-title"></h1>
+            <p id="res-summary" class="result-desc"></p>
+          </div>
+          <div class="export-actions">
+            <button id="btn-copy-md" class="btn-ghost" type="button">复制 Markdown</button>
+            <button id="btn-dl-md" class="btn-ghost" type="button">下载 .md</button>
+            <button id="btn-dl-json" class="btn-ghost" type="button">导出 JSON</button>
+          </div>
+        </div>
+        <div id="res-pillars" class="key-pillars"></div>
+      </div>
+
+      <div id="res-sections"></div>
+
+      <div class="card">
+        <div class="section-header">
+          <div>
+            <h2>智囊团合议备忘录</h2>
+            <p class="muted" style="margin: 4px 0 0;">4 位顾问分别从各自专业视角给出立场、核心判断与具体落地动作。</p>
+          </div>
+        </div>
+        <div id="council-synthesis-wrap" class="council-synthesis hidden"></div>
+        <div id="council-notes-grid" class="council-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="modal-council" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>双轨思维智囊团（A/B 轨博弈与切轨 · 4 位顾问）</h3>
+        <button class="btn-ghost btn-close-modal" data-close="modal-council" type="button">关闭</button>
+      </div>
+      <div id="council-roster-list" class="roster-list"></div>
+    </div>
+  </div>
+
+  <div id="modal-history" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>历史分析记录</h3>
+        <button class="btn-ghost btn-close-modal" data-close="modal-history" type="button">关闭</button>
+      </div>
+      <div id="history-list" class="history-list"></div>
+    </div>
+  </div>
+
+  <div id="modal-settings" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>API 与模型设置</h3>
+        <button class="btn-ghost btn-close-modal" data-close="modal-settings" type="button">关闭</button>
+      </div>
+      <div class="settings-body">
+        <p id="hosted-notice" class="muted hidden" style="margin-top:0;">
+          当前为公网托管模式，默认共享服务端免费额度；你也可以填入自己的 API Key（仅保存在当前浏览器）继续使用。
+        </p>
+        <div class="field-row">
+          <label for="cfg-provider">服务商</label>
+          <select id="cfg-provider">
+            <option value="gemini">Google Gemini（默认）</option>
+            <option value="xai">xAI Grok</option>
+            <option value="deepseek">DeepSeek</option>
+          </select>
+        </div>
+        <div class="field-row">
+          <label for="cfg-model">模型名称</label>
+          <input id="cfg-model" type="text" placeholder="gemini-3.5-flash-lite" />
+        </div>
+        <div class="field-row">
+          <label for="cfg-key">API Key（留空则使用服务端默认 Key）</label>
+          <input id="cfg-key" type="password" placeholder="输入自定义 API Key（可选）" />
+        </div>
+        <div class="field-row">
+          <label for="cfg-base-url">Base URL（可选）</label>
+          <input id="cfg-base-url" type="text" placeholder="https://generativelanguage.googleapis.com" />
+        </div>
+        <div id="settings-status" class="muted" style="min-height: 18px;"></div>
+        <div class="settings-actions">
+          <button id="btn-test-conn" class="btn-ghost" type="button">测试连接</button>
+          <button id="btn-save-cfg" class="btn-primary" type="button">保存设置</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/shared/thinking.js"></script>
+  <script src="/shared/nav.js"></script>
+</body>
+</html>

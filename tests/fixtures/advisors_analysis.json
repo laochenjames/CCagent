@@ -1,0 +1,44 @@
+{
+  "analysis": {
+    "critique": [
+      {
+        "target": "MONETIZATION",
+        "text": "当前仅有口头询问，尚未验证陌生人真实付费意愿。"
+      },
+      {
+        "target": "weekly_hours_actual_recent",
+        "text": "每周实际投入 2 小时偏少，可能拉长验证周期。"
+      }
+    ],
+    "two_week_checks": [
+      {
+        "side": "需求侧",
+        "text": "找 3 位陌生目标用户完成预售或付费访谈"
+      },
+      {
+        "side": "执行侧",
+        "text": "记录连续两周实际可投入小时数是否稳定超过 4 小时"
+      }
+    ],
+    "validation_design": {
+      "action": "发布 1 个最小可交付服务页并向目标人群推送",
+      "pass_line": "两周内收到至少 1 笔真实预付款",
+      "fail_line": "两周内 0 笔付费且无人愿意预约试用",
+      "cost": "每周 4 小时，现金支出 0 元"
+    },
+    "advisors": [
+      {
+        "id": "MONETIZATION",
+        "insight": "当前尚无陌生人付费验证，建议先用最小样本测试付费意愿。",
+        "next_step": "找 3 位目标用户做预售或付费访谈。"
+      },
+      {
+        "id": "AI_IMPACT",
+        "insight": "AI 工具可显著降低内容生产成本，但也加剧同质化竞争。",
+        "next_step": "明确自身不可替代的真实经历或数据视角。"
+      }
+    ],
+    "summary": "整体可行，优先补齐付费验证与时间投入。"
+  },
+  "stale": false
+}

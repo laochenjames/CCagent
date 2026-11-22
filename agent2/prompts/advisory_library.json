@@ -1,0 +1,128 @@
+[
+  {
+    "id": "WORK_GENERAL",
+    "domain": "work",
+    "name": "工作通用准则",
+    "typical_signals": ["常规工作", "事务处理", "业务跟进", "日常协作", "非紧急任务"],
+    "judgment_criteria": "按本周重点目标与交付紧急度判断。关乎关键客户与核心项目进度的归入Q1/Q2，常规流程与次要支持归入Q3，非重点发散事务归入Q4。",
+    "common_pitfall": "容易把所有他人催促的事项一律当作高优先级，打乱核心工作节奏。",
+    "advice_style": "结合本周重点排定优先级，先确保主线交付，常规协作控制投入时长。"
+  },
+  {
+    "id": "WORK_CORE_DELIVERY",
+    "domain": "work",
+    "name": "工作交付攻坚",
+    "typical_signals": ["定稿交付", "核心功能上线", "关键代码编写", "分镜定稿", "客户付款节点", "核心截稿"],
+    "judgment_criteria": "直接决定本周/本月核心现金流、商业合约履约或项目生死线的主线交付攻坚。",
+    "common_pitfall": "因心理阻力大而本能地用琐碎杂事推迟核心任务的启动。",
+    "advice_style": "锁定整块高认知时段，先拆出10分钟可落笔执行的最小启动动作。"
+  },
+  {
+    "id": "WORK_LEVERAGE_SOP",
+    "domain": "work",
+    "name": "工作基建与SOP沉淀",
+    "typical_signals": ["搭建工作流", "优化提示词库", "整理组件资产", "自动化脚本", "竞品深度调研", "沉淀SOP"],
+    "judgment_criteria": "未来可反复复用提效的生产工具与资产积累，非当日紧急但具备长期复利。",
+    "common_pitfall": "过度打磨基建而推迟了真实内容与产品的交付上线。",
+    "advice_style": "限制60至90分钟时间盒推进，重点关注本周能否用得上，避免过度设计。"
+  },
+  {
+    "id": "WORK_SHALLOW_NOISE",
+    "domain": "work",
+    "name": "工作协作与事务配合",
+    "typical_signals": ["回复临时消息", "非核心小修改", "导出文件格式", "零碎沟通", "开具发票", "对账确认"],
+    "judgment_criteria": "低认知密度的配合性事务，通常带有外部催促但在整体目标中价值较低。",
+    "common_pitfall": "全天随时零散响应，导致深度创作时间被切得过碎。",
+    "advice_style": "集中归拢至状态较疲劳的低脑力时段批处理，用模板快速交付脱身。"
+  },
+  {
+    "id": "WORK_FAKE_PRODUCTIVITY",
+    "domain": "work",
+    "name": "边缘细节打磨与工具折腾",
+    "typical_signals": ["微调边缘排版", "频繁更换笔记软件", "试用无关新插件", "整理旧目录", "死磕非核心样式"],
+    "judgment_criteria": "对推进本周核心交付与关键目标无实质贡献的低杠杆操作。",
+    "common_pitfall": "容易在表面勤奋中消耗精力，偏离当前核心主线。",
+    "advice_style": "暂缓推进，先核对是否属于本周重点，建议待主线达标后再作为闲暇探索。"
+  },
+  {
+    "id": "LIFE_GENERAL",
+    "domain": "life",
+    "name": "生活通用准则",
+    "typical_signals": ["日常起居", "生活琐事", "人际往来", "个人事务", "常规家务"],
+    "judgment_criteria": "区分硬性生存底线与柔性家务。硬性生存与防爆雷归入Q1，日常打理与琐事归入Q3，不影响生活的非必要折腾归入Q4。",
+    "common_pitfall": "将琐碎家务与工作时间混淆，导致工作断流。",
+    "advice_style": "生活事务以保障秩序为前提，能自动化的设自动化，需动手的批量处理。"
+  },
+  {
+    "id": "LIFE_HARD_DEADLINE",
+    "domain": "life",
+    "name": "生存底线与刚性事务",
+    "typical_signals": ["交房租", "交水电费", "看病就医", "按时买药", "报税申报", "服务器与宽带续费", "证件办理"],
+    "judgment_criteria": "逾期将直接产生停摆、罚款、断网或健康恶化等严重后果的硬期限事务。",
+    "common_pitfall": "拖延至最后一刻处理导致手忙脚乱，打乱全天安排。",
+    "advice_style": "今日优先顺手清零，并建议开启自动续费或设置周期日历提醒。"
+  },
+  {
+    "id": "LIFE_INTRUSIVE_CHORES",
+    "domain": "life",
+    "name": "日常家务与跑腿杂务",
+    "typical_signals": ["取寄快递", "采购日用品", "洗晒衣服", "日常简单打扫", "洗碗倒垃圾", "购买猫粮"],
+    "judgment_criteria": "维持日常生活运转所必需的常规体力事务，具有一定现实需求但认知投入低。",
+    "common_pitfall": "在工作桌前看到杂乱就起身打理，打断专注心流。",
+    "advice_style": "外包代劳或作为长时间用脑后的起身换脑活动，整批完成。"
+  },
+  {
+    "id": "STUDY_GENERAL",
+    "domain": "study",
+    "name": "学习通用准则",
+    "typical_signals": ["获取新知", "自主学习", "阅读思考", "听讲座", "技能提升"],
+    "judgment_criteria": "以是否与当前目标与业务攻坚直接关联为准绳。直接相关的刻意练习归入Q2，泛知识阅读归入Q4。",
+    "common_pitfall": "收藏大量资料却缺乏针对性产出，把囤积当掌握。",
+    "advice_style": "明确每次学习的具体产出目标，以用促学，控制投入时间。"
+  },
+  {
+    "id": "STUDY_TARGETED_SKILL",
+    "domain": "study",
+    "name": "目标挂钩技能进阶",
+    "typical_signals": ["专业技能攻关", "研读核心技术文档", "考证复习", "项目所需专项练习", "针对性课程"],
+    "judgment_criteria": "直接服务于本周或近期核心业务突破的刻意练习与技能获取，具备长远复利。",
+    "common_pitfall": "只看不练，缺乏以输出倒逼输入的真实实践。",
+    "advice_style": "按固定时间盒专注推进，配合具体案例或实操产出检验效果。"
+  },
+  {
+    "id": "STUDY_BROAD_HORIZON",
+    "domain": "study",
+    "name": "通识拓展与泛知识阅读",
+    "typical_signals": ["泛读社科历史", "看科普视频", "听行业通识播客", "随性浏览资讯", "跨界阅读"],
+    "judgment_criteria": "有助于拓宽视野与思维储备，但与当下交付无直接紧迫关联的通识学习。",
+    "common_pitfall": "在核心任务未完成前以学习为由占用黄金工作时段。",
+    "advice_style": "安排在睡前、通勤或低强度时间段低压阅读，不挤占核心工作带宽。"
+  },
+  {
+    "id": "PLAY_GENERAL",
+    "domain": "play",
+    "name": "娱乐与休息通用准则",
+    "typical_signals": ["休息", "放松", "日常调节", "业余爱好", "休闲"],
+    "judgment_criteria": "区分刚性精力修复与纯娱乐消遣。维持身心健康的刚性回血归入Q2，纯消遣放松默认归入Q4并保持中性态度。",
+    "common_pitfall": "忽略合理休息对脑力的保护作用，导致过度疲劳。",
+    "advice_style": "合理安排身心充电，注意与当天的紧急重要事务错开时段。"
+  },
+  {
+    "id": "PLAY_RIGID_RECOVERY",
+    "domain": "play",
+    "name": "身心充电与刚性保养",
+    "typical_signals": ["运动健身", "慢跑跑步", "午休", "散步放空", "按时睡眠", "做操拉伸", "做健康营养餐"],
+    "judgment_criteria": "维护身体健康、防止脑力透支的必要机体保养，是维持持续产出的底线支撑。",
+    "common_pitfall": "为了追赶进度牺牲运动和睡眠，导致次日精力衰退。",
+    "advice_style": "锁定固定作息时段，安心恢复体力与神经系统，无需有负罪感。"
+  },
+  {
+    "id": "PLAY_LEISURE_RELAX",
+    "domain": "play",
+    "name": "休闲娱乐与兴趣消遣",
+    "typical_signals": ["玩电子游戏", "看电影刷剧", "刷社交媒体", "朋友聚餐", "逛街休闲", "纯娱乐消遣"],
+    "judgment_criteria": "用于放松神经与个人爱好的纯消遣活动，无功利性交付目标。",
+    "common_pitfall": "在核心任务未推进时沉迷导致时间失控，带来后续赶工压力。",
+    "advice_style": "建议在关键事项有阶段性进展后作为犒劳，可预设明确时间盒安心享受。"
+  }
+]

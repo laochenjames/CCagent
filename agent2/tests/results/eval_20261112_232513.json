@@ -1,0 +1,258 @@
+{
+  "timestamp": "2026-11-12T15:25:13.375540+00:00",
+  "model": "gemini-3.5-flash",
+  "prompt": "default",
+  "with_corrections": false,
+  "total_runs": 3,
+  "total_expected_tasks": 12,
+  "domain_accuracy": 0.25,
+  "quadrant_accuracy": 0.25,
+  "low_confidence_ratio": 0.0,
+  "avg_latency_sec": 23.821,
+  "confusion_domain": {
+    "play": {
+      "play": 1,
+      "missing": 4,
+      "life": 1
+    },
+    "life": {
+      "life": 1
+    },
+    "work": {
+      "work": 1,
+      "missing": 3
+    },
+    "study": {
+      "missing": 1
+    }
+  },
+  "confusion_quadrant": {
+    "q4": {
+      "q4": 1,
+      "missing": 1
+    },
+    "q1": {
+      "q1": 2,
+      "missing": 2
+    },
+    "q2": {
+      "missing": 3,
+      "q3": 1
+    },
+    "candidate": {
+      "missing": 1
+    },
+    "q3": {
+      "missing": 1
+    }
+  },
+  "details": [
+    {
+      "case_id": "draft_001",
+      "input": "已完成：早晨跑步30分钟\n明天下午2点交付客户A核心分镜脚本\n后天要交房租水电\n晚上想打局游戏放松下",
+      "engine": "ai",
+      "latency_sec": 11.396,
+      "tasks": [
+        {
+          "expected_title": "晚上想打局游戏放松下",
+          "actual_title": "晚上打游戏放松",
+          "expected": {
+            "domain": "play",
+            "quadrant": "q4"
+          },
+          "actual": {
+            "domain": "play",
+            "quadrant": "q4",
+            "confidence": "high"
+          },
+          "domain_match": true,
+          "quadrant_match": true
+        },
+        {
+          "expected_title": "后天要交房租水电",
+          "actual_title": "缴纳房租水电",
+          "expected": {
+            "domain": "life",
+            "quadrant": "q1"
+          },
+          "actual": {
+            "domain": "life",
+            "quadrant": "q1",
+            "confidence": "high"
+          },
+          "domain_match": true,
+          "quadrant_match": true
+        },
+        {
+          "expected_title": "明天下午2点交付客户A核心分镜脚本",
+          "actual_title": "交付客户A核心分镜脚本",
+          "expected": {
+            "domain": "work",
+            "quadrant": "q1"
+          },
+          "actual": {
+            "domain": "work",
+            "quadrant": "q1",
+            "confidence": "high"
+          },
+          "domain_match": true,
+          "quadrant_match": true
+        },
+        {
+          "expected_title": "早晨跑步30分钟",
+          "actual_title": "(未拆出此任务)",
+          "expected": {
+            "domain": "play",
+            "quadrant": "q2"
+          },
+          "actual": {
+            "domain": "missing",
+            "quadrant": "missing",
+            "confidence": "none"
+          },
+          "domain_match": false,
+          "quadrant_match": false
+        }
+      ],
+      "unmatched_actual_count": 0
+    },
+    {
+      "case_id": "draft_002",
+      "input": "今天早上吃，今天要去吃个饭，然后健身，然后做一些髋关节锻炼。然后把那个自媒体给做一下，视频做一下。有 5 个 APP 要做一下。然后是推特上面去进行一个宠物的这个一个一个连接吧，把那个小游戏连接到这个宠物的这个桌宠上面去，然后去发布到谷歌页面。然后其他的话，基本上就保证休息吧。然后平时玩玩游戏啊，看看圣经啊，然后就看看李敖啊",
+      "engine": "ai",
+      "latency_sec": 55.926,
+      "tasks": [
+        {
+          "expected_title": "今天早上吃，今天要去吃个饭，然后健身，然后做一些髋关节锻炼。然后把那个自媒体给做一下，视频做一下。有 5 个 APP 要做一下。然后是推特上面去进行一个宠物的这个一个一个连接吧，把那个小游戏连接到这个宠物的这个桌宠上面去，然后去发布到谷歌页面。然后其他的话，基本上就保证休息吧。然后平时玩玩游戏啊，看看圣经啊，然后就看看李敖啊",
+          "actual_title": "去吃个饭",
+          "expected": {
+            "domain": "play",
+            "quadrant": "q2"
+          },
+          "actual": {
+            "domain": "life",
+            "quadrant": "q3",
+            "confidence": "medium"
+          },
+          "domain_match": false,
+          "quadrant_match": false
+        }
+      ],
+      "unmatched_actual_count": 7
+    },
+    {
+      "case_id": "draft_003",
+      "input": "今天早上吃，今天要去吃个饭，然后健身，然后做一些髋关节锻炼。然后把那个自媒体给做一下，视频做一下。有 5 个 APP 要做一下。然后是推特上面去进行一个宠物的这个一个一个连接吧，把那个小游戏连接到这个宠物的这个桌宠上面去，然后去发布到谷歌页面。然后其他的话，基本上就保证休息吧。然后平时玩玩游戏啊，看看圣经啊，然后就看看李敖啊",
+      "engine": "fallback",
+      "latency_sec": 4.14,
+      "tasks": [
+        {
+          "expected_title": "保证充分休息",
+          "actual_title": "(未拆出此任务)",
+          "expected": {
+            "domain": "play",
+            "quadrant": "q2"
+          },
+          "actual": {
+            "domain": "missing",
+            "quadrant": "missing",
+            "confidence": "none"
+          },
+          "domain_match": false,
+          "quadrant_match": false
+        },
+        {
+          "expected_title": "制作并剪辑自媒体视频",
+          "actual_title": "(未拆出此任务)",
+          "expected": {
+            "domain": "work",
+            "quadrant": "q1"
+          },
+          "actual": {
+            "domain": "missing",
+            "quadrant": "missing",
+            "confidence": "none"
+          },
+          "domain_match": false,
+          "quadrant_match": false
+        },
+        {
+          "expected_title": "玩游戏放松",
+          "actual_title": "(未拆出此任务)",
+          "expected": {
+            "domain": "play",
+            "quadrant": "q4"
+          },
+          "actual": {
+            "domain": "missing",
+            "quadrant": "missing",
+            "confidence": "none"
+          },
+          "domain_match": false,
+          "quadrant_match": false
+        },
+        {
+          "expected_title": "处理 5 个 APP 相关事项",
+          "actual_title": "(未拆出此任务)",
+          "expected": {
+            "domain": "work",
+            "quadrant": "candidate"
+          },
+          "actual": {
+            "domain": "missing",
+            "quadrant": "missing",
+            "confidence": "none"
+          },
+          "domain_match": false,
+          "quadrant_match": false
+        },
+        {
+          "expected_title": "阅读圣经与李敖著作",
+          "actual_title": "(未拆出此任务)",
+          "expected": {
+            "domain": "study",
+            "quadrant": "q3"
+          },
+          "actual": {
+            "domain": "missing",
+            "quadrant": "missing",
+            "confidence": "none"
+          },
+          "domain_match": false,
+          "quadrant_match": false
+        },
+        {
+          "expected_title": "健身与髋关节训练",
+          "actual_title": "(未拆出此任务)",
+          "expected": {
+            "domain": "play",
+            "quadrant": "q2"
+          },
+          "actual": {
+            "domain": "missing",
+            "quadrant": "missing",
+            "confidence": "none"
+          },
+          "domain_match": false,
+          "quadrant_match": false
+        },
+        {
+          "expected_title": "桌宠小游戏连接推特并发布至谷歌页面",
+          "actual_title": "(未拆出此任务)",
+          "expected": {
+            "domain": "work",
+            "quadrant": "q1"
+          },
+          "actual": {
+            "domain": "missing",
+            "quadrant": "missing",
+            "confidence": "none"
+          },
+          "domain_match": false,
+          "quadrant_match": false
+        }
+      ],
+      "unmatched_actual_count": 1
+    }
+  ]
+}

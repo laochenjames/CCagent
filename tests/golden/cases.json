@@ -1,0 +1,64 @@
+[
+  {
+    "id": "case_1_vague_media",
+    "input": "想做自媒体",
+    "expect": {
+      "reward_rating": "无法判断",
+      "tier": "暂不给档位",
+      "completeness_lt": 0.3,
+      "to_complete_count": 3
+    }
+  },
+  {
+    "id": "case_2_borrowing",
+    "input": "打算借钱做个餐饮小店，启动资金大概10万。",
+    "expect": {
+      "tier": "不建议"
+    }
+  },
+  {
+    "id": "case_3_ambiguous_asr",
+    "input": "想做线上咨询，51 小时也能接受。",
+    "expect": {
+      "has_ambiguous": true,
+      "clarify_non_empty": true
+    }
+  },
+  {
+    "id": "case_4_project_scope",
+    "input": "打算和朋友合伙开画室，画室每月净利 2 万。",
+    "expect": {
+      "has_yellow_flag_or_target_scope": true
+    }
+  },
+  {
+    "id": "case_5_client_price_vs_floor",
+    "input": "我想做职业咨询，最低接受时薪 300 元，客户付的价还没定。",
+    "expect": {
+      "floor_take_home_not_confused": true
+    }
+  },
+  {
+    "id": "case_6_early_stoploss",
+    "input": "想做知识付费，预计第 3 个月才有第一笔收入，但我打算做 2 个月没结果就停。",
+    "expect": {
+      "has_red_stoploss_flag": true
+    }
+  },
+  {
+    "id": "case_7_pure_time",
+    "input": "业余时间写技术博客，不花钱，也不影响主业。",
+    "expect": {
+      "safety_net": "不适用",
+      "to_complete_excludes": ["cash_free"]
+    }
+  },
+  {
+    "id": "case_8_purpose_learn",
+    "input": "想花两个月学 Python 数据分析，主要是为了学东西，不指望靠这个直接赚钱。",
+    "expect": {
+      "reward_applicable": false
+    }
+  }
+]
+

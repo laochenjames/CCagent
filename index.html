@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>职业投入体检</title>
+  <link rel="stylesheet" href="style.css?v=2.4.6" />
+  <link rel="stylesheet" href="report.css" />
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/favicon.png">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="brand">职业投入体检</div>
+      <nav class="agent-nav" aria-label="Agent 切换"></nav>
+    </div>
+    <div class="top-actions">
+      <span id="quota-badge" class="quota-badge hidden"></span>
+      <button id="btn-advisors" class="btn-ghost" type="button">智囊团</button>
+      <button id="btn-history" class="btn-ghost" type="button">历史会话</button>
+      <button id="btn-settings" class="btn-ghost" type="button">设置</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- 1. 输入区 -->
+    <section id="input-card" class="card input-section">
+      <div id="input-collapsed" class="input-collapsed hidden">
+        <span id="desc-preview" class="muted"></span>
+        <button id="btn-edit-desc" class="btn-ghost" type="button">修改</button>
+      </div>
+      <div id="input-expanded">
+        <textarea id="raw-input" rows="4" placeholder="随便写，写不写数字都行：你想做什么？为什么？大概怎么赚钱？"></textarea>
+        <div class="input-footer">
+          <div class="examples">
+            <span class="muted">示例：</span>
+            <button class="chip" type="button" data-example="我想做自媒体，平时下班后拍点行业科普视频，还没想好怎么变现。">做自媒体副业</button>
+            <button class="chip" type="button" data-example="打算辞职开一家小工作室，预计启动资金15万，其中10万需要借贷，目前存款20万，每月开销1万。">借钱开工作室</button>
+            <button class="chip" type="button" data-example="想业余做技能陪跑，单价800元，自己能拿7成，我的底线是每单不低于500元，已经有两个陌生人付过钱了。">已有付费的陪跑</button>
+          </div>
+          <button id="btn-evaluate" class="btn-primary" type="button">开始体检</button>
+        </div>
+      </div>
+      <div id="skeleton-bar" class="skeleton hidden">
+        <div class="skel-line"></div>
+        <div class="skel-line short"></div>
+      </div>
+      <div id="error-box" class="error-box hidden"></div>
+    </section>
+
+    <section id="result-section" class="hidden">
+      <!-- 2. 仪表盘 -->
+      <div id="dash-sentinel"></div>
+      <div class="card dashboard-card">
+        <div class="dash-top">
+          <div class="dash-left">
+            <div id="score-label" class="score-label">还看不出来</div>
+            <div id="score-action" class="score-action"></div>
+            <div id="score-range" class="muted"></div>
+          </div>
+          <div class="dash-right">
+            <div id="conf-row" class="conf-row">
+              <span id="conf-label-wrap">置信度 <strong id="conf-pct">0%</strong></span>
+              <span id="sync-hint" class="muted hidden">更新中…</span>
+              <div class="conf-track"><div id="conf-bar" class="conf-fill"></div></div>
+            </div>
+            <div id="conf-redline" class="hidden">由规则直接判定（红线）</div>
+            <div id="conf-note" class="conf-note">置信度表示信息够不够，不表示结论一定对。</div>
+          </div>
+        </div>
+
+        <div class="gauge-wrap">
+          <div class="gauge-track">
+            <div id="gauge-interval" class="gauge-interval"></div>
+            <div id="gauge-marker" class="gauge-marker"></div>
+          </div>
+          <div id="marker-hint" class="marker-hint hidden">位置仅供参考</div>
+          <div class="gauge-zones">
+            <span>偏低 (0–35)</span>
+            <span>一般 (35–65)</span>
+            <span>偏高 (65–100)</span>
+          </div>
+        </div>
+
+        <p id="headline-text" class="headline"></p>
+        <p id="synthesis-line" class="synthesis-line hidden"></p>
+        <p id="excluded-line" class="muted hidden"></p>
+      </div>
+
+      <!-- 3. 风险条 -->
+
+      <div id="risk-bar" class="card risk-card">
+        <details id="risk-details">
+          <summary id="risk-summary">未发现明确风险（不代表没有风险）</summary>
+          <ul id="flags-list" class="flags-list"></ul>
+        </details>
+      </div>
+
+      <!-- 4. 提升准确度清单 -->
+      <div class="card">
+        <div class="checklist-header">
+          <h2>提升准确度清单</h2>
+          <span class="muted">改动即保存，无需提交</span>
+        </div>
+        <div id="groups-container"></div>
+
+        <div class="append-box">
+          <input id="append-input" type="text" placeholder="再补充一段话（可选，例如：预计第3个月回本）" />
+          <button id="btn-append" class="btn-ghost" type="button">补充抽取</button>
+        </div>
+      </div>
+
+      <!-- 5. 详细分析（折叠） -->
+      <div class="card">
+        <div class="analysis-header">
+          <button id="btn-analysis" class="btn-ghost" type="button">查看详细分析（约 10–20 秒）</button>
+          <button id="btn-dl-html" class="btn-ghost" type="button" disabled>下载报告（HTML）</button>
+          <button id="btn-dl-md" class="btn-ghost" type="button" disabled>下载 Markdown</button>
+          <span id="dl-hint" class="muted">生成详细分析后可下载</span>
+          <span id="analysis-stale-banner" class="stale-banner hidden">基于较早的信息，<button id="btn-refresh-analysis" class="link-btn" type="button">点击更新</button></span>
+        </div>
+        <div id="analysis-skeleton" class="skeleton hidden">
+          <div class="skel-line"></div>
+          <div class="skel-line short"></div>
+        </div>
+        <div id="analysis-body" class="hidden">
+          <div id="analysis-html"></div>
+        </div>
+      </div>
+
+      <p id="disclaimer-text" class="disclaimer"></p>
+    </section>
+    <details id="privacy-notice" class="privacy-notice muted">
+      <summary>隐私与数据说明</summary>
+      <p>本工具会保存你的文字描述、填写的数字与选项、以及评估结果，默认保留 <span id="retention-days-text">30</span> 天。提交评估或生成详细分析时，你的描述会发送给模型服务（当前：<span id="privacy-provider">Google Gemini</span>）进行处理。你的会话记录通过浏览器 Cookie 与本浏览器绑定，清除 Cookie 后将无法看到旧记录；你也可以在历史会话中随时删除任意记录。</p>
+    </details>
+  </main>
+
+  <!-- 历史会话抽屉 -->
+  <aside id="history-drawer" class="drawer hidden">
+    <div class="drawer-header">
+      <h3>历史会话</h3>
+      <button id="btn-close-history" class="btn-ghost" type="button">关闭</button>
+    </div>
+    <div id="history-list" class="history-list"></div>
+  </aside>
+
+  <!-- 设置弹窗 -->
+  <div id="advisors-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="advisors-modal-title">
+    <div class="modal-content card advisors-modal-content">
+      <div class="modal-head">
+        <h3 id="advisors-modal-title">智囊团</h3>
+        <button id="btn-advisors-close" class="btn-ghost" type="button" aria-label="关闭">关闭</button>
+      </div>
+      <div id="advisors-modal-body" class="advisors-modal-body"></div>
+      <div class="advisors-modal-foot">
+        <div>智囊是分析视角，不是持证顾问。</div>
+        <div>评级由程序按规则计算，AI 只负责解读。</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="settings-modal" class="modal hidden">
+    <div class="modal-content card">
+      <h3>模型与 API 设置</h3>
+      <div id="byok-cfg-wrap">
+        <h4>使用你自己的 API Key</h4>
+        <label>厂商
+          <select id="byok-provider">
+            <option value="gemini">Gemini</option>
+            <option value="xai">Grok（xAI）· 测试中</option>
+            <option value="deepseek">DeepSeek · 测试中</option>
+          </select>
+        </label>
+        <div class="muted">Grok 与 DeepSeek 仍在测试中。如果"测试连接并自测"失败，请改用 Gemini，或稍后再试。</div>
+        <label>API Key
+          <input id="byok-key" type="password" placeholder="粘贴你的 API Key" autocomplete="off" />
+        </label>
+        <label>模型名称
+          <input id="byok-model" type="text" placeholder="留空使用默认模型" />
+        </label>
+        <label class="checkbox-inline">
+          <input id="byok-remember" type="checkbox" />
+          保存在本浏览器（公共电脑不要勾选）
+        </label>
+        <div id="byok-policy-hint" class="muted">你的描述会发送给 Google Gemini，按其数据政策处理。</div>
+        <div id="byok-status" class="muted"></div>
+        <div class="modal-actions">
+          <button id="btn-byok-test" class="btn-ghost" type="button">测试连接并自测</button>
+          <button id="btn-byok-save" class="btn-primary" type="button">保存</button>
+          <button id="btn-byok-clear" class="btn-ghost" type="button">清除我的 Key</button>
+        </div>
+      </div>
+      <div id="server-cfg-wrap">
+        <hr />
+        <h4>服务端配置（本机模式）</h4>
+        <label>Gemini API Key
+          <input id="cfg-key" type="password" placeholder="留空则保持不变" />
+        </label>
+        <label>主模型名称（详细分析）
+          <input id="cfg-model" type="text" placeholder="gemini-3.5-flash" />
+        </label>
+        <label>快速模型名称（可选，用于快速抽取）
+          <input id="cfg-fast-model" type="text" placeholder="留空则与主模型相同" />
+        </label>
+        <label>Base URL
+          <input id="cfg-url" type="text" placeholder="https://generativelanguage.googleapis.com" />
+        </label>
+        <div id="cfg-status" class="muted"></div>
+        <div class="modal-actions">
+          <button id="btn-test-cfg" class="btn-ghost" type="button">测试连接</button>
+          <button id="btn-save-cfg" class="btn-primary" type="button">保存</button>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button id="btn-close-cfg" class="btn-ghost" type="button">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js?v=2.4.6"></script>
+  <script src="/shared/nav.js"></script>
+</body>
+</html>

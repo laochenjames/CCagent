@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CCagent · 个人任务分诊工具</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/favicon.png">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="brand">个人任务分诊</div>
+      <nav class="agent-nav" aria-label="Agent 切换"></nav>
+    </div>
+    <div class="top-actions">
+      <button id="btn-toggle-advisory" class="btn-ghost" type="button" title="查看 14 类智囊分类原型与策略">智囊团</button>
+      <button id="btn-toggle-settings" class="btn-ghost" type="button" title="配置 API 与规则设置">设置</button>
+    </div>
+  </header>
+
+  <div class="app-layout">
+    <!-- Main Workspace -->
+    <main class="main-workspace">
+      <!-- Layer 1: Input Area -->
+      <section class="triage-input-panel">
+        <div class="input-wrapper">
+          <textarea 
+            id="task-raw-input" 
+            placeholder="把从微信、日志或随手记复制的待办流水账粘贴到这里...&#10;系统将拆解为独立事项，对照本周重点给出可信分析与下一步建议。"
+            rows="3"
+          ></textarea>
+        </div>
+
+        <!-- 本周重点与硬约束（可折叠） -->
+        <div class="context-drawer-wrap">
+          <div class="context-drawer-toggle" id="btn-toggle-context">
+            <span><strong>本周重点与硬约束 (Context)</strong>：<span id="context-summary-preview" class="text-muted">未设置（展开编辑）</span></span>
+            <span class="toggle-icon" id="context-toggle-arrow">▾</span>
+          </div>
+          <div class="context-drawer-content" id="context-drawer-body" style="display: none;">
+            <textarea 
+              id="user-context-input" 
+              placeholder="例如：本周核心攻坚客户A宣传片主线分镜上线；周五前不得安排非紧急外出；每天必须保证7小时睡眠..."
+              rows="2"
+            ></textarea>
+            <div class="context-hint">提示：输入内容在失去焦点时自动保存到服务端，并在每次分流时作为 AI 判断“重要性”的核心基准。</div>
+          </div>
+        </div>
+
+        <!-- B2: 去重跳过提示 -->
+        <div id="duplicate-hint-bar" class="duplicate-hint-bar" style="display: none;"></div>
+
+        <div class="triage-controls">
+          <div class="controls-left">
+            <span id="engine-tag-display" class="card-engine-tag">引擎就绪</span>
+            <span id="fallback-reason-display" class="fallback-reason-tag" style="display: none;"></span>
+          </div>
+          <div class="controls-right">
+            <button id="btn-clear-input" class="btn-ghost" title="清空上方输入文本">清空输入</button>
+            <button id="btn-run-triage" class="btn-triage-main">开始分诊</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Layer 2: Matrix & Export Header -->
+      <section class="matrix-section">
+        <div class="matrix-action-bar">
+          <div class="action-bar-left">
+            <h2>四象限任务看板</h2>
+            <span class="task-count-hint" id="matrix-total-count">共 0 项进行中</span>
+          </div>
+          <div class="action-bar-right">
+            <button id="btn-clear-matrix" class="btn-ghost btn-clear-matrix" title="清空当前四象限看板中的全部任务（保留历史日志）">清空矩阵</button>
+            <button id="btn-copy-md" class="btn-export-primary" title="一键复制 Markdown 任务列表">复制 Markdown</button>
+            <button id="btn-download-md" class="btn-export-secondary" title="下载 .md 文件">下载 .md</button>
+            <button id="btn-download-json" class="btn-export-secondary" title="下载 JSON 数据">下载 JSON</button>
+          </div>
+        </div>
+
+        <!-- 2x2 Quadrant Grid -->
+        <div class="eisenhower-grid">
+          <!-- Q1 -->
+          <div class="quadrant q1-zone" data-quadrant="q1">
+            <div class="quadrant-header">
+              <div class="quadrant-title">
+                <span class="dot dot-q1"></span>
+                <h3>Q1：重要且紧急</h3>
+              </div>
+              <span class="quadrant-subtitle">生存底线 · 核心阻断性交付</span>
+            </div>
+            <div class="cards-list" id="list-q1"></div>
+          </div>
+
+          <!-- Q2 -->
+          <div class="quadrant q2-zone" data-quadrant="q2">
+            <div class="quadrant-header">
+              <div class="quadrant-title">
+                <span class="dot dot-q2"></span>
+                <h3>Q2：重要不紧急</h3>
+              </div>
+              <span class="quadrant-subtitle">复利资产 · SOP基建 · 刚性回血</span>
+            </div>
+            <div class="cards-list" id="list-q2"></div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="quadrant q3-zone" data-quadrant="q3">
+            <div class="quadrant-header">
+              <div class="quadrant-title">
+                <span class="dot dot-q3"></span>
+                <h3>Q3：紧急不重要</h3>
+              </div>
+              <span class="quadrant-subtitle">突发杂音 · 日常家务跑腿</span>
+            </div>
+            <div class="cards-list" id="list-q3"></div>
+          </div>
+
+          <!-- Q4 -->
+          <div class="quadrant q4-zone" data-quadrant="q4">
+            <div class="quadrant-header">
+              <div class="quadrant-title">
+                <span class="dot dot-q4"></span>
+                <h3>Q4：不重要不紧急</h3>
+              </div>
+              <span class="quadrant-subtitle">纯消遣放松 · 边缘琐事</span>
+            </div>
+            <div class="cards-list" id="list-q4"></div>
+          </div>
+        </div>
+
+        <!-- Candidate Pool -->
+        <div class="candidate-compact-zone" id="candidate-wrapper" style="display: none;">
+          <div class="candidate-compact-head">
+            <span>待确认 / 澄清事项</span>
+          </div>
+          <div class="cards-list" id="list-candidate"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- B5: 撤销提示条 Toast -->
+  <div id="undo-toast" class="undo-toast" style="display: none;">
+    <span id="undo-toast-message">已将任务移到 Q3</span>
+    <button id="btn-undo-action" class="btn-undo-action">撤销</button>
+  </div>
+
+  <!-- B6: 领域切换浮层菜单 -->
+  <div id="domain-popover" class="domain-popover" style="display: none;">
+    <div class="domain-popover-item" data-domain="work"><span class="domain-dot domain-work"></span>工作</div>
+    <div class="domain-popover-item" data-domain="life"><span class="domain-dot domain-life"></span>生活</div>
+    <div class="domain-popover-item" data-domain="study"><span class="domain-dot domain-study"></span>学习</div>
+    <div class="domain-popover-item" data-domain="play"><span class="domain-dot domain-play"></span>娱乐</div>
+  </div>
+
+  <!-- Settings Modal (收起状态，默认不占版面) -->
+  <div class="modal-overlay" id="modal-settings">
+    <div class="modal-content settings-modal-box">
+      <div class="modal-header">
+        <h3>系统与 API 设置</h3>
+        <button class="btn-close" id="btn-close-settings">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="server-key-indicator" id="server-key-indicator" style="display: none;">
+          <span id="server-key-text">本地服务端已配置 Gemini API Key</span>
+        </div>
+
+        <div class="form-group">
+          <label for="cfg-provider"><strong>模型服务商：</strong></label>
+          <select id="cfg-provider" class="form-input">
+            <option value="gemini">Google Gemini</option>
+            <option value="xai">Grok (xAI)</option>
+            <option value="deepseek">DeepSeek</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="margin-top: 14px;">
+          <label for="cfg-api-key"><strong>API Key：</strong></label>
+          <div class="input-with-action">
+            <input type="password" id="cfg-api-key" placeholder="留空则使用服务端 .env 中的 Key" class="form-input">
+            <button class="btn-toggle-vis" id="btn-toggle-key-vis" type="button">显示</button>
+          </div>
+          <small class="form-help">仅保存在本地服务端 .env，与职业投入体检共享配置。</small>
+        </div>
+
+        <div class="form-group" style="margin-top: 14px;">
+          <label for="cfg-model"><strong>模型版本：</strong></label>
+          <input type="text" id="cfg-model" list="cfg-model-list" value="gemini-3.5-flash-lite" class="form-input">
+          <datalist id="cfg-model-list">
+            <option value="gemini-3.5-flash-lite"></option>
+            <option value="gemini-3.5-flash"></option>
+            <option value="gemini-3.8-flash"></option>
+            <option value="grok-3-mini-fast"></option>
+            <option value="deepseek-flash"></option>
+            <option value="deepseek-chat"></option>
+          </datalist>
+        </div>
+
+        <div class="form-group" style="margin-top: 14px;">
+          <label for="cfg-base-url"><strong>API Base URL：</strong></label>
+          <input type="text" id="cfg-base-url" value="https://generativelanguage.googleapis.com" class="form-input">
+          <small class="form-help">仅支持 https:// 或本地 http://127.0.0.1 / localhost 反代。</small>
+        </div>
+
+        <div class="form-group" style="margin-top: 14px;">
+          <label class="checkbox-label">
+            <input type="checkbox" id="cfg-fallback" checked>
+            <span>当 API 不可用或限流时，允许使用内置专家规则保底</span>
+          </label>
+        </div>
+
+        <div class="form-group" style="margin-top: 14px;">
+          <label class="checkbox-label">
+            <input type="checkbox" id="cfg-corrections-enabled" checked>
+            <span><strong>使用我的历史纠正</strong>（开启后分诊提示词将参考你手动拖拽或修改过的偏好）</span>
+          </label>
+        </div>
+
+        <!-- B3: 生效中的纠正列表 -->
+        <div class="form-group" style="margin-top: 14px;">
+          <label><strong>当前生效的纠正记录：</strong></label>
+          <div id="active-corrections-list" class="active-corrections-list">
+            <div class="text-muted" style="font-size: 12px; padding: 6px 0;">加载中...</div>
+          </div>
+        </div>
+
+        <div class="test-result-box" id="test-result-box" style="display: none;"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="btn-test-api" type="button">测试连通性</button>
+        <button class="btn-primary" id="btn-save-api" type="button">保存设置</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Advisory Library Modal (智囊策略库) -->
+  <div class="modal-overlay" id="modal-advisory">
+    <div class="modal-content advisory-modal-box" style="max-width: 680px; max-height: 85vh; display: flex; flex-direction: column;">
+      <div class="modal-header">
+        <h3>智囊库 (14 类分类原型与判断准则)</h3>
+        <button class="btn-close" id="btn-close-advisory">&times;</button>
+      </div>
+      <div class="modal-body" style="overflow-y: auto; padding: 14px 18px;">
+        <div id="advisory-cards-container" class="advisory-list">
+          <div style="color: #6b7280; font-size: 13px;">正在加载智囊原型库...</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-primary" id="btn-close-advisory-footer" type="button">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script src="/shared/nav.js"></script>
+</body>
+</html>

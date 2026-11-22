@@ -1,0 +1,88 @@
+[
+  {
+    "name": "1. 保留工资的副业，不花钱，现金较少",
+    "fields": {
+      "purpose": {"value": "money", "category": "自报", "status": "given"},
+      "needs_cash": {"value": false, "category": "自报", "status": "given"},
+      "affects_main_job": {"value": true, "category": "自报", "status": "given"},
+      "cash_free": {"value": 20000, "category": "自报", "status": "given"},
+      "monthly_expense": {"value": 10000, "category": "自报", "status": "given"},
+      "income_after_monthly": {"value": 15000, "category": "自报", "status": "given"}
+    },
+    "expected": {"red_line": false, "labels": ["一般", "偏高", "还看不出来"], "note": "这是合成用例的预期，不是事实"}
+  },
+  {
+    "name": "2. 辞职全职、收入中断、现金不足3个月",
+    "fields": {
+      "purpose": {"value": "money", "category": "自报", "status": "given"},
+      "cash_free": {"value": 20000, "category": "自报", "status": "given"},
+      "monthly_expense": {"value": 10000, "category": "自报", "status": "given"},
+      "income_after_monthly": {"value": 0, "category": "自报", "status": "given"}
+    },
+    "expected": {"red_line": true, "labels": ["偏低"], "note": "这是合成用例的预期，不是事实"}
+  },
+  {
+    "name": "3. 求职转岗，不花钱，排除变现与划算程度",
+    "fields": {
+      "purpose": {"value": "transition", "category": "自报", "status": "given"},
+      "needs_cash": {"value": false, "category": "自报", "status": "given"},
+      "excl_MONETIZATION": {"value": true, "category": "自报", "status": "given"},
+      "excl_OPPORTUNITY": {"value": true, "category": "自报", "status": "given"},
+      "skill_evidence": {"value": "direct", "category": "自报", "status": "given"},
+      "channel_access": {"value": "has", "category": "自报", "status": "given"}
+    },
+    "expected": {"red_line": false, "labels": ["一般", "偏高"], "note": "这是合成用例的预期，不是事实"}
+  },
+  {
+    "name": "4. 学习考证 (purpose=learn)",
+    "fields": {
+      "purpose": {"value": "learn", "category": "自报", "status": "given"},
+      "needs_cash": {"value": false, "category": "自报", "status": "given"},
+      "affects_main_job": {"value": false, "category": "自报", "status": "given"},
+      "weekly_hours_actual_recent": {"value": 6, "category": "自报", "status": "given"},
+      "weekly_hours_planned": {"value": 6, "category": "自报", "status": "given"}
+    },
+    "expected": {"red_line": false, "labels": ["一般", "偏高"], "note": "这是合成用例的预期，不是事实"}
+  },
+  {
+    "name": "5. 开店，花费占现金超过25%",
+    "fields": {
+      "purpose": {"value": "money", "category": "自报", "status": "given"},
+      "needs_cash": {"value": true, "category": "自报", "status": "given"},
+      "cash_free": {"value": 100000, "category": "自报", "status": "given"},
+      "cash_outlay": {"value": 40000, "category": "自报", "status": "given"}
+    },
+    "expected": {"red_line": true, "labels": ["偏低"], "note": "这是合成用例的预期，不是事实"}
+  },
+  {
+    "name": "6. 借钱投入",
+    "fields": {
+      "purpose": {"value": "money", "category": "自报", "status": "given"},
+      "borrowing_or_essential_funds": {"value": true, "category": "自报", "status": "given"}
+    },
+    "expected": {"red_line": true, "labels": ["偏低"], "note": "这是合成用例的预期，不是事实"}
+  },
+  {
+    "name": "7. 已有陌生人付费、稳定投入、止损合理",
+    "fields": {
+      "purpose": {"value": "money", "category": "自报", "status": "given"},
+      "paid_evidence": {"value": "paid_stranger", "category": "事实", "status": "given"},
+      "skill_evidence": {"value": "direct", "category": "自报", "status": "given"},
+      "channel_access": {"value": "has", "category": "自报", "status": "given"},
+      "weekly_hours_actual_recent": {"value": 8, "category": "自报", "status": "given"},
+      "weekly_hours_planned": {"value": 8, "category": "自报", "status": "given"},
+      "first_paid_month": {"value": 1, "category": "自报", "status": "given"},
+      "validation_months": {"value": 4, "category": "自报", "status": "given"},
+      "will_really_stop": {"value": true, "category": "自报", "status": "given"}
+    },
+    "expected": {"red_line": false, "labels": ["偏高"], "note": "这是合成用例的预期，不是事实"}
+  },
+  {
+    "name": "8. 只有一句话（几乎没有信息）",
+    "fields": {
+      "decision": {"value": "做自媒体", "category": "自报", "status": "given"}
+    },
+    "expected": {"red_line": false, "labels": ["还看不出来"], "note": "这是合成用例的预期，不是事实"}
+  }
+]
+
