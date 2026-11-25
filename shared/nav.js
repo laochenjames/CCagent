@@ -9,14 +9,17 @@
     { href: "/agent7/", label: "双轨思维" },
   ];
 
-  // Inject responsive horizontal-scroll support for narrow screens
+  const isEmbedded = window.self !== window.top;
+
+  // Inject responsive horizontal-scroll support (and compact mode when embedded in Side Panel)
   if (!document.getElementById("cc-shared-nav-style")) {
     const st = document.createElement("style");
     st.id = "cc-shared-nav-style";
     st.textContent =
       ".agent-nav{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;max-width:100%;}" +
       ".agent-nav::-webkit-scrollbar{display:none;}" +
-      ".agent-nav-link{flex-shrink:0;white-space:nowrap;}";
+      ".agent-nav-link{flex-shrink:0;white-space:nowrap;}" +
+      (isEmbedded ? ".agent-nav{display:none !important;}" : "");
     document.head.appendChild(st);
   }
 
@@ -39,9 +42,70 @@
     });
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", renderNav);
-  } else {
+  function applyPrefill(text, autoExtract) {
+    if (!text) return false;
+    const el =
+      document.getElementById("raw-input") ||
+      document.getElementById("task-raw-input") ||
+      document.querySelector("textarea");
+    if (!el) return false;
+    el.value = text;
+    el.dispatchEvent(new Event("input", { bubbles: true }));
+    el.dispatchEvent(new Event("change", { bubbles: true }));
+    el.focus();
+    el.scrollIntoView({ behavior: "smooth", block: "center" });
+    if (autoExtract) {
+      const btn =
+        document.getElementById("btn-extract") ||
+        document.getElementById("extract-btn");
+      if (btn && !btn.disabled) {
+        setTimeout(() => btn.click(), 120);
+      }
+    }
+    return true;
+  }
+
+  function syncByok(byok) {
+    if (!byok || typeof byok !== "object") return;
+    const payload = JSON.stringify({
+      provider: byok.provider || "xai",
+      model: byok.model || "",
+      api_key: byok.api_key || "",
+      base_url: byok.base_url || "",
+    });
+    ["cc_byok", "ccagent_agent3_byok", "ccagent_shared_byok"].forEach((k) => {
+      try {
+        if (byok.api_key) {
+          localStorage.setItem(k, payload);
+        } else {
+          localStorage.removeItem(k);
+        }
+      } catch (_) {}
+    });
+  }
+
+  window.addEventListener("message", (event) => {
+    const msg = event.data;
+    if (!msg || typeof msg !== "object") return;
+    if (msg.type === "CCAGENT_PREFILL") {
+      applyPrefill(msg.text || "", Boolean(msg.autoExtract));
+    } else if (msg.type === "CCAGENT_SYNC_BYOK") {
+      syncByok(msg.byok);
+    }
+  });
+
+  function onReady() {
     renderNav();
+    if (isEmbedded) {
+      try {
+        window.parent.postMessage({ type: "CCAGENT_IFRAME_READY", path: window.location.pathname }, "*");
+      } catch (_) {}
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", onReady);
+  } else {
+    onReady();
   }
 })();

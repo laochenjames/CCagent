@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CCagent 智囊团侧边栏</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <header class="sp-header">
+    <div class="sp-row">
+      <select id="agent-select" class="sp-select" aria-label="选择 Agent">
+        <option value="agent4">第一性原理（马斯克）</option>
+        <option value="agent5">辩证抽象（矛盾论）</option>
+        <option value="agent6">一法多解（芒格）</option>
+        <option value="agent7">双轨思维（A/B轨）</option>
+        <option value="agent3">原子习惯生成</option>
+        <option value="agent2">个人任务分诊</option>
+        <option value="agent1">职业投入体检</option>
+      </select>
+      <div class="sp-actions">
+        <button id="btn-clip" class="sp-btn" title="暂存篮（收集多条推文，一键发给一法多解）">
+          暂存 <span id="clip-count" class="sp-badge hidden">0</span>
+        </button>
+        <button id="btn-settings" class="sp-btn" title="绑定 Grok / Gemini / DeepSeek API">API</button>
+        <button id="btn-open-tab" class="sp-btn" title="在新标签页打开当前 Agent">↗</button>
+      </div>
+    </div>
+  </header>
+
+  <section id="clip-drawer" class="sp-drawer hidden">
+    <div class="sp-drawer-head">
+      <strong>暂存篮（多条素材合并）</strong>
+      <div class="sp-drawer-btns">
+        <button id="btn-clip-send" class="sp-btn primary">合并发给一法多解</button>
+        <button id="btn-clip-clear" class="sp-btn">清空</button>
+      </div>
+    </div>
+    <div id="clip-list" class="sp-clip-list"></div>
+  </section>
+
+  <section id="settings-drawer" class="sp-drawer hidden">
+    <div class="sp-drawer-head">
+      <strong>API / Grok 绑定（本地保存）</strong>
+      <button id="btn-settings-close" class="sp-btn">收起</button>
+    </div>
+    <div class="sp-form">
+      <label>
+        <span>服务地址</span>
+        <input id="cfg-host" type="text" placeholder="https://ccagent.mycici.top">
+      </label>
+      <label>
+        <span>模型厂商</span>
+        <select id="cfg-provider">
+          <option value="xai">xAI Grok（推荐绑定）</option>
+          <option value="gemini">Google Gemini</option>
+          <option value="deepseek">DeepSeek</option>
+        </select>
+      </label>
+      <label>
+        <span>模型名称（留空用默认）</span>
+        <input id="cfg-model" type="text" placeholder="如 grok-3-mini / gemini-3.5-flash-lite">
+      </label>
+      <label>
+        <span>API Key（留空则使用服务端免费额度）</span>
+        <input id="cfg-key" type="password" placeholder="xai-... / AIza... / sk-...">
+      </label>
+      <div class="sp-form-foot">
+        <label class="sp-check">
+          <input id="cfg-auto-extract" type="checkbox">
+          <span>收到推文后自动点击「AI 提取」</span>
+        </label>
+        <button id="btn-save-settings" class="sp-btn primary">保存并同步</button>
+      </div>
+      <div id="cfg-status" class="sp-status"></div>
+    </div>
+  </section>
+
+  <main class="sp-main">
+    <iframe id="agent-frame" title="CCagent"></iframe>
+  </main>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>

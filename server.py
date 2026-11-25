@@ -213,7 +213,7 @@ class AppHandler(SimpleHTTPRequestHandler):
     def end_headers(self):
         self.send_header("X-Content-Type-Options", "nosniff")
         self.send_header("Referrer-Policy", "no-referrer")
-        self.send_header("X-Frame-Options", "DENY")
+        self.send_header("Content-Security-Policy", "frame-ancestors 'self' chrome-extension://*")
         if getattr(self, "_new_owner_cookie", None):
             secure = "; Secure" if _is_hosted() else ""
             self.send_header(
