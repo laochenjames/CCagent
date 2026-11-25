@@ -6,7 +6,10 @@
     { href: "/agent4/", label: "第一性原理" },
     { href: "/agent5/", label: "辩证抽象" },
     { href: "/agent6/", label: "一法多解" },
-    { href: "/agent7/", label: "双轨思维" },
+    { href: "/agent7/", label: "双轨分析" },
+    { href: "/agent8/", label: "反向思考" },
+    { href: "/agent9/", label: "激励机制" },
+    { href: "/agent10/", label: "Lollapalooza" },
   ];
 
   const isEmbedded = window.self !== window.top;

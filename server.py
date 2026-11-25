@@ -50,6 +50,9 @@ SUB_AGENTS = {
     "agent5": {"handler": "RequestHandler", "quota_paths": ("/api/extract", "/api/generate")},
     "agent6": {"handler": "RequestHandler", "quota_paths": ("/api/extract", "/api/generate")},
     "agent7": {"handler": "RequestHandler", "quota_paths": ("/api/extract", "/api/generate")},
+    "agent8": {"handler": "RequestHandler", "quota_paths": ("/api/extract", "/api/generate")},
+    "agent9": {"handler": "RequestHandler", "quota_paths": ("/api/extract", "/api/generate")},
+    "agent10": {"handler": "RequestHandler", "quota_paths": ("/api/extract", "/api/generate")},
 }
 
 

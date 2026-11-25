@@ -7,6 +7,9 @@
     agent5: "/agent5/",
     agent6: "/agent6/",
     agent7: "/agent7/",
+    agent8: "/agent8/",
+    agent9: "/agent9/",
+    agent10: "/agent10/",
   };
 
   const DEFAULT_HOST = "https://ccagent.mycici.top";

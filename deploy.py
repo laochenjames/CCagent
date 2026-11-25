@@ -31,6 +31,12 @@ FILES_TO_SYNC = [
     "agent6/index.html",
     "agent7/server.py",
     "agent7/index.html",
+    "agent8/server.py",
+    "agent8/index.html",
+    "agent9/server.py",
+    "agent9/index.html",
+    "agent10/server.py",
+    "agent10/index.html",
 ]
 
 HEALTH_URLS = [
@@ -46,6 +52,9 @@ HEALTH_URLS = [
     "https://ccagent.mycici.top/agent5/",
     "https://ccagent.mycici.top/agent6/",
     "https://ccagent.mycici.top/agent7/",
+    "https://ccagent.mycici.top/agent8/",
+    "https://ccagent.mycici.top/agent9/",
+    "https://ccagent.mycici.top/agent10/",
 ]
 
 
@@ -80,7 +89,9 @@ def main():
         port=int(env.get("DEPLOY_PORT", 22)),
         username=env["DEPLOY_USER"],
         password=env["DEPLOY_PASSWORD"],
-        timeout=15,
+        timeout=30,
+        banner_timeout=45,
+        auth_timeout=30,
     )
     sftp = ssh.open_sftp()
 

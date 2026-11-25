@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CCagent · 激励机制诊断师（芒格）</title>
+  <link rel="stylesheet" href="/shared/thinking.css" />
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/favicon.png">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="brand">激励机制</div>
+      <nav class="agent-nav" aria-label="Agent 切换"></nav>
+    </div>
+    <div class="top-actions">
+      <span id="engine-badge" class="engine-badge">引擎就绪</span>
+      <button id="btn-council" class="btn-ghost" type="button">智囊团</button>
+      <button id="btn-history" class="btn-ghost" type="button">历史记录</button>
+      <button id="btn-settings" class="btn-ghost" type="button">设置</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="input-card" class="card input-section">
+      <div id="input-collapsed" class="input-collapsed hidden">
+        <span id="desc-preview" class="muted"></span>
+        <button id="btn-edit-desc" class="btn-ghost" type="button">修改</button>
+      </div>
+      <div id="input-expanded">
+        <textarea id="raw-input" rows="4" placeholder="描述一个让你困惑的组织现象、团队管不动、产品没人用，或粘贴一条商业/行业热点推文：&#10;例如：公司喊着要重视用户体验，但客服和产品经理天天互相甩锅，用户投诉越来越多，帮我用芒格激励机制拆解。"></textarea>
+        <div class="input-footer">
+          <div class="examples">
+            <span class="muted">示例：</span>
+            <button class="chip" type="button" data-example="公司考核研发按代码行数和准时上线，考核测试按提 Bug 数量，结果双方天天扯皮，线上质量反而更差。">团队互相甩锅</button>
+            <button class="chip" type="button" data-example="做了一个社区产品，想让用户多发高质量长文，但目前只有发水贴蹭热点能拿流量，怎么重构激励机制？">产品增长卡点</button>
+            <button class="chip" type="button" data-example="为什么很多医院/中介/教培机构明面上说为用户着想，实际行为却总是诱导过度消费？怎么设计更健康的机制？">拆解商业/行业现象</button>
+          </div>
+          <button id="btn-extract" class="btn-primary" type="button">提取并完善信息</button>
+        </div>
+      </div>
+      <div id="skeleton-bar" class="skeleton hidden">
+        <div class="skel-line"></div>
+        <div class="skel-line short"></div>
+      </div>
+      <div id="error-box" class="error-box hidden"></div>
+    </section>
+
+    <section id="refine-section" class="card hidden">
+      <div class="section-header">
+        <div>
+          <h2>完善分析信息清单</h2>
+          <p id="extract-summary-note" class="muted" style="margin: 4px 0 0;"></p>
+        </div>
+        <div class="completeness-wrap">
+          <span class="muted">信息完整度 <strong id="completeness-pct">0%</strong></span>
+          <div class="completeness-track"><div id="completeness-bar" class="completeness-fill"></div></div>
+        </div>
+      </div>
+      <div id="form-groups-container" class="form-groups"></div>
+      <div class="refine-footer">
+        <span class="muted">空白项可留空由智囊团代为推演，补充越具体结论越犀利。</span>
+        <div class="refine-actions">
+          <button id="btn-reset" class="btn-ghost" type="button">重置</button>
+          <button id="btn-generate" class="btn-primary" type="button">智囊团深度推演</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="result-section" class="card hidden">
+      <div class="result-head">
+        <div>
+          <span class="badge" id="result-engine-badge">AI 智囊团</span>
+          <h2 id="res-title" style="margin: 8px 0 4px;"></h2>
+          <p id="res-summary" class="muted" style="margin: 0;"></p>
+        </div>
+        <div class="result-actions">
+          <button id="btn-copy-md" class="btn-ghost" type="button">复制 Markdown</button>
+          <button id="btn-export-json" class="btn-ghost" type="button">导出 JSON</button>
+          <button id="btn-regenerate" class="btn-ghost" type="button">重新推演</button>
+        </div>
+      </div>
+
+      <div id="res-pillars" class="key-pillars"></div>
+
+      <div id="res-sections" class="sections-wrap"></div>
+
+      <div class="council-section">
+        <div class="council-section-head">
+          <h3>智囊团合议备忘录</h3>
+          <span class="muted">4 位独立视角交叉校验</span>
+        </div>
+        <div id="res-council-synthesis" class="council-synthesis hidden"></div>
+        <div id="res-council-notes" class="council-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="modal-council" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>智囊团成员</h3>
+        <button class="btn-close" data-close="modal-council" type="button">×</button>
+      </div>
+      <div id="council-roster-list" class="roster-list"></div>
+    </div>
+  </div>
+
+  <div id="modal-history" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>历史分析记录</h3>
+        <button class="btn-close" data-close="modal-history" type="button">×</button>
+      </div>
+      <div id="history-list" class="history-list"></div>
+    </div>
+  </div>
+
+  <div id="modal-settings" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>模型与 API 设置</h3>
+        <button class="btn-close" data-close="modal-settings" type="button">×</button>
+      </div>
+      <div class="settings-form">
+        <label>模型厂商
+          <select id="set-provider">
+            <option value="gemini">Google Gemini（默认）</option>
+            <option value="xai">xAI Grok</option>
+            <option value="deepseek">DeepSeek</option>
+          </select>
+        </label>
+        <label>模型名称（留空使用默认）
+          <input id="set-model" type="text" placeholder="gemini-3.5-flash-lite / grok-3-mini / deepseek-chat" />
+        </label>
+        <label>API Key（留空使用服务端配置）
+          <input id="set-api-key" type="password" placeholder="AIza... / xai-... / sk-..." />
+        </label>
+        <div class="settings-actions">
+          <button id="btn-save-settings" class="btn-primary" type="button">保存设置</button>
+          <span id="settings-msg" class="muted"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/shared/thinking.js"></script>
+  <script src="/shared/nav.js"></script>
+</body>
+</html>

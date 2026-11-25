@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CCagent · 双轨思维（A 轨稳态 + B 轨高赔率）</title>
+  <title>CCagent · 双轨分析（查理·芒格）</title>
   <link rel="stylesheet" href="/shared/thinking.css" />
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="shortcut icon" href="/favicon.ico">
@@ -12,7 +12,7 @@
 <body>
   <header class="topbar">
     <div class="topbar-left">
-      <div class="brand">双轨思维</div>
+      <div class="brand">双轨分析</div>
       <nav class="agent-nav" aria-label="Agent 切换"></nav>
     </div>
     <div class="top-actions">
@@ -30,13 +30,13 @@
         <button id="btn-edit-desc" class="btn-ghost" type="button">修改</button>
       </div>
       <div id="input-expanded">
-        <textarea id="raw-input" rows="4" placeholder="写下你当前需要“稳态托底 + 高赔率探索”的双轨抉择：&#10;例如：主业月薪稳定但看不到天花板，想同时探索 AI 独立产品，不知道怎么分配精力和何时切轨。"></textarea>
+        <textarea id="raw-input" rows="4" placeholder="写下你正在面临的复杂决策、投资判断或争议观点：&#10;例如：看到一个热门赛道/标的，大家都说机会难得，我想用芒格双轨分析同时跑一遍「理性利益/概率」和「潜意识误判排查」。"></textarea>
         <div class="input-footer">
           <div class="examples">
             <span class="muted">示例：</span>
-            <button class="chip" type="button" data-example="目前主业稳定月入2万，但成长停滞；想利用业余时间做 AI 小工具矩阵，既怕影响主业又怕副业一直起不来。">主业托底 + AI副业</button>
-            <button class="chip" type="button" data-example="手头有一个成熟但增速放缓的外包业务（维持生活），想抽精力孵化自己的 SaaS 产品，怎么配比最安全？">老业务现金流 + 新方向</button>
-            <button class="chip" type="button" data-example="资金配置上想一边用低风险资产守住本金，一边用小仓位做高赔率策略，怎么设计仓位和止损切轨规则？">稳健投资 + 高赔率博弈</button>
+            <button class="chip" type="button" data-example="最近某 AI 概念股/币种暴涨，圈子里大佬都在晒单，我也想重仓冲进去，帮我跑一遍芒格双轨分析。">追高热门标的</button>
+            <button class="chip" type="button" data-example="前同事拉我一起创业，给了很高期权承诺，我既动心又怕被画饼，帮我同时做理性轨和潜意识误判排查。">是否跳槽创业</button>
+            <button class="chip" type="button" data-example="一个大客户提出先垫资做定制开发，承诺后续有大单，我总觉得哪里不对但又怕错过机会。">重大合作评估</button>
           </div>
           <button id="btn-extract" class="btn-primary" type="button">提取并完善信息</button>
         </div>
@@ -63,43 +63,37 @@
       <div class="refine-footer">
         <span class="muted">空白项可留空由智囊团代为推演，补充越具体结论越犀利。</span>
         <div class="refine-actions">
-          <button id="btn-reset-all" class="btn-ghost" type="button">重新输入</button>
-          <button id="btn-generate" class="btn-primary" type="button">由智囊团设计「双轨并行」方案</button>
+          <button id="btn-reset" class="btn-ghost" type="button">重置</button>
+          <button id="btn-generate" class="btn-primary" type="button">智囊团深度推演</button>
         </div>
       </div>
     </section>
 
-    <section id="result-section" class="hidden">
-      <div class="card result-hero">
-        <div class="result-hero-top">
-          <div>
-            <div class="result-tags">
-              <span id="res-engine-tag" class="tag-pill">AI 智囊团</span>
-              <span id="res-fallback-tag" class="tag-pill tag-warn hidden"></span>
-            </div>
-            <h1 id="res-title" class="result-title"></h1>
-            <p id="res-summary" class="result-desc"></p>
-          </div>
-          <div class="export-actions">
-            <button id="btn-copy-md" class="btn-ghost" type="button">复制 Markdown</button>
-            <button id="btn-dl-md" class="btn-ghost" type="button">下载 .md</button>
-            <button id="btn-dl-json" class="btn-ghost" type="button">导出 JSON</button>
-          </div>
+    <section id="result-section" class="card hidden">
+      <div class="result-head">
+        <div>
+          <span class="badge" id="result-engine-badge">AI 智囊团</span>
+          <h2 id="res-title" style="margin: 8px 0 4px;"></h2>
+          <p id="res-summary" class="muted" style="margin: 0;"></p>
         </div>
-        <div id="res-pillars" class="key-pillars"></div>
+        <div class="result-actions">
+          <button id="btn-copy-md" class="btn-ghost" type="button">复制 Markdown</button>
+          <button id="btn-export-json" class="btn-ghost" type="button">导出 JSON</button>
+          <button id="btn-regenerate" class="btn-ghost" type="button">重新推演</button>
+        </div>
       </div>
 
-      <div id="res-sections"></div>
+      <div id="res-pillars" class="key-pillars"></div>
 
-      <div class="card">
-        <div class="section-header">
-          <div>
-            <h2>智囊团合议备忘录</h2>
-            <p class="muted" style="margin: 4px 0 0;">4 位顾问分别从各自专业视角给出立场、核心判断与具体落地动作。</p>
-          </div>
+      <div id="res-sections" class="sections-wrap"></div>
+
+      <div class="council-section">
+        <div class="council-section-head">
+          <h3>智囊团合议备忘录</h3>
+          <span class="muted">4 位独立视角交叉校验</span>
         </div>
-        <div id="council-synthesis-wrap" class="council-synthesis hidden"></div>
-        <div id="council-notes-grid" class="council-grid"></div>
+        <div id="res-council-synthesis" class="council-synthesis hidden"></div>
+        <div id="res-council-notes" class="council-grid"></div>
       </div>
     </section>
   </main>
@@ -107,8 +101,8 @@
   <div id="modal-council" class="modal-backdrop hidden">
     <div class="modal-card">
       <div class="modal-header">
-        <h3>双轨思维智囊团（A/B 轨博弈与切轨 · 4 位顾问）</h3>
-        <button class="btn-ghost btn-close-modal" data-close="modal-council" type="button">关闭</button>
+        <h3>智囊团成员</h3>
+        <button class="btn-close" data-close="modal-council" type="button">×</button>
       </div>
       <div id="council-roster-list" class="roster-list"></div>
     </div>
@@ -118,7 +112,7 @@
     <div class="modal-card">
       <div class="modal-header">
         <h3>历史分析记录</h3>
-        <button class="btn-ghost btn-close-modal" data-close="modal-history" type="button">关闭</button>
+        <button class="btn-close" data-close="modal-history" type="button">×</button>
       </div>
       <div id="history-list" class="history-list"></div>
     </div>
@@ -127,37 +121,26 @@
   <div id="modal-settings" class="modal-backdrop hidden">
     <div class="modal-card">
       <div class="modal-header">
-        <h3>API 与模型设置</h3>
-        <button class="btn-ghost btn-close-modal" data-close="modal-settings" type="button">关闭</button>
+        <h3>模型与 API 设置</h3>
+        <button class="btn-close" data-close="modal-settings" type="button">×</button>
       </div>
-      <div class="settings-body">
-        <p id="hosted-notice" class="muted hidden" style="margin-top:0;">
-          当前为公网托管模式，默认共享服务端免费额度；你也可以填入自己的 API Key（仅保存在当前浏览器）继续使用。
-        </p>
-        <div class="field-row">
-          <label for="cfg-provider">服务商</label>
-          <select id="cfg-provider">
+      <div class="settings-form">
+        <label>模型厂商
+          <select id="set-provider">
             <option value="gemini">Google Gemini（默认）</option>
             <option value="xai">xAI Grok</option>
             <option value="deepseek">DeepSeek</option>
           </select>
-        </div>
-        <div class="field-row">
-          <label for="cfg-model">模型名称</label>
-          <input id="cfg-model" type="text" placeholder="gemini-3.5-flash-lite" />
-        </div>
-        <div class="field-row">
-          <label for="cfg-key">API Key（留空则使用服务端默认 Key）</label>
-          <input id="cfg-key" type="password" placeholder="输入自定义 API Key（可选）" />
-        </div>
-        <div class="field-row">
-          <label for="cfg-base-url">Base URL（可选）</label>
-          <input id="cfg-base-url" type="text" placeholder="https://generativelanguage.googleapis.com" />
-        </div>
-        <div id="settings-status" class="muted" style="min-height: 18px;"></div>
+        </label>
+        <label>模型名称（留空使用默认）
+          <input id="set-model" type="text" placeholder="gemini-3.5-flash-lite / grok-3-mini / deepseek-chat" />
+        </label>
+        <label>API Key（留空使用服务端配置）
+          <input id="set-api-key" type="password" placeholder="AIza... / xai-... / sk-..." />
+        </label>
         <div class="settings-actions">
-          <button id="btn-test-conn" class="btn-ghost" type="button">测试连接</button>
-          <button id="btn-save-cfg" class="btn-primary" type="button">保存设置</button>
+          <button id="btn-save-settings" class="btn-primary" type="button">保存设置</button>
+          <span id="settings-msg" class="muted"></span>
         </div>
       </div>
     </div>
