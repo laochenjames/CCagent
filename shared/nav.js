@@ -35,6 +35,13 @@
         ".examples{gap:5px !important;}" +
         ".chip{font-size:11.5px !important;padding:3px 8px !important;}" +
         ".form-groups,.council-synthesis,.grid-2{grid-template-columns:1fr !important;}" +
+        ".triage-input-panel{padding:10px !important;}" +
+        ".triage-controls,.matrix-action-bar{flex-direction:column !important;align-items:stretch !important;gap:8px !important;}" +
+        ".controls-right{display:flex !important;gap:6px !important;width:100% !important;}" +
+        ".controls-right .btn-triage-main{flex:1 !important;}" +
+        ".action-bar-right{display:grid !important;grid-template-columns:1fr 1fr !important;gap:6px !important;width:100% !important;}" +
+        ".action-bar-right button{width:100% !important;padding:6px 8px !important;font-size:12px !important;white-space:nowrap;text-align:center;}" +
+        ".quadrant-grid,.matrix-grid{grid-template-columns:1fr !important;}" +
         ".modal{width:calc(100vw - 20px) !important;max-width:none !important;}"
       : "";
     st.textContent =
