@@ -14,6 +14,9 @@
   const $ = (id) => document.getElementById(id);
 
   function loadByok() {
+    if (window.__CCAGENT_BYOK__ && window.__CCAGENT_BYOK__.api_key) {
+      return window.__CCAGENT_BYOK__;
+    }
     try { return JSON.parse(localStorage.getItem(STORAGE_BYOK) || "{}"); } catch { return {}; }
   }
   function saveByok(obj) {

@@ -371,8 +371,10 @@ async function runTriage() {
   }, 1000);
 
   try {
-    let byok = {};
-    try { byok = JSON.parse(localStorage.getItem('ccagent_shared_byok') || '{}'); } catch (_) {}
+    let byok = (window.__CCAGENT_BYOK__ && window.__CCAGENT_BYOK__.api_key) ? window.__CCAGENT_BYOK__ : {};
+    if (!byok.api_key) {
+      try { byok = JSON.parse(localStorage.getItem('ccagent_shared_byok') || '{}'); } catch (_) {}
+    }
     const reqBody = {
       text,
       fallback: document.getElementById('cfg-fallback').checked
@@ -883,6 +885,12 @@ async function saveApiConfig() {
     updates.api_key = keyInput;
   }
 
+  // 托管模式或插件嵌入模式下，先保存到浏览器本地与内存，确保立即生效
+  if (updates.api_key) {
+    window.__CCAGENT_BYOK__ = { ...updates };
+    try { localStorage.setItem('ccagent_shared_byok', JSON.stringify(updates)); } catch (_) {}
+  }
+
   try {
     // 1. 保存 API 配置
     const res = await fetch('api/save-config', {
@@ -890,6 +898,10 @@ async function saveApiConfig() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updates)
     });
+    if (res.status === 403 && updates.api_key) {
+      alert('API Key 已保存到当前浏览器（托管模式），可直接开始分诊！');
+      return;
+    }
     // 2. 保存纠偏开关设置 (B3)
     await fetch('api/settings', {
       method: 'PUT',

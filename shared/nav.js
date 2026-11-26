@@ -96,15 +96,17 @@
 
   function syncByok(byok) {
     if (!byok || typeof byok !== "object") return;
-    const payload = JSON.stringify({
+    const obj = {
       provider: byok.provider || "xai",
       model: byok.model || "",
       api_key: byok.api_key || "",
       base_url: byok.base_url || "",
-    });
+    };
+    window.__CCAGENT_BYOK__ = obj.api_key ? obj : null;
+    const payload = JSON.stringify(obj);
     ["cc_byok", "ccagent_agent3_byok", "ccagent_shared_byok"].forEach((k) => {
       try {
-        if (byok.api_key) {
+        if (obj.api_key) {
           localStorage.setItem(k, payload);
         } else {
           localStorage.removeItem(k);
