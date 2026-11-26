@@ -92,8 +92,8 @@
           <h3>智囊团合议备忘录</h3>
           <span class="muted">4 位独立视角交叉校验</span>
         </div>
-        <div id="res-council-synthesis" class="council-synthesis hidden"></div>
-        <div id="res-council-notes" class="council-grid"></div>
+                <div id="council-synthesis-wrap" class="council-synthesis hidden"></div>
+        <div id="council-notes-grid" class="council-grid"></div>
       </div>
     </section>
   </main>
@@ -101,8 +101,8 @@
   <div id="modal-council" class="modal-backdrop hidden">
     <div class="modal-card">
       <div class="modal-header">
-        <h3>智囊团成员</h3>
-        <button class="btn-close" data-close="modal-council" type="button">×</button>
+        <h3>智囊团成员（4 位独立顾问）</h3>
+        <button class="btn-ghost btn-close-modal" data-close="modal-council" type="button">关闭</button>
       </div>
       <div id="council-roster-list" class="roster-list"></div>
     </div>
@@ -112,7 +112,7 @@
     <div class="modal-card">
       <div class="modal-header">
         <h3>历史分析记录</h3>
-        <button class="btn-close" data-close="modal-history" type="button">×</button>
+        <button class="btn-ghost btn-close-modal" data-close="modal-history" type="button">关闭</button>
       </div>
       <div id="history-list" class="history-list"></div>
     </div>
@@ -121,26 +121,37 @@
   <div id="modal-settings" class="modal-backdrop hidden">
     <div class="modal-card">
       <div class="modal-header">
-        <h3>模型与 API 设置</h3>
-        <button class="btn-close" data-close="modal-settings" type="button">×</button>
+        <h3>API 与模型设置</h3>
+        <button class="btn-ghost btn-close-modal" data-close="modal-settings" type="button">关闭</button>
       </div>
-      <div class="settings-form">
-        <label>模型厂商
-          <select id="set-provider">
+      <div class="settings-body">
+        <p id="hosted-notice" class="muted hidden" style="margin-top:0;">
+          当前为公网托管模式，默认共享服务端免费额度；你也可以填入自己的 API Key（仅保存在当前浏览器）继续使用。
+        </p>
+        <div class="field-row">
+          <label for="cfg-provider">服务商</label>
+          <select id="cfg-provider">
             <option value="gemini">Google Gemini（默认）</option>
             <option value="xai">xAI Grok</option>
             <option value="deepseek">DeepSeek</option>
           </select>
-        </label>
-        <label>模型名称（留空使用默认）
-          <input id="set-model" type="text" placeholder="gemini-3.5-flash-lite / grok-3-mini / deepseek-chat" />
-        </label>
-        <label>API Key（留空使用服务端配置）
-          <input id="set-api-key" type="password" placeholder="AIza... / xai-... / sk-..." />
-        </label>
+        </div>
+        <div class="field-row">
+          <label for="cfg-model">模型名称</label>
+          <input id="cfg-model" type="text" placeholder="gemini-3.5-flash-lite" />
+        </div>
+        <div class="field-row">
+          <label for="cfg-key">API Key（留空则使用服务端默认 Key）</label>
+          <input id="cfg-key" type="password" placeholder="输入自定义 API Key（可选）" />
+        </div>
+        <div class="field-row">
+          <label for="cfg-base-url">Base URL（可选）</label>
+          <input id="cfg-base-url" type="text" placeholder="https://generativelanguage.googleapis.com" />
+        </div>
+        <div id="settings-status" class="muted" style="min-height: 18px;"></div>
         <div class="settings-actions">
-          <button id="btn-save-settings" class="btn-primary" type="button">保存设置</button>
-          <span id="settings-msg" class="muted"></span>
+          <button id="btn-test-conn" class="btn-ghost" type="button">测试连接</button>
+          <button id="btn-save-cfg" class="btn-primary" type="button">保存设置</button>
         </div>
       </div>
     </div>
