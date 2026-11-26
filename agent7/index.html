@@ -63,7 +63,7 @@
       <div class="refine-footer">
         <span class="muted">空白项可留空由智囊团代为推演，补充越具体结论越犀利。</span>
         <div class="refine-actions">
-          <button id="btn-reset" class="btn-ghost" type="button">重置</button>
+          <button id="btn-reset-all" class="btn-ghost" type="button">重新输入</button>
           <button id="btn-generate" class="btn-primary" type="button">智囊团深度推演</button>
         </div>
       </div>
@@ -72,14 +72,14 @@
     <section id="result-section" class="card hidden">
       <div class="result-head">
         <div>
-          <span class="badge" id="result-engine-badge">AI 智囊团</span>
+          <div class="result-tags"><span id="res-engine-tag" class="tag-pill">AI 智囊团</span><span id="res-fallback-tag" class="tag-pill tag-warn hidden"></span></div>
           <h2 id="res-title" style="margin: 8px 0 4px;"></h2>
           <p id="res-summary" class="muted" style="margin: 0;"></p>
         </div>
         <div class="result-actions">
           <button id="btn-copy-md" class="btn-ghost" type="button">复制 Markdown</button>
-          <button id="btn-export-json" class="btn-ghost" type="button">导出 JSON</button>
-          <button id="btn-regenerate" class="btn-ghost" type="button">重新推演</button>
+          <button id="btn-dl-md" class="btn-ghost" type="button">下载 MD</button>
+          <button id="btn-dl-json" class="btn-ghost" type="button">导出 JSON</button>
         </div>
       </div>
 
