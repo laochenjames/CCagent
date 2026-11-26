@@ -71,7 +71,7 @@
     });
   }
 
-  function applyPrefill(text, autoExtract) {
+  function applyPrefill(text, autoExtract, directGenerate) {
     if (!text) return false;
     const el =
       document.getElementById("raw-input") ||
@@ -83,6 +83,17 @@
     el.dispatchEvent(new Event("change", { bubbles: true }));
     el.focus();
     el.scrollIntoView({ behavior: "smooth", block: "center" });
+
+    if (directGenerate) {
+      const triageBtn = document.getElementById("btn-run-triage");
+      if (triageBtn && !triageBtn.disabled) {
+        setTimeout(() => triageBtn.click(), 120);
+        return true;
+      }
+      window.dispatchEvent(new CustomEvent("ccagent:direct-generate", { detail: { text } }));
+      return true;
+    }
+
     if (autoExtract) {
       const btn =
         document.getElementById("btn-extract") ||
@@ -119,7 +130,7 @@
     const msg = event.data;
     if (!msg || typeof msg !== "object") return;
     if (msg.type === "CCAGENT_PREFILL") {
-      applyPrefill(msg.text || "", Boolean(msg.autoExtract));
+      applyPrefill(msg.text || "", Boolean(msg.autoExtract), Boolean(msg.directGenerate));
     } else if (msg.type === "CCAGENT_SYNC_BYOK") {
       syncByok(msg.byok);
     }

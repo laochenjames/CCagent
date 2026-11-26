@@ -60,6 +60,10 @@
       postToFrame({
         type: "CCAGENT_PREFILL",
         text: state.queuedPrefill.text,
+        directGenerate:
+          state.queuedPrefill.directGenerate !== undefined
+            ? state.queuedPrefill.directGenerate
+            : true,
         autoExtract:
           state.queuedPrefill.autoExtract !== undefined
             ? state.queuedPrefill.autoExtract
