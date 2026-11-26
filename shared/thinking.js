@@ -352,7 +352,8 @@
       state.schema = council.fields_schema || [];
 
       $("engine-badge").textContent = cfg.has_key ? `引擎：${cfg.model}` : "未配置 API";
-      if (state.hosted) $("hosted-notice").classList.remove("hidden");
+      const hostedNotice = $("hosted-notice");
+      if (state.hosted && hostedNotice) hostedNotice.classList.remove("hidden");
 
       const byok = loadByok();
       $("cfg-provider").value = byok.provider || cfg.provider || "gemini";

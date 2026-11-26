@@ -30,6 +30,7 @@
         </optgroup>
       </select>
       <div class="sp-actions">
+        <button id="btn-guide" class="sp-btn" title="使用技巧 · 实战速查表">技巧</button>
         <button id="btn-clip" class="sp-btn" title="暂存篮（收集多条推文，一键发给一法多解）">
           暂存 <span id="clip-count" class="sp-badge hidden">0</span>
         </button>
@@ -90,6 +91,89 @@
   <main class="sp-main">
     <iframe id="agent-frame" title="CCagent"></iframe>
   </main>
+
+  <div id="guide-modal" class="sp-modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="guide-modal-title">
+    <div class="sp-modal">
+      <div class="sp-modal-head">
+        <strong id="guide-modal-title">使用技巧 · 推特实战速查表</strong>
+        <button id="btn-guide-close" class="sp-btn" type="button">关闭</button>
+      </div>
+      <div class="sp-modal-body">
+        <div class="sp-tips-box">
+          <div><strong>快捷操作：</strong></div>
+          <ul>
+            <li>推文上点 <code>CC</code> → 直接送入当前 Agent</li>
+            <li>按住 <code>Shift</code> 点 <code>CC</code> → 追加进<strong>暂存篮</strong>，多条合并喂给「一法多解」</li>
+            <li>任意网页选中文字 → 右键选 Agent，或按 <code>Alt + C</code> 打开侧边栏</li>
+          </ul>
+        </div>
+
+        <p class="sp-guide-hint">点击下方任意 Agent 名称可直接切换：</p>
+
+        <table class="sp-guide-table">
+          <thead>
+            <tr>
+              <th>看到什么推文</th>
+              <th>推荐 Agent</th>
+              <th>核心用法</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>暴富神话 / AI 焦虑 / 情绪带货 / 大 V 晒单</td>
+              <td><button class="sp-agent-jump" data-agent="agent7">双轨分析</button></td>
+              <td>一轨算理性账，二轨拆潜意识误判</td>
+            </tr>
+            <tr>
+              <td>新项目 / 融资 / 投资机会 / 商业宏图</td>
+              <td><button class="sp-agent-jump" data-agent="agent8">反向思考</button></td>
+              <td>事前验尸：怎么一定会死？断裂点在哪？</td>
+            </tr>
+            <tr>
+              <td>大厂裁员 / 政策变动 / 平台改规则 / 利益纠纷</td>
+              <td><button class="sp-agent-jump" data-agent="agent9">激励机制</button></td>
+              <td>不听口号，直接顺着钱和考核看真实动机</td>
+            </tr>
+            <tr>
+              <td>现象级爆款 / 集体狂热 / 币圈或 AI 泡沫</td>
+              <td><button class="sp-agent-jump" data-agent="agent10">Lollapalooza</button></td>
+              <td>识别多力同向共振，分辨真复利还是伪泡沫</td>
+            </tr>
+            <tr>
+              <td>硬核技术 / 行业成本质疑 / 颠覆式产品</td>
+              <td><button class="sp-agent-jump" data-agent="agent4">第一性原理</button></td>
+              <td>剥掉行业惯例，退回物理与成本底线重构</td>
+            </tr>
+            <tr>
+              <td>宏观趋势 / 巨头博弈 / 复杂路线之争</td>
+              <td><button class="sp-agent-jump" data-agent="agent5">辩证抽象</button></td>
+              <td>抓主要矛盾、分敌我友、找阶段破局点</td>
+            </tr>
+            <tr>
+              <td>连续刷到 3~5 条不同领域的干货 / 观点</td>
+              <td><button class="sp-agent-jump" data-agent="agent6">一法多解</button></td>
+              <td>用暂存篮合并，提炼底层最大公约数</td>
+            </tr>
+            <tr>
+              <td>招聘帖 / 副业案例 / 转行分享 / 行业红利</td>
+              <td><button class="sp-agent-jump" data-agent="agent1">职业投入体检</button></td>
+              <td>校准自己的能力圈起点，判断是否值得重注</td>
+            </tr>
+            <tr>
+              <td>长文干货 / 待办清单 / 让你心动的新点子</td>
+              <td><button class="sp-agent-jump" data-agent="agent2">个人任务分诊</button></td>
+              <td>检查清单过滤：现在做、延后还是直接删</td>
+            </tr>
+            <tr>
+              <td>高手日常 / 健身学习方法 / 长期主义分享</td>
+              <td><button class="sp-agent-jump" data-agent="agent3">原子习惯生成</button></td>
+              <td>把别人经验转成自己 2 分钟可落地的复利习惯</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
   <script src="sidepanel.js"></script>
 </body>

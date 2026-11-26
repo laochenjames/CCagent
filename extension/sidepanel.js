@@ -163,6 +163,36 @@
     $("settings-drawer").classList.add("hidden");
   });
 
+  $("btn-guide").addEventListener("click", () => {
+    $("clip-drawer").classList.add("hidden");
+    $("settings-drawer").classList.add("hidden");
+    $("guide-modal").classList.remove("hidden");
+  });
+
+  $("btn-guide-close").addEventListener("click", () => {
+    $("guide-modal").classList.add("hidden");
+  });
+
+  $("guide-modal").addEventListener("click", (e) => {
+    if (e.target === $("guide-modal")) {
+      $("guide-modal").classList.add("hidden");
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      $("guide-modal").classList.add("hidden");
+    }
+  });
+
+  document.querySelectorAll(".sp-agent-jump").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const target = btn.getAttribute("data-agent");
+      if (target) loadAgent(target, null);
+      $("guide-modal").classList.add("hidden");
+    });
+  });
+
   $("btn-save-settings").addEventListener("click", async () => {
     const host = ($("cfg-host").value || "").trim() || DEFAULT_HOST;
     const provider = $("cfg-provider").value || "xai";
