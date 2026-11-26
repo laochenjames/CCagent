@@ -10,6 +10,7 @@
   <header class="sp-header">
     <div class="sp-row">
       <select id="agent-select" class="sp-select" aria-label="选择 Agent">
+        <option value="auto">✨ 智能路由（自动选模型）</option>
         <optgroup label="防误判 · 芒格护城河">
           <option value="agent7">双轨分析（理性 + 潜意识误判）</option>
           <option value="agent8">反向思考（事前验尸 + 安全边际）</option>
@@ -88,7 +89,23 @@
     </div>
   </section>
 
+  <div id="route-banner" class="sp-route-banner hidden">
+    <div id="route-banner-text" class="sp-route-text"></div>
+    <div class="sp-route-actions">
+      <button id="btn-route-alt" class="sp-route-alt hidden" type="button"></button>
+      <button id="btn-route-close" class="sp-route-close" type="button" title="关闭提示">×</button>
+    </div>
+  </div>
+
   <main class="sp-main">
+    <section id="auto-panel" class="sp-auto-panel hidden">
+      <div class="sp-auto-card">
+        <h3>✨ 智能路由 · 自动选模型</h3>
+        <p class="sp-auto-desc">不确定该用哪个思维模型？直接点推文上的 <code>CC</code> 按钮，或在下方粘贴任意内容，系统将自动判断最匹配的 Agent 并直接送入分析。</p>
+        <textarea id="auto-input" rows="5" placeholder="粘贴推文、想法、难题或待办，点击下方按钮自动匹配最合适的思维模型…"></textarea>
+        <button id="btn-auto-go" class="sp-btn primary sp-auto-btn" type="button">✨ 自动匹配并送入分析</button>
+      </div>
+    </section>
     <iframe id="agent-frame" title="CCagent"></iframe>
   </main>
 

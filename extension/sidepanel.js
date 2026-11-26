@@ -12,16 +12,31 @@
     agent10: "/agent10/",
   };
 
+  const AGENT_LABELS = {
+    agent1: "职业投入体检",
+    agent2: "个人任务分诊",
+    agent3: "原子习惯生成",
+    agent4: "第一性原理",
+    agent5: "辩证抽象",
+    agent6: "一法多解",
+    agent7: "双轨分析",
+    agent8: "反向思考",
+    agent9: "激励机制诊断",
+    agent10: "Lollapalooza",
+  };
+
   const DEFAULT_HOST = "https://ccagent.mycici.top";
   const $ = (id) => document.getElementById(id);
 
   let state = {
     host: DEFAULT_HOST,
-    agentId: "agent4",
+    agentId: "auto",
     byok: { provider: "xai", model: "", api_key: "" },
     autoExtract: false,
     iframeReady: false,
     queuedPrefill: null,
+    lastRoutedText: "",
+    lastAltAgent: "",
   };
 
   function agentUrl(agentId) {
@@ -54,12 +69,82 @@
     }
   }
 
-  function loadAgent(agentId, prefillPayload) {
+  function showRouteBanner(text, altAgentId) {
+    $("route-banner-text").textContent = text;
+    const altBtn = $("btn-route-alt");
+    if (altAgentId && AGENT_LABELS[altAgentId]) {
+      state.lastAltAgent = altAgentId;
+      altBtn.textContent = `改用${AGENT_LABELS[altAgentId]}`;
+      altBtn.classList.remove("hidden");
+    } else {
+      state.lastAltAgent = "";
+      altBtn.classList.add("hidden");
+    }
+    $("route-banner").classList.remove("hidden");
+  }
+
+  async function routeAndLoad(text, extraPayload) {
+    const clean = (text || "").trim();
+    if (!clean) return;
+    state.lastRoutedText = clean;
+    showRouteBanner("✨ 智能路由判断最合适的思维模型中…", "");
+
+    const base = (state.host || DEFAULT_HOST).replace(/\/+$/, "");
+    let target = "agent7";
+    let alt = "agent4";
+    let reason = "已为你自动匹配最合适的思维模型。";
+
+    try {
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 6000);
+      const body = { text: clean };
+      if (state.byok && state.byok.api_key) {
+        body.provider = state.byok.provider;
+        body.model = state.byok.model;
+        body.api_key = state.byok.api_key;
+      }
+      const res = await fetch(`${base}/api/route`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+        signal: ctrl.signal,
+      });
+      clearTimeout(timer);
+      if (res.ok) {
+        const data = await res.json();
+        if (data.primary && AGENT_PATHS[data.primary]) target = data.primary;
+        if (data.secondary && AGENT_PATHS[data.secondary]) alt = data.secondary;
+        if (data.reason) reason = data.reason;
+      }
+    } catch (_) {}
+
+    const label = AGENT_LABELS[target] || target;
+    showRouteBanner(`✨ 已自动选定「${label}」：${reason}`, alt);
+    loadAgent(target, { ...(extraPayload || {}), agentId: target, text: clean }, true);
+  }
+
+  function loadAgent(agentId, prefillPayload, keepAutoMode) {
+    if (agentId === "auto") {
+      state.agentId = "auto";
+      $("agent-select").value = "auto";
+      chrome.storage.local.set({ lastAgentId: "auto" });
+      if (prefillPayload && prefillPayload.text) {
+        routeAndLoad(prefillPayload.text, prefillPayload);
+        return;
+      }
+      $("auto-panel").classList.remove("hidden");
+      $("agent-frame").classList.add("hidden");
+      return;
+    }
+
+    $("auto-panel").classList.add("hidden");
+    $("agent-frame").classList.remove("hidden");
+
     const targetId = AGENT_PATHS[agentId] ? agentId : "agent4";
     const sameAgent = state.agentId === targetId && state.iframeReady && $("agent-frame").src === agentUrl(targetId);
-    state.agentId = targetId;
-    $("agent-select").value = targetId;
-    chrome.storage.local.set({ lastAgentId: targetId });
+    state.agentId = keepAutoMode ? "auto" : targetId;
+    $("agent-select").value = keepAutoMode ? "auto" : targetId;
+    chrome.storage.local.set({ lastAgentId: state.agentId });
 
     if (prefillPayload && prefillPayload.text) {
       state.queuedPrefill = prefillPayload;
@@ -161,6 +246,23 @@
 
   $("btn-settings-close").addEventListener("click", () => {
     $("settings-drawer").classList.add("hidden");
+  });
+
+  $("btn-route-close").addEventListener("click", () => {
+    $("route-banner").classList.add("hidden");
+  });
+
+  $("btn-route-alt").addEventListener("click", () => {
+    if (!state.lastAltAgent) return;
+    const alt = state.lastAltAgent;
+    showRouteBanner(`✨ 已切换至备选模型「${AGENT_LABELS[alt] || alt}」`, "");
+    loadAgent(alt, state.lastRoutedText ? { text: state.lastRoutedText } : null, state.agentId === "auto");
+  });
+
+  $("btn-auto-go").addEventListener("click", () => {
+    const txt = ($("auto-input").value || "").trim();
+    if (!txt) return;
+    routeAndLoad(txt, {});
   });
 
   $("btn-guide").addEventListener("click", () => {

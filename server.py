@@ -268,6 +268,8 @@ class AppHandler(SimpleHTTPRequestHandler):
         origin = self.headers.get("Origin")
         if origin:
             parsed = urllib.parse.urlparse(origin)
+            if parsed.scheme == "chrome-extension":
+                return True
             if (parsed.hostname or "").lower() not in allowed:
                 self._send_json(403, {"error": "Forbidden Origin", "category": "安全校验失败"})
                 return False
@@ -277,6 +279,9 @@ class AppHandler(SimpleHTTPRequestHandler):
         body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
         self.send_response(status_code)
         self.send_header("Content-Type", "application/json; charset=utf-8")
+        origin = self.headers.get("Origin") or ""
+        if origin.startswith("chrome-extension://"):
+            self.send_header("Access-Control-Allow-Origin", origin)
         if cache_control:
             self.send_header("Cache-Control", cache_control)
         self.send_header("Content-Length", str(len(body)))
@@ -524,11 +529,99 @@ class AppHandler(SimpleHTTPRequestHandler):
             if path == "/api/test-connection":
                 return self._handle_test_connection(body, ip_hash=ip_hash)
 
+            if path == "/api/route":
+                return self._handle_route(body)
+
             self._send_json(404, {"error": "Not Found", "category": "未找到"})
         except Exception as exc:
             log_event("ERROR", "unhandled_post_error", category=type(exc).__name__)
             err_msg = "服务器内部错误" if _is_hosted() else f"服务器内部错误: {type(exc).__name__}: {exc}"
             self._send_json(500, {"error": err_msg, "category": "服务异常"})
+
+    def do_OPTIONS(self):
+        self.send_response(204)
+        origin = self.headers.get("Origin") or "*"
+        self.send_header("Access-Control-Allow-Origin", origin)
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.end_headers()
+
+    def _handle_route(self, body):
+        text = (body.get("text") or "").strip()
+        if not text:
+            return self._send_json(400, {"error": "请输入需要路由判断的内容"})
+
+        agent_catalog = {
+            "agent1": "职业投入体检（能力圈起点：招聘、副业、转行、行业机会、是否值得重注）",
+            "agent2": "个人任务分诊（检查清单：待办流水账、多件事不知先做哪个、干货清单筛选）",
+            "agent3": "原子习惯生成（复利飞轮：高手日常、健身学习方法、想养成的长期习惯）",
+            "agent4": "第一性原理（马斯克：硬核技术、商业模式/成本质疑、打破行业惯例重构）",
+            "agent5": "辩证抽象（矛盾论：宏观趋势、巨头博弈、复杂路线之争、抓主要矛盾）",
+            "agent6": "一法多解（最大公约数：多条不同领域素材/案例合并、提炼通用底层规律）",
+            "agent7": "双轨分析（芒格理性+误判：暴富神话、AI焦虑、大V晒单、带情绪的观点或决策）",
+            "agent8": "反向思考（事前验尸：新项目、投资/融资机会、商业宏图、找失败路径和断裂点）",
+            "agent9": "激励机制诊断（联邦快递法：大厂裁员、平台改规则、政策变动、利益与考核博弈）",
+            "agent10": "Lollapalooza共振雷达（多力叠加：现象级爆款、集体狂热、泡沫还是超级复利）",
+        }
+
+        def fallback_route(t):
+            s = t.lower()
+            if "【素材 1】" in t or "【素材 2】" in t:
+                return "agent6", "多条素材合并，最适合用「一法多解」提炼底层最大公约数。", "agent5"
+            if any(k in s for k in ("暴富", "焦虑", "割韭菜", "fomo", "晒单", "月入", "财务自由", "千万别", "必须买", "梭哈")):
+                return "agent7", "内容带有较强情绪或利益诱导，建议先用「双轨分析」算理性账并排查潜意识误判。", "agent10"
+            if any(k in s for k in ("裁员", "kpi", "okr", "绩效", "考核", "政策", "规则", "抽成", "补贴", "管理层", "官僚")):
+                return "agent9", "涉及组织考核与利益分配，最适合用「激励机制诊断」看清真实动机。", "agent5"
+            if any(k in s for k in ("泡沫", "狂热", "爆款", "疯涨", "全民", "病毒式", "lollapalooza", "共振", "踩踏")):
+                return "agent10", "呈现多力量同向叠加迹象，适合用「Lollapalooza」甄别真复利还是伪泡沫。", "agent7"
+            if any(k in s for k in ("投资", "融资", "创业", "项目", "估值", "商业计划", "押注", "all in", "风险")):
+                return "agent8", "面对机会与宏图，先用「反向思考」做事前验尸，排查断裂点和安全边际。", "agent7"
+            if any(k in s for k in ("转行", "求职", "招聘", "副业", "职业", "跳槽", "薪资", "能力圈", "赛道")):
+                return "agent1", "涉及个人职业与赛道投入，适合用「职业投入体检」校准能力圈起点。", "agent8"
+            if any(k in s for k in ("待办", "todo", "任务", "清单", "今天要做", "忙不过来", "优先级", "安排")):
+                return "agent2", "属于多事项排序与取舍，最适合用「个人任务分诊」快速做清单过滤。", "agent3"
+            if any(k in s for k in ("习惯", "坚持", "早起", "健身", "背单词", "自律", "每天", "打卡", "复利")):
+                return "agent3", "聚焦长期行为养成，适合用「原子习惯生成」拆成 2 分钟可启动的飞轮。", "agent2"
+            if any(k in s for k in ("成本", "原理", "架构", "技术", "颠覆", "物理", "重构", "效率", "为什么必须")):
+                return "agent4", "适合剥掉行业惯例，用「第一性原理」退回物理与成本底线重新推演。", "agent5"
+            if any(k in s for k in ("趋势", "博弈", "巨头", "竞争", "格局", "宏观", "矛盾", "路线")):
+                return "agent5", "属于复杂局势与多方博弈，适合用「辩证抽象」抓住当前主要矛盾。", "agent9"
+            return "agent7", "通用信息与观点评估，默认推荐用「双轨分析」同时做理性推演与误判排查。", "agent4"
+
+        primary, reason, secondary = fallback_route(text)
+        engine = "rule"
+        try:
+            import thinking_core
+            cfg = thinking_core.resolve_llm_config(body)
+            if cfg.get("api_key"):
+                catalog_str = "\n".join(f"- {k}: {v}" for k, v in agent_catalog.items())
+                prompt = (
+                    "你是 CCagent 的前置路由专家。请根据用户输入的内容，从下面 10 个思维模型 Agent 中，"
+                    "选出最匹配的主推 Agent（primary）和备选 Agent（secondary），并用一句不超过 28 字的中文说明原因。\n\n"
+                    f"可选 Agent：\n{catalog_str}\n\n"
+                    f"用户输入：\n{text[:1200]}\n\n"
+                    '严格返回 JSON：{"primary": "agent7", "secondary": "agent8", "reason": "一句话理由"}'
+                )
+                res = thinking_core.call_llm_json(prompt, cfg, temperature=0.1, max_tokens=220, tag="Router")
+                p_id = (res.get("primary") or "").strip()
+                s_id = (res.get("secondary") or "").strip()
+                r_txt = (res.get("reason") or "").strip()
+                if p_id in agent_catalog:
+                    primary = p_id
+                    if s_id in agent_catalog and s_id != p_id:
+                        secondary = s_id
+                    if r_txt:
+                        reason = r_txt
+                    engine = "ai"
+        except Exception:
+            pass
+
+        return self._send_json(200, {
+            "primary": primary,
+            "secondary": secondary,
+            "reason": reason,
+            "engine": engine,
+        })
 
     def do_PUT(self):
         return self._proxy_other("PUT")
