@@ -73,17 +73,9 @@
     }
   }
 
-  function showRouteBanner(text, altAgentId) {
+  function showRouteBanner(text) {
     $("route-banner-text").textContent = text;
-    const altBtn = $("btn-route-alt");
-    if (altAgentId && AGENT_LABELS[altAgentId]) {
-      state.lastAltAgent = altAgentId;
-      altBtn.textContent = `改用${AGENT_LABELS[altAgentId]}`;
-      altBtn.classList.remove("hidden");
-    } else {
-      state.lastAltAgent = "";
-      altBtn.classList.add("hidden");
-    }
+    $("btn-route-alt").classList.add("hidden");
     $("route-banner").classList.remove("hidden");
   }
 
@@ -91,12 +83,11 @@
     const clean = (text || "").trim();
     if (!clean) return;
     state.lastRoutedText = clean;
-    showRouteBanner("✨ 智能路由判断最合适的思维模型中…", "");
+    showRouteBanner("✨ 智能路由判断中…");
 
     const base = (state.host || DEFAULT_HOST).replace(/\/+$/, "");
     let target = "agent7";
-    let alt = "agent4";
-    let reason = "已为你自动匹配最合适的思维模型。";
+    let reason = "已自动匹配最合适的思维模型。";
 
     try {
       const ctrl = new AbortController();
@@ -117,14 +108,13 @@
       if (res.ok) {
         const data = await res.json();
         if (data.primary && AGENT_PATHS[data.primary]) target = data.primary;
-        if (data.secondary && AGENT_PATHS[data.secondary]) alt = data.secondary;
         if (data.reason) reason = data.reason;
       }
     } catch (_) {}
 
     const label = AGENT_LABELS[target] || target;
-    showRouteBanner(`✨ 已自动选定「${label}」：${reason}`, alt);
-    loadAgent(target, { ...(extraPayload || {}), agentId: target, text: clean }, true);
+    showRouteBanner(`✨ 已自动选定「${label}」并开始深度推演：${reason}`);
+    loadAgent(target, { ...(extraPayload || {}), agentId: target, text: clean, directGenerate: true }, true);
   }
 
   function loadAgent(agentId, prefillPayload, keepAutoMode) {

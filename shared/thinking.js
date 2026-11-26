@@ -385,19 +385,6 @@
 
     $("btn-extract").addEventListener("click", handleExtract);
     $("btn-generate").addEventListener("click", handleGenerate);
-
-    window.addEventListener("ccagent:direct-generate", (e) => {
-      const raw = ((e.detail && e.detail.text) || $("raw-input").value || "").trim();
-      if (!raw) return;
-      state.rawText = raw;
-      state.fields = {};
-      $("raw-input").value = raw;
-      $("desc-preview").textContent = raw.length > 60 ? raw.slice(0, 60) + "…" : raw;
-      $("input-expanded").classList.add("hidden");
-      $("input-collapsed").classList.remove("hidden");
-      $("refine-section").classList.add("hidden");
-      handleGenerate();
-    });
     $("btn-edit-desc").addEventListener("click", () => {
       $("input-collapsed").classList.add("hidden");
       $("input-expanded").classList.remove("hidden");
@@ -479,6 +466,24 @@
       }
     });
   }
+
+  function runDirectGenerate(rawText) {
+    const raw = (rawText || $("raw-input").value || "").trim();
+    if (!raw) return;
+    state.rawText = raw;
+    state.fields = {};
+    $("raw-input").value = raw;
+    $("desc-preview").textContent = raw.length > 60 ? raw.slice(0, 60) + "…" : raw;
+    $("input-expanded").classList.add("hidden");
+    $("input-collapsed").classList.remove("hidden");
+    $("refine-section").classList.add("hidden");
+    handleGenerate();
+  }
+
+  window.addEventListener("ccagent:direct-generate", (e) => {
+    const raw = (e.detail && e.detail.text) || "";
+    runDirectGenerate(raw);
+  });
 
   init();
 })();
