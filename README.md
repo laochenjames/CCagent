@@ -1,19 +1,69 @@
-# 职业投入快评工具
+# CCagent — 查理·芒格「普世智慧」10-Agent 决策智囊团 & X (Twitter) 侧边栏插件
 
-基于纯 Python 标准库（`http.server.ThreadingHTTPServer` + `sqlite3` + `urllib`）实现的职业投入决策快评工具。
+> **在线体验**：[https://ccagent.mycici.top/](https://ccagent.mycici.top/)  
+> 把查理·芒格（Charlie Munger）的「**起点（能力圈）— 路径（清单/复利）— 破局（本质/杠杆）— 防错（双轨/逆向/激励/Lollapalooza）**」思维框架，做成 10 个开箱即用的决策 Agent + 一个逛 X (Twitter) 时一键调用的 Chrome / Edge 侧边栏插件。
 
-## 启动方式
+---
 
-1. 复制 `.env.example` 为 `.env`，填写 `GEMINI_API_KEY`（也可在页面右上角“设置”中填写）。
-2. 启动服务：
+## 核心特性
+
+- **10 个结构化思维模型 Agent**：每个 Agent 内置 4 位独立视角的「智囊团合议备忘录」（最大共识 + 核心分歧 + 立场标签 + 建议动作）。
+- **✨ 前置智能路由（Auto-Router）**：不确定该用哪个模型？直接扔给 `✨ 智能路由`，自动判断最匹配的 Agent 并一键填入分析。
+- **X (Twitter) 侧边栏插件（MV3 Side Panel）**：
+  - 每条推文右上角自动注入 `CC` 按钮：点击直达侧边栏分析；`Shift + 点击` 追加到**暂存篮**，多条推文一键合并喂给「一法多解」。
+  - 任意网页划词右键 / `Alt + C` 快捷键直达分析。
+  - 内置「使用技巧 · 实战速查表」弹窗，点击表内模型名即可切换。
+- **BYOK 隐私优先**：支持绑定你自己的 **xAI Grok / Google Gemini / DeepSeek** API Key；Key 仅保存在你本地浏览器，绝不落盘服务器。
+
+---
+
+## 10 个 Agent 一览表
+
+| 分组 | 路径 | Agent | 核心思维模型 | 典型适用场景 |
+| :--- | :--- | :--- | :--- | :--- |
+| **防误判** | `/agent7/` | **双轨分析** | 芒格原版：第一轨客观理性 + 第二轨潜意识误判 | 暴富神话、AI 焦虑、大 V 晒单、情绪化决策 |
+| **防误判** | `/agent8/` | **反向思考** | 雅各比逆向 + 工程学断裂点与备份系统 | 新项目、融资/投资机会、事前验尸 |
+| **防误判** | `/agent9/` | **激励机制诊断** | 联邦快递法 + 规模优势 vs 官僚陷阱 | 大厂裁员、平台改规则、政策与利益博弈 |
+| **防误判** | `/agent10/` | **Lollapalooza 共振雷达** | 多力同向叠加共振 | 现象级爆款、集体狂热、真复利 vs 伪泡沫 |
+| **破本质** | `/agent4/` | **第一性原理** | 马斯克物理与成本底线重构 | 硬核技术、行业成本质疑、颠覆式产品 |
+| **破本质** | `/agent5/` | **辩证抽象** | 《矛盾论》主要矛盾与动态演化 | 宏观趋势、巨头博弈、复杂路线之争 |
+| **破本质** | `/agent6/` | **一法多解** | 芒格最大公约数 / 多元模型 | 多条跨领域干货合并（配合暂存篮） |
+| **定起点** | `/` | **职业投入体检** | 能力圈起点校准与可逆性评估 | 招聘帖、副业案例、转行与赛道选择 |
+| **建路径** | `/agent2/` | **个人任务分诊** | 芒格检查清单（Checklist）四象限 | 待办流水账、多事项取舍与排序 |
+| **建路径** | `/agent3/` | **原子习惯生成** | 复利飞轮与 2 分钟启动法 | 高手日常、健身学习、长期习惯养成 |
+
+---
+
+## 快速安装浏览器插件（Chrome / Edge）
+
+1. 下载或克隆本仓库：
    ```bash
-   python server.py
+   git clone https://github.com/laochenjames/CCagent.git
    ```
-3. 浏览器访问：`http://127.0.0.1:8100`
+2. 打开浏览器扩展管理页：`chrome://extensions/` 或 `edge://extensions/`。
+3. 打开右上角 **开发者模式（Developer mode）**。
+4. 点击 **加载已解压的扩展程序（Load unpacked）**，选择仓库中的 `extension/` 目录即可使用。
 
-## 运行单元测试
+> 详细快捷键与用法见 [extension/README.md](extension/README.md)。
+
+---
+
+## 本地自托管运行
+
+无需复杂依赖，仅需 Python 3.10+ 标准库即可启动全部 10 个 Agent：
 
 ```bash
-python -m unittest discover tests -v
+# 1. 复制环境变量配置（填入 GEMINI_API_KEY / XAI_API_KEY / DEEPSEEK_API_KEY 之一）
+cp .env.example .env  # 或直接新建 .env
+
+# 2. 启动主服务（自动按需拉起 agent2 ~ agent10 子服务）
+python server.py
 ```
 
+默认监听 `http://127.0.0.1:8100`。
+
+---
+
+## License
+
+[MIT License](LICENSE)

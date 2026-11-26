@@ -6,8 +6,8 @@ import urllib.request
 import paramiko
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-ENV_PATH = r"E:\Doc\Python_daye\cchabit\.deploy.env"
-REMOTE_BASE = "/opt/ccagent1/current"
+ENV_PATH = os.environ.get("CCAGENT_DEPLOY_ENV") or os.path.join(ROOT, ".deploy.env")
+REMOTE_BASE = os.environ.get("CCAGENT_REMOTE_BASE") or "/opt/ccagent1/current"
 
 FILES_TO_SYNC = [
     "server.py",
