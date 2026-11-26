@@ -19,6 +19,7 @@ FILES_TO_SYNC = [
     "shared/thinking.css",
     "shared/thinking.js",
     "agent2/index.html",
+    "agent2/app.js",
     "agent3/server.py",
     "agent3/index.html",
     "agent3/style.css",

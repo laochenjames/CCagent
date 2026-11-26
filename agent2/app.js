@@ -371,13 +371,21 @@ async function runTriage() {
   }, 1000);
 
   try {
+    let byok = {};
+    try { byok = JSON.parse(localStorage.getItem('ccagent_shared_byok') || '{}'); } catch (_) {}
+    const reqBody = {
+      text,
+      fallback: document.getElementById('cfg-fallback').checked
+    };
+    if (byok.provider) reqBody.provider = byok.provider;
+    if (byok.model) reqBody.model = byok.model;
+    if (byok.api_key) reqBody.api_key = byok.api_key;
+    if (byok.base_url) reqBody.base_url = byok.base_url;
+
     const res = await fetch('api/triage', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        text,
-        fallback: document.getElementById('cfg-fallback').checked
-      })
+      body: JSON.stringify(reqBody)
     });
 
     clearInterval(timer);
