@@ -359,6 +359,8 @@ class AppHandler(SimpleHTTPRequestHandler):
 
         if path == "/" or path == "/index.html":
             return self._serve_static("index.html")
+        if path == "/privacy" or path == "/privacy.html":
+            return self._serve_static("privacy.html")
         if path.startswith("/shared/"):
             rel_shared = path[len("/shared/"):]
             if rel_shared in SHARED_STATIC_FILES:

@@ -13,6 +13,7 @@ FILES_TO_SYNC = [
     "server.py",
     "thinking_core.py",
     "index.html",
+    "privacy.html",
     "favicon.ico",
     "favicon.png",
     "shared/nav.js",
@@ -42,6 +43,7 @@ FILES_TO_SYNC = [
 
 HEALTH_URLS = [
     "https://ccagent.mycici.top/",
+    "https://ccagent.mycici.top/privacy",
     "https://ccagent.mycici.top/favicon.ico",
     "https://ccagent.mycici.top/favicon.png",
     "https://ccagent.mycici.top/shared/nav.js",

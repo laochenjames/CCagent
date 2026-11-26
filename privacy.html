@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy · 隐私政策 — CCagent</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <style>
+    body {
+      margin: 0; padding: 32px 16px 64px; background: #faf9f5; color: #1f2328;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.7;
+    }
+    main {
+      max-width: 760px; margin: 0 auto; background: #fff;
+      border: 1px solid #e5e2dc; border-radius: 12px; padding: 28px 32px;
+    }
+    h1 { margin-top: 0; font-size: 22px; }
+    h2 { margin-top: 24px; font-size: 16px; border-bottom: 1px solid #eee; padding-bottom: 6px; }
+    p, li { font-size: 14px; color: #333; }
+    .muted { color: #656d76; font-size: 12px; }
+    a { color: #9a3412; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>CCagent 隐私政策 / Privacy Policy</h1>
+    <p class="muted">Last updated: 2026-11-26 · Open Source: <a href="https://github.com/laochenjames/CCagent" target="_blank" rel="noopener">github.com/laochenjames/CCagent</a></p>
+
+    <h2>1. 我们处理哪些数据 / Data We Process</h2>
+    <ul>
+      <li><strong>仅处理你主动发送的文本</strong>：只有当你主动点击推文上的 <code>CC</code> 按钮、右键菜单或按下 <code>Alt+C</code> 时，选中的文本才会被发送到 CCagent 侧边栏进行分析。本扩展<strong>不会</strong>在后台自动抓取或监控你的浏览记录。</li>
+      <li><strong>API Key 仅存储在你的本地浏览器</strong>：如果你在扩展设置中填写了自己的 xAI Grok / Google Gemini / DeepSeek API Key，该密钥仅保存在本地 <code>chrome.storage.local</code> 与浏览器内存中，并在你主动发起分析请求时通过 HTTPS 转发至对应的模型服务商，<strong>不会写入或持久化到 CCagent 服务器</strong>。</li>
+    </ul>
+
+    <h2>2. 数据用途与第三方共享 / Data Usage &amp; Sharing</h2>
+    <ul>
+      <li>你主动提交的分析文本仅用于生成本次思维模型分析结果。</li>
+      <li>我们<strong>不会</strong>将你的任何数据用于广告投放、用户画像或出售给第三方。</li>
+    </ul>
+
+    <h2>3. 开源与透明 / Open Source</h2>
+    <p>CCagent 的浏览器扩展与后端代码均已完整开源（MIT License），任何人均可审查代码以确认上述隐私承诺。</p>
+
+    <h2>4. 联系我们 / Contact</h2>
+    <p>如有任何隐私相关问题，请通过 GitHub Issues 联系：<a href="https://github.com/laochenjames/CCagent/issues" target="_blank" rel="noopener">https://github.com/laochenjames/CCagent/issues</a></p>
+  </main>
+</body>
+</html>

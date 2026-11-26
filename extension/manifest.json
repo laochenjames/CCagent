@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "CCagent 智囊团侧边栏",
   "version": "1.0.0",
-  "description": "逛 X (Twitter) 或任意网页时，划词/一键抓推文，在右侧边栏直接调用 7 个 CCagent 思维模型智囊团分析，支持绑定 Grok / Gemini / DeepSeek API。",
+  "description": "逛 X (Twitter) 一键抓推文，内置查理·芒格 10 大思维模型与全自动智能路由，侧边栏直出智囊团深度分析，支持 Grok / Gemini / DeepSeek BYOK。",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
