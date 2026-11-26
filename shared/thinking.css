@@ -293,3 +293,15 @@ textarea:focus, input:focus, select:focus {
 @media (max-width: 760px) {
   .council-synthesis { grid-template-columns: 1fr; }
 }
+
+@media (max-width: 520px) {
+  .topbar { padding: 10px 12px; gap: 8px; }
+  .brand { font-size: 15px; }
+  .top-actions { gap: 6px; }
+  .top-actions .btn-ghost { padding: 4px 9px; font-size: 12px; white-space: nowrap; }
+  .container { margin: 12px auto; padding: 0 10px 32px; }
+  .card { padding: 14px 12px; }
+  .input-footer, .refine-footer { flex-direction: column; align-items: stretch; }
+  .input-footer .btn-primary, .refine-footer .btn-primary { width: 100%; }
+  .result-item-card { padding: 10px 11px; gap: 8px; }
+}
