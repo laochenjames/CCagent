@@ -602,24 +602,45 @@ class AppHandler(SimpleHTTPRequestHandler):
             s = t.lower()
             if "【素材 1】" in t or "【素材 2】" in t:
                 return "agent6", "多条素材合并，最适合用「一法多解」提炼底层最大公约数。", "agent5"
-            if any(k in s for k in ("暴富", "焦虑", "割韭菜", "fomo", "晒单", "月入", "财务自由", "千万别", "必须买", "梭哈")):
-                return "agent7", "内容带有较强情绪或利益诱导，建议先用「双轨分析」算理性账并排查潜意识误判。", "agent10"
-            if any(k in s for k in ("裁员", "kpi", "okr", "绩效", "考核", "政策", "规则", "抽成", "补贴", "管理层", "官僚")):
-                return "agent9", "涉及组织考核与利益分配，最适合用「激励机制诊断」看清真实动机。", "agent5"
-            if any(k in s for k in ("泡沫", "狂热", "爆款", "疯涨", "全民", "病毒式", "lollapalooza", "共振", "踩踏")):
-                return "agent10", "呈现多力量同向叠加迹象，适合用「Lollapalooza」甄别真复利还是伪泡沫。", "agent7"
-            if any(k in s for k in ("投资", "融资", "创业", "项目", "估值", "商业计划", "押注", "all in", "风险")):
-                return "agent8", "面对机会与宏图，先用「反向思考」做事前验尸，排查断裂点和安全边际。", "agent7"
-            if any(k in s for k in ("转行", "求职", "招聘", "副业", "职业", "跳槽", "薪资", "能力圈", "赛道")):
-                return "agent1", "涉及个人职业与赛道投入，适合用「职业投入体检」校准能力圈起点。", "agent8"
-            if any(k in s for k in ("待办", "todo", "任务", "清单", "今天要做", "忙不过来", "优先级", "安排")):
-                return "agent2", "属于多事项排序与取舍，最适合用「个人任务分诊」快速做清单过滤。", "agent3"
-            if any(k in s for k in ("习惯", "坚持", "早起", "健身", "背单词", "自律", "每天", "打卡", "复利")):
-                return "agent3", "聚焦长期行为养成，适合用「原子习惯生成」拆成 2 分钟可启动的飞轮。", "agent2"
-            if any(k in s for k in ("成本", "原理", "架构", "技术", "颠覆", "物理", "重构", "效率", "为什么必须")):
-                return "agent4", "适合剥掉行业惯例，用「第一性原理」退回物理与成本底线重新推演。", "agent5"
-            if any(k in s for k in ("趋势", "博弈", "巨头", "竞争", "格局", "宏观", "矛盾", "路线")):
-                return "agent5", "属于复杂局势与多方博弈，适合用「辩证抽象」抓住当前主要矛盾。", "agent9"
+            rules = [
+                ("agent4", ("成本", "原理", "架构", "技术", "颠覆", "物理", "重构", "效率", "为什么必须", "开源", "算力", "芯片", "模型", "产品设计",
+                            "first principle", "architecture", "benchmark", "latency", "cost", "open source", "gpu", "inference", "llm", "engineering", "rebuild"),
+                 "适合剥掉行业惯例，用「第一性原理」退回物理与成本底线重新推演。"),
+                ("agent5", ("趋势", "博弈", "巨头", "竞争", "格局", "宏观", "矛盾", "路线", "战略", "中美", "地缘", "生态", "护城河", "洗牌",
+                            "strategy", "geopolitics", "competition", "moat", "macro", "ecosystem", "trade war", "antitrust", "platform war"),
+                 "属于复杂局势与多方博弈，适合用「辩证抽象」抓住当前主要矛盾。"),
+                ("agent8", ("投资", "融资", "创业", "项目", "估值", "商业计划", "押注", "all in", "风险", "梭哈", "加杠杆", "做多", "做空", "合伙", "买房",
+                            "startup", "funding", "valuation", "invest", "bet", "risk", "downside", "leverage", "founder", "launch", "pre-mortem"),
+                 "面对机会与宏图，先用「反向思考」做事前验尸，排查断裂点和安全边际。"),
+                ("agent9", ("裁员", "kpi", "okr", "绩效", "考核", "政策", "规则", "抽成", "补贴", "管理层", "官僚", "激励", "佣金", "分润", "定价", "算法推荐",
+                            "layoff", "incentive", "pricing", "commission", "policy", "regulation", "bureaucracy", "monetiz", "fee", "tax", "subsidy"),
+                 "涉及组织考核与利益分配，最适合用「激励机制诊断」看清真实动机。"),
+                ("agent10", ("泡沫", "狂热", "爆款", "疯涨", "全民", "病毒式", "lollapalooza", "共振", "踩踏", "刷屏", "排队", "溢价", "meme", "暴涨", "暴跌",
+                             "bubble", "hype", "viral", "mania", "frenzy", "craze", "flywheel", "network effect", "pump", "crash"),
+                 "呈现多力量同向叠加迹象，适合用「Lollapalooza」甄别真复利还是伪泡沫。"),
+                ("agent7", ("暴富", "焦虑", "割韭菜", "fomo", "晒单", "月入", "财务自由", "千万别", "必须买", "情绪", "偏见", "忽悠", "智商税",
+                            "fomo", "scam", "bias", "emotional", "panic", "greedy", "influencer", "shill"),
+                 "内容带有较强情绪或利益诱导，建议先用「双轨分析」算理性账并排查潜意识误判。"),
+                ("agent1", ("转行", "求职", "招聘", "副业", "职业", "跳槽", "薪资", "能力圈", "赛道", "打工", "裁员潮", "外包",
+                            "career", "hiring", "salary", "job market", "resume", "interview", "side hustle"),
+                 "涉及个人职业与赛道投入，适合用「职业投入体检」校准能力圈起点。"),
+                ("agent2", ("待办", "todo", "任务", "清单", "今天要做", "忙不过来", "优先级", "安排", "拖延",
+                            "checklist", "priorit", "backlog", "task list", "overwhelmed"),
+                 "属于多事项排序与取舍，最适合用「个人任务分诊」快速做清单过滤。"),
+                ("agent3", ("习惯", "坚持", "早起", "健身", "背单词", "自律", "每天", "打卡", "复利", "阅读", "冥想",
+                            "habit", "routine", "workout", "discipline", "daily", "consistency"),
+                 "聚焦长期行为养成，适合用「原子习惯生成」拆成 2 分钟可启动的飞轮。"),
+            ]
+            scored = []
+            for aid, kws, rsn in rules:
+                hits = sum(1 for k in kws if k in s)
+                if hits > 0:
+                    scored.append((hits, aid, rsn))
+            if scored:
+                scored.sort(key=lambda x: x[0], reverse=True)
+                p_aid, p_rsn = scored[0][1], scored[0][2]
+                s_aid = scored[1][1] if len(scored) > 1 else ("agent7" if p_aid != "agent7" else "agent4")
+                return p_aid, p_rsn, s_aid
             return "agent7", "通用信息与观点评估，默认推荐用「双轨分析」同时做理性推演与误判排查。", "agent4"
 
         primary, reason, secondary = fallback_route(text)
