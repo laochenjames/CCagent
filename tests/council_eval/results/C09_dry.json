@@ -1,0 +1,124 @@
+{
+  "title": "反向思考（芒格） 模拟分析",
+  "summary": "干跑桩函数输出，仅用于验证管线与校验逻辑。",
+  "decision": "是否推进当前方案",
+  "assumptions": [],
+  "missing_info": [
+    "缺少关键量化数据"
+  ],
+  "pillars": [
+    {
+      "label": "Top 1 致命死因",
+      "value": "桩函数支柱内容"
+    },
+    {
+      "label": "系统断裂点（Breakpoint）",
+      "value": "桩函数支柱内容"
+    },
+    {
+      "label": "工程学备份与安全边际",
+      "value": "桩函数支柱内容"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "一、核心拆解与关键发现",
+      "items": [
+        {
+          "name": "示例项1",
+          "tag": "核心洞察",
+          "detail": "桩函数详情"
+        }
+      ]
+    },
+    {
+      "heading": "二、可执行行动与安全边界",
+      "items": [
+        {
+          "name": "示例项1",
+          "tag": "落地动作",
+          "detail": "桩函数详情"
+        },
+        {
+          "name": "示例项2",
+          "tag": "落地动作",
+          "detail": "桩函数详情"
+        },
+        {
+          "name": "示例项3",
+          "tag": "落地动作",
+          "detail": "桩函数详情"
+        },
+        {
+          "name": "示例项4",
+          "tag": "落地动作",
+          "detail": "桩函数详情"
+        }
+      ]
+    }
+  ],
+  "council_synthesis": {
+    "consensus_text": "需先补充关键证据再决策。",
+    "tension_text": "推进节奏与风险控制存在分歧。",
+    "tension_between": [
+      "mortem_coroner",
+      "breakpoint_eng"
+    ]
+  },
+  "council_notes": [
+    {
+      "id": "mortem_coroner",
+      "name": "事前验尸官",
+      "role": "反过来想 · 死亡路径",
+      "stance": "hold",
+      "verdict": "针对当前案例的模拟判断（事前验尸官）。",
+      "based_on": "准备投资朋友的餐饮店 1",
+      "grounded": true,
+      "confidence": "mid",
+      "would_change_if": "补充量化数据后调整",
+      "action": "先做小规模验证"
+    },
+    {
+      "id": "breakpoint_eng",
+      "name": "断裂点工程师",
+      "role": "工程学 · 阈值崩溃",
+      "stance": "oppose",
+      "verdict": "针对当前案例的模拟判断（断裂点工程师）。",
+      "based_on": "准备投资朋友的餐饮店 1",
+      "grounded": true,
+      "confidence": "mid",
+      "would_change_if": "补充量化数据后调整",
+      "action": "先做小规模验证"
+    },
+    {
+      "id": "backup_architect",
+      "name": "备份系统设计师",
+      "role": "冗余设计 · 安全边际",
+      "stance": "need_info",
+      "verdict": "针对当前案例的模拟判断（备份系统设计师）。",
+      "based_on": "准备投资朋友的餐饮店 1",
+      "grounded": true,
+      "confidence": "mid",
+      "would_change_if": "补充量化数据后调整",
+      "action": "先做小规模验证"
+    },
+    {
+      "id": "avoidance_guard",
+      "name": "负面清单守门人",
+      "role": "绝不做什么 · 止损红线",
+      "stance": "support",
+      "verdict": "针对当前案例的模拟判断（负面清单守门人）。",
+      "based_on": "用户未提供",
+      "grounded": true,
+      "confidence": "mid",
+      "would_change_if": "补充量化数据后调整",
+      "action": "先做小规模验证"
+    }
+  ],
+  "stance_counts": {
+    "support": 1,
+    "hold": 1,
+    "oppose": 1,
+    "need_info": 1
+  }
+}

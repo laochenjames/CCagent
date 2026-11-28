@@ -8,11 +8,23 @@
     const author = userEl ? userEl.innerText.replace(/\n+/g, " ").trim() : "";
     const timeLink = article.querySelector("time") && article.querySelector("time").closest("a");
     const url = timeLink ? timeLink.href : window.location.href;
+    const images = [];
+    const seen = new Set();
+    article.querySelectorAll('[data-testid="tweetPhoto"] img, img[src*="pbs.twimg.com/media/"]').forEach((img) => {
+      if (images.length >= 2) return;
+      let src = (img.getAttribute("src") || "").trim();
+      if (!src.startsWith("https://pbs.twimg.com/media/")) return;
+      src = src.replace(/([?&]name=)(orig|large|4096x4096|small)/i, "$1medium");
+      if (!seen.has(src)) {
+        seen.add(src);
+        images.push(src);
+      }
+    });
     const parts = [];
     if (author) parts.push(`作者：${author}`);
     if (text) parts.push(text);
     if (url) parts.push(`链接：${url}`);
-    return { formatted: parts.join("\n\n"), url };
+    return { formatted: parts.join("\n\n"), url, images };
   }
 
   function injectButtons() {
@@ -47,10 +59,10 @@
       btn.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
-        const { formatted, url } = extractTweet(article);
+        const { formatted, url, images } = extractTweet(article);
         if (!formatted) return;
         const msgType = e.shiftKey ? "CCAGENT_TWEET_CLIP" : "CCAGENT_TWEET_SEND";
-        chrome.runtime.sendMessage({ type: msgType, text: formatted, url });
+        chrome.runtime.sendMessage({ type: msgType, text: formatted, url, images });
         const oldText = btn.textContent;
         btn.textContent = e.shiftKey ? "已暂存" : "已发送";
         setTimeout(() => {

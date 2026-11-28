@@ -40,6 +40,7 @@ _SESSION_LOCK_SHARDS = [threading.Lock() for _ in range(64)]
 _RATE_LIMITER = ratelimit.TokenBucketLimiter(rate_per_min=120, capacity=120)
 _TEST_CONN_LIMITER = ratelimit.TokenBucketLimiter(rate_per_min=10.0 / 60.0, capacity=10)
 MAX_BODY_BYTES = 65536
+SUB_AGENT_PROXY_TIMEOUT = 120
 
 _SUB_AGENTS_LOCK = threading.Lock()
 _SUB_AGENT_PORTS = {}
@@ -74,6 +75,18 @@ def _get_sub_agent_port(agent_name):
         _SUB_AGENT_PORTS[agent_name] = srv.server_port
         t = threading.Thread(target=srv.serve_forever, daemon=True)
         t.start()
+        if _is_hosted() and hasattr(mod, "DB_PATH"):
+            import thinking_core as _tc
+
+            def _sub_cleanup_loop(db_p=mod.DB_PATH):
+                while True:
+                    try:
+                        _tc.cleanup_old(db_p, _retention_days())
+                    except Exception:
+                        pass
+                    time.sleep(6 * 3600)
+
+            threading.Thread(target=_sub_cleanup_loop, daemon=True).start()
         return _SUB_AGENT_PORTS[agent_name]
 
 
@@ -304,7 +317,7 @@ class AppHandler(SimpleHTTPRequestHandler):
                 return name
         return None
 
-    def _proxy_sub_agent(self, agent_name, method, pre_read_body=None):
+    def _proxy_sub_agent(self, agent_name, method, pre_read_body=None, owner_hash=""):
         prefix = f"/{agent_name}"
         if self.path == prefix:
             self.send_response(302)
@@ -319,26 +332,34 @@ class AppHandler(SimpleHTTPRequestHandler):
             body = self.rfile.read(length) if length > 0 else None
         fwd_headers = {
             k: v for k, v in self.headers.items()
-            if k.lower() not in ("host", "connection", "content-length", "origin", "referer")
+            if k.lower() not in ("host", "connection", "content-length", "origin", "referer", "x-cc-owner")
         }
+        fwd_headers["X-CC-Owner"] = owner_hash or ""
         if body is not None:
             fwd_headers["Content-Length"] = str(len(body))
-        port = _get_sub_agent_port(agent_name)
-        conn = http.client.HTTPConnection("127.0.0.1", port, timeout=120)
         try:
-            conn.request(method, target_path, body=body, headers=fwd_headers)
-            resp = conn.getresponse()
-            data = resp.read()
-            self.send_response(resp.status)
-            for k, v in resp.getheaders():
-                if k.lower() not in ("transfer-encoding", "connection", "content-length"):
-                    self.send_header(k, v)
-            self.send_header("Content-Length", str(len(data)))
-            self.end_headers()
-            self.wfile.write(data)
-            return resp.status
-        finally:
-            conn.close()
+            port = _get_sub_agent_port(agent_name)
+            conn = http.client.HTTPConnection("127.0.0.1", port, timeout=SUB_AGENT_PROXY_TIMEOUT)
+            try:
+                conn.request(method, target_path, body=body, headers=fwd_headers)
+                resp = conn.getresponse()
+                data = resp.read()
+                self.send_response(resp.status)
+                for k, v in resp.getheaders():
+                    if k.lower() not in ("transfer-encoding", "connection", "content-length"):
+                        self.send_header(k, v)
+                self.send_header("Content-Length", str(len(data)))
+                self.end_headers()
+                self.wfile.write(data)
+                return resp.status
+            finally:
+                conn.close()
+        except TimeoutError:
+            self._send_json(504, {"error": "服务响应超时，请稍后再试。", "category": "服务异常"})
+            return 504
+        except Exception:
+            self._send_json(502, {"error": "子服务暂时不可用，请稍后再试。", "category": "服务异常"})
+            return 502
 
     def do_GET(self):
         if not self._check_host_origin():
@@ -355,7 +376,7 @@ class AppHandler(SimpleHTTPRequestHandler):
                 self.send_header("Location", f"/{sub_agent}/" + (f"?{parsed.query}" if parsed.query else ""))
                 self.end_headers()
                 return
-            return self._proxy_sub_agent(sub_agent, "GET")
+            return self._proxy_sub_agent(sub_agent, "GET", owner_hash=owner_hash)
 
         if path == "/" or path == "/index.html":
             return self._serve_static("index.html")
@@ -457,10 +478,21 @@ class AppHandler(SimpleHTTPRequestHandler):
         if sub_agent:
             if _is_hosted() and path == f"/{sub_agent}/api/save-config":
                 return self._send_json(403, {"error": "公网托管模式下不支持修改服务端配置。"})
+            ct = (self.headers.get("Content-Type") or "").split(";")[0].strip().lower()
+            if ct != "application/json":
+                return self._send_json(415, {"error": "Content-Type 必须为 application/json", "category": "参数错误"})
+            try:
+                length = int(self.headers.get("Content-Length") or 0)
+            except Exception:
+                return self._send_json(400, {"error": "非法的 Content-Length", "category": "参数错误"})
+            if length < 0:
+                return self._send_json(400, {"error": "非法的 Content-Length", "category": "参数错误"})
+            if length > MAX_BODY_BYTES:
+                self.close_connection = True
+                return self._send_json(413, {"error": "请求体超过 64 KB 上限", "category": "参数错误"})
+            raw_body = self.rfile.read(length) if length > 0 else b""
             quota_targets = tuple(f"/{sub_agent}{p}" for p in SUB_AGENTS[sub_agent]["quota_paths"])
             if _is_hosted() and path in quota_targets:
-                length = int(self.headers.get("Content-Length") or 0)
-                raw_body = self.rfile.read(length) if length > 0 else b""
                 user_key = ""
                 try:
                     parsed_body = json.loads(raw_body.decode("utf-8")) if raw_body else {}
@@ -474,15 +506,15 @@ class AppHandler(SimpleHTTPRequestHandler):
                     ok, kind, _ = quota.reserve(owner_hash, ip_hash, limits=_quota_limits())
                     if not ok:
                         return self._send_json(429, {
-                            "error": "免费体验次数已用完（10 次），请在右上角「设置」中填入你自己的 API Key 继续使用。",
+                            "error": "免费调用次数已用完（一次完整分析约消耗 2 次），请在右上角「设置」中填入你自己的 API Key 继续使用。",
                             "category": "额度已用完",
                         })
                     charged = True
-                status = self._proxy_sub_agent(sub_agent, "POST", pre_read_body=raw_body)
+                status = self._proxy_sub_agent(sub_agent, "POST", pre_read_body=raw_body, owner_hash=owner_hash)
                 if charged and (status is None or status >= 400):
                     quota.refund(owner_hash, ip_hash)
                 return
-            return self._proxy_sub_agent(sub_agent, "POST")
+            return self._proxy_sub_agent(sub_agent, "POST", pre_read_body=raw_body, owner_hash=owner_hash)
 
         ct = (self.headers.get("Content-Type") or "").split(";")[0].strip().lower()
         if ct != "application/json":
@@ -592,31 +624,34 @@ class AppHandler(SimpleHTTPRequestHandler):
 
         primary, reason, secondary = fallback_route(text)
         engine = "rule"
-        try:
-            import thinking_core
-            cfg = thinking_core.resolve_llm_config(body)
-            if cfg.get("api_key"):
-                catalog_str = "\n".join(f"- {k}: {v}" for k, v in agent_catalog.items())
-                prompt = (
-                    "你是 CCagent 的前置路由专家。请根据用户输入的内容，从下面 10 个思维模型 Agent 中，"
-                    "选出最匹配的主推 Agent（primary）和备选 Agent（secondary），并用一句不超过 28 字的中文说明原因。\n\n"
-                    f"可选 Agent：\n{catalog_str}\n\n"
-                    f"用户输入：\n{text[:1200]}\n\n"
-                    '严格返回 JSON：{"primary": "agent7", "secondary": "agent8", "reason": "一句话理由"}'
-                )
-                res = thinking_core.call_llm_json(prompt, cfg, temperature=0.1, max_tokens=220, tag="Router")
-                p_id = (res.get("primary") or "").strip()
-                s_id = (res.get("secondary") or "").strip()
-                r_txt = (res.get("reason") or "").strip()
-                if p_id in agent_catalog:
-                    primary = p_id
-                    if s_id in agent_catalog and s_id != p_id:
-                        secondary = s_id
-                    if r_txt:
-                        reason = r_txt
-                    engine = "ai"
-        except Exception:
-            pass
+        rk = (body.get("api_key") or "").strip()
+        has_user_key = bool(rk and rk != "server-configured" and "..." not in rk)
+        if not (_is_hosted() and not has_user_key):
+            try:
+                import thinking_core
+                cfg = thinking_core.resolve_llm_config(body)
+                if cfg.get("api_key"):
+                    catalog_str = "\n".join(f"- {k}: {v}" for k, v in agent_catalog.items())
+                    prompt = (
+                        "你是 CCagent 的前置路由专家。请根据用户输入的内容，从下面 10 个思维模型 Agent 中，"
+                        "选出最匹配的主推 Agent（primary）和备选 Agent（secondary），并用一句不超过 28 字的中文说明原因。\n\n"
+                        f"可选 Agent：\n{catalog_str}\n\n"
+                        f"用户输入：\n{text[:1200]}\n\n"
+                        '严格返回 JSON：{"primary": "agent7", "secondary": "agent8", "reason": "一句话理由"}'
+                    )
+                    res = thinking_core.call_llm_json(prompt, cfg, temperature=0.1, max_tokens=220, tag="Router")
+                    p_id = (res.get("primary") or "").strip()
+                    s_id = (res.get("secondary") or "").strip()
+                    r_txt = (res.get("reason") or "").strip()
+                    if p_id in agent_catalog:
+                        primary = p_id
+                        if s_id in agent_catalog and s_id != p_id:
+                            secondary = s_id
+                        if r_txt:
+                            reason = r_txt
+                        engine = "ai"
+            except Exception:
+                pass
 
         return self._send_json(200, {
             "primary": primary,
@@ -640,7 +675,7 @@ class AppHandler(SimpleHTTPRequestHandler):
             return
         sub_agent = self._match_sub_agent(path)
         if sub_agent and path.startswith(f"/{sub_agent}/"):
-            return self._proxy_sub_agent(sub_agent, method)
+            return self._proxy_sub_agent(sub_agent, method, owner_hash=owner_hash)
         self._send_json(404, {"error": "not found"})
 
     def do_DELETE(self):
@@ -653,7 +688,7 @@ class AppHandler(SimpleHTTPRequestHandler):
             return
         sub_agent = self._match_sub_agent(path)
         if sub_agent:
-            return self._proxy_sub_agent(sub_agent, "DELETE")
+            return self._proxy_sub_agent(sub_agent, "DELETE", owner_hash=owner_hash)
 
         if path.startswith("/api/sessions/"):
             sid = path[len("/api/sessions/"):].strip("/")

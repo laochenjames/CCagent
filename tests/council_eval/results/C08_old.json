@@ -1,0 +1,60 @@
+{
+  "title": "旧版模拟标题",
+  "summary": "旧版模拟摘要",
+  "pillars": [
+    {
+      "label": "支柱1",
+      "content": "旧版支柱内容1"
+    },
+    {
+      "label": "支柱2",
+      "content": "旧版支柱内容2"
+    },
+    {
+      "label": "支柱3",
+      "content": "旧版支柱内容3"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "一、旧版分节",
+      "items": [
+        {
+          "name": "旧要点",
+          "tag": "旧标签",
+          "detail": "旧版分析详情"
+        }
+      ]
+    }
+  ],
+  "council_synthesis": {
+    "consensus": "旧版共识",
+    "tension": "旧版分歧"
+  },
+  "council_notes": [
+    {
+      "id": "a1",
+      "name": "顾问1",
+      "verdict": "旧版判断1",
+      "action": "旧版动作1"
+    },
+    {
+      "id": "a2",
+      "name": "顾问2",
+      "verdict": "旧版判断2",
+      "action": "旧版动作2"
+    },
+    {
+      "id": "a3",
+      "name": "顾问3",
+      "verdict": "旧版判断3",
+      "action": "旧版动作3"
+    },
+    {
+      "id": "a4",
+      "name": "顾问4",
+      "verdict": "旧版判断4",
+      "action": "旧版动作4"
+    }
+  ]
+}

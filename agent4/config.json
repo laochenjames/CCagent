@@ -1,0 +1,129 @@
+{
+  "id": "agent4",
+  "title": "第一性原理（马斯克）",
+  "framework_intro": "你是 CCagent 的「第一性原理智囊团（马斯克方法）」，拆解事物到不可再分的物理/逻辑底层事实，再从底层重构方案。",
+  "advisors": [
+    {
+      "id": "assumption_breaker",
+      "name": "假设爆破手",
+      "tag": "破除类比 · 质疑惯例",
+      "principle": "大家一直这么做，不代表它符合底层规律；先把所有隐含假设摆上台面逐个证伪。",
+      "focus": "识别行业惯例、经验主义与伪约束，区分“习惯如此”和“不得不如此”。"
+    },
+    {
+      "id": "physics_floor",
+      "name": "物理底线官",
+      "tag": "不可再分 · 底层铁律",
+      "principle": "剥离一切包装，只保留物理定律、数学约束、人性底线和真实资源边界。",
+      "focus": "找到这件事真正不可动摇的 3~4 条基本事实。"
+    },
+    {
+      "id": "cost_rebuilder",
+      "name": "成本重构师",
+      "tag": "从零重构 · 10x 路径",
+      "principle": "站在基本事实之上重新组装方案，往往能发现比常规做法低一个数量级的路径。",
+      "focus": "绕开中间环节，直接从原材料/核心要素重算最优路径。"
+    },
+    {
+      "id": "min_experiment",
+      "name": "极简执行官",
+      "tag": "快速证伪 · 最小闭环",
+      "principle": "再漂亮的底层推演也要接受现实检验；用 7 天内可跑通的最小实验验证核心假设。",
+      "focus": "把重构方案压成第一步可落地、低成本的验证动作。"
+    }
+  ],
+  "fields_schema": [
+    {
+      "key": "target_issue",
+      "group": "问题与惯例",
+      "label": "核心问题/目标",
+      "placeholder": "例如：我想低成本获客、做一款独立产品、转行进 AI 行业"
+    },
+    {
+      "key": "conventional_way",
+      "group": "问题与惯例",
+      "label": "大家通常的做法（类比）",
+      "placeholder": "例如：投信息流广告、先招团队开发半年、报万元培训班"
+    },
+    {
+      "key": "current_cost",
+      "group": "问题与惯例",
+      "label": "当前成本/耗时/瓶颈",
+      "placeholder": "例如：获客成本太高、开发周期长、没人付费"
+    },
+    {
+      "key": "hard_constraints",
+      "group": "问题与惯例",
+      "label": "真正的物理/资源硬约束",
+      "placeholder": "例如：只有下班 2 小时、预算不超过 5000 元、一个人干"
+    },
+    {
+      "key": "core_assumptions",
+      "group": "底层事实与重构",
+      "label": "被默认的隐含假设",
+      "placeholder": "例如：必须有完美 UI 才能卖、必须先做流量再变现"
+    },
+    {
+      "key": "desired_outcome",
+      "group": "底层事实与重构",
+      "label": "最本质想要的结果",
+      "placeholder": "例如：让 10 个真实用户愿意为一个明确痛点付钱"
+    },
+    {
+      "key": "available_assets",
+      "group": "底层事实与重构",
+      "label": "手头可动用的要素/筹码",
+      "placeholder": "例如：会写代码、有行业人脉、已有 3 个现成工具"
+    },
+    {
+      "key": "risk_tolerance",
+      "group": "底层事实与重构",
+      "label": "可接受的试错代价",
+      "placeholder": "例如：最多投入 2 周时间 + 1000 元试错"
+    }
+  ],
+  "pillars": [
+    {
+      "label": "被打破的核心伪常识",
+      "hint": "一句话点破最致命的错误假设（35字以内）"
+    },
+    {
+      "label": "最硬的底层事实",
+      "hint": "一句话总结不可动摇的底层规律（35字以内）"
+    },
+    {
+      "label": "7 天最小验证实验",
+      "hint": "本周就能做的低成本验证动作（35字以内）"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "一、被爆破的隐含假设（3 项）",
+      "count": "3",
+      "item_tag": "伪常识",
+      "item_name_hint": "假设名称（12字内）",
+      "detail_hint": "为什么它不成立、背后隐藏了什么浪费（35~60字）"
+    },
+    {
+      "heading": "二、不可再分的底层事实（3 项）",
+      "count": "3",
+      "item_tag": "第一性原理",
+      "item_name_hint": "底层事实（12字内）",
+      "detail_hint": "客观不可违背的规律或核心约束说明（35~60字）"
+    },
+    {
+      "heading": "三、从底层重构的新方案（3~4 步）",
+      "count": "3-4",
+      "item_tag": "第1步",
+      "item_name_hint": "重构步骤（12字内）",
+      "detail_hint": "具体怎么做、相比常规做法省掉什么成本（35~60字）"
+    }
+  ],
+  "extract_note": "",
+  "decision_hint": "一句话概括当前要质疑或重构的方案/做法",
+  "style_note": "语言犀利、具体、去空话",
+  "title_hint": "分析标题，16字以内",
+  "summary_hint": "一句话核心破局结论，35字以内",
+  "extract_summary_hint": "一句话提示用户最值得补充哪 1~2 项信息（35字以内）",
+  "synthesis_hint": "共识/分歧各 35~55 字"
+}

@@ -1,0 +1,1812 @@
+{
+  "agent4": [
+    {
+      "text": "你是第一性原理分析的结构化抽取助手。请从用户输入中提取关键信息，未提及的字段留空 \"\"，不要编造。",
+      "where": "extract",
+      "kind": "wording",
+      "status": "changed",
+      "old": "你是第一性原理分析的结构化抽取助手。请从用户输入中提取关键信息，未提及的字段留空 \"\"，不要编造。",
+      "new": "build_extract_prompt 统一规则：只能抽取用户输入中明确提到的信息，未提及的字段必须留空字符串 \"\"，不得编造。",
+      "reason": "B1 配置化重构：extract 严格反编造规则收敛到 thinking_core.build_extract_prompt 统一模板",
+      "check": "未提及的字段必须留空"
+    },
+    {
+      "text": "（未提及则留空）\"",
+      "where": "extract",
+      "kind": "wording",
+      "status": "changed",
+      "old": "（未提及则留空）\"",
+      "new": "build_extract_prompt 统一规则：未提及的字段必须留空字符串 \"\"，不得编造。",
+      "reason": "B1 配置化重构：字段留空指令由每字段注释收敛为 build_extract_prompt 顶部统一规则",
+      "check": "未提及的字段必须留空"
+    },
+    {
+      "text": "一句话提示用户最值得补充哪 1~2 项信息（35字以内）",
+      "where": "extract",
+      "path": "extract_summary_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "语言犀利、具体、去空话",
+      "where": "generate",
+      "path": "style_note",
+      "kind": "wording",
+      "status": "required"
+    },
+    {
+      "text": "分析标题，16字以内",
+      "where": "generate",
+      "path": "title_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "一句话核心破局结论，35字以内",
+      "where": "generate",
+      "path": "summary_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "一句话点破最致命的错误假设（35字以内）",
+      "where": "generate",
+      "path": "pillars[0].hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "一句话总结不可动摇的底层规律（35字以内）",
+      "where": "generate",
+      "path": "pillars[1].hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "本周就能做的低成本验证动作（35字以内）",
+      "where": "generate",
+      "path": "pillars[2].hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "一、被爆破的隐含假设（3 项）",
+      "where": "generate",
+      "path": "sections[0].heading",
+      "kind": "count",
+      "status": "required"
+    },
+    {
+      "text": "3",
+      "where": "generate",
+      "path": "sections[0].count",
+      "kind": "count",
+      "status": "required"
+    },
+    {
+      "text": "假设名称（12字内）",
+      "where": "generate",
+      "path": "sections[0].item_name_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "为什么它不成立、背后隐藏了什么浪费（35~60字）",
+      "where": "generate",
+      "path": "sections[0].detail_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "二、不可再分的底层事实（3 项）",
+      "where": "generate",
+      "path": "sections[1].heading",
+      "kind": "count",
+      "status": "required"
+    },
+    {
+      "text": "3",
+      "where": "generate",
+      "path": "sections[1].count",
+      "kind": "count",
+      "status": "required"
+    },
+    {
+      "text": "底层事实（12字内）",
+      "where": "generate",
+      "path": "sections[1].item_name_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "客观不可违背的规律或核心约束说明（35~60字）",
+      "where": "generate",
+      "path": "sections[1].detail_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "三、从底层重构的新方案（3~4 步）",
+      "where": "generate",
+      "path": "sections[2].heading",
+      "kind": "count",
+      "status": "required"
+    },
+    {
+      "text": "3-4",
+      "where": "generate",
+      "path": "sections[2].count",
+      "kind": "count",
+      "status": "required"
+    },
+    {
+      "text": "第1步",
+      "where": "generate",
+      "path": "sections[2].item_tag",
+      "kind": "count",
+      "status": "required"
+    },
+    {
+      "text": "重构步骤（12字内）",
+      "where": "generate",
+      "path": "sections[2].item_name_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "具体怎么做、相比常规做法省掉什么成本（35~60字）",
+      "where": "generate",
+      "path": "sections[2].detail_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "共识/分歧各 35~55 字",
+      "where": "generate",
+      "path": "synthesis_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "35~55字",
+      "where": "generate",
+      "kind": "length",
+      "status": "changed",
+      "old": "35~55字",
+      "new": "共识/分歧各 35~55 字",
+      "reason": "B1 配置化：旧 consensus/tension 两条 35~55字 合并写入 synthesis_hint（空格不影响 parse_max_len）",
+      "check": "共识/分歧各 35~55 字"
+    },
+    {
+      "text": "一句话核心判断（25字内）",
+      "where": "generate",
+      "kind": "length",
+      "status": "dropped",
+      "reason": "① 旧 council 的 25 字限制与写死的 stance（被 B2 新契约 verdict 30-60 字替代）"
+    },
+    {
+      "text": "1条具体落地动作（35字内）",
+      "where": "generate",
+      "kind": "length",
+      "status": "changed",
+      "old": "1条具体落地动作（35字内）",
+      "new": "action：≤40 字，可检查的动作",
+      "reason": "D16 / B2 智囊输出契约统一：action 统一为 ≤40 字可检查动作",
+      "check": "action：≤40 字"
+    },
+    {
+      "text": "被打破的核心伪常识",
+      "where": "generate",
+      "path": "pillars[0].label",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "最硬的底层事实",
+      "where": "generate",
+      "path": "pillars[1].label",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "7 天最小验证实验",
+      "where": "generate",
+      "path": "pillars[2].label",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "伪常识",
+      "where": "generate",
+      "path": "sections[0].item_tag",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "第一性原理",
+      "where": "generate",
+      "path": "sections[1].item_tag",
+      "kind": "structure",
+      "status": "required"
+    }
+  ],
+  "agent5": [
+    {
+      "text": "你是辩证抽象分析（矛盾论/实践论方法）的结构化抽取助手。请从用户输入中提取关键信息，未提及的字段留空 \"\"，不要编造。",
+      "where": "extract",
+      "kind": "wording",
+      "status": "changed",
+      "old": "你是辩证抽象分析（矛盾论/实践论方法）的结构化抽取助手。请从用户输入中提取关键信息，未提及的字段留空 \"\"，不要编造。",
+      "new": "build_extract_prompt 统一规则：只能抽取用户输入中明确提到的信息，未提及的字段必须留空字符串 \"\"，不得编造。",
+      "reason": "B1 配置化重构：extract 严格反编造规则收敛到 thinking_core.build_extract_prompt 统一模板",
+      "check": "未提及的字段必须留空"
+    },
+    {
+      "text": "（未提及则留空）\"",
+      "where": "extract",
+      "kind": "wording",
+      "status": "changed",
+      "old": "（未提及则留空）\"",
+      "new": "build_extract_prompt 统一规则：未提及的字段必须留空字符串 \"\"，不得编造。",
+      "reason": "B1 配置化重构：字段留空指令由每字段注释收敛为 build_extract_prompt 顶部统一规则",
+      "check": "未提及的字段必须留空"
+    },
+    {
+      "text": "一句话提示用户最值得补充哪 1~2 项信息（35字以内）",
+      "where": "extract",
+      "path": "extract_summary_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "请用冷静、务实、直击本质的中文输出，不要喊口号",
+      "where": "generate",
+      "path": "style_note",
+      "kind": "wording",
+      "status": "required"
+    },
+    {
+      "text": "辩证分析标题，16字以内",
+      "where": "generate",
+      "path": "title_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "一句话抓住本质规律与破局总方针，35字以内",
+      "where": "generate",
+      "path": "summary_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "A 与 B 之间的核心矛盾，及矛盾的主要方面（35字以内）",
+      "where": "generate",
+      "path": "pillars[0].hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "达成什么条件后局势会由被动转为主动（35字以内）",
+      "where": "generate",
+      "path": "pillars[1].hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "集中优势兵力先攻克的唯一突破口（35字以内）",
+      "where": "generate",
+      "path": "pillars[2].hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "主要矛盾",
+      "where": "generate",
+      "path": "sections[0].items[0].tag",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "矛盾名称（12字内）",
+      "where": "generate",
+      "path": "sections[0].items[0].name_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "为什么它决定全局、不解决它会怎样（35~60字）",
+      "where": "generate",
+      "path": "sections[0].items[0].detail_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "依托",
+      "where": "generate",
+      "path": "sections[1].items[0].tag",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "己方真正站得住脚的筹码（35~60字）",
+      "where": "generate",
+      "path": "sections[1].items[0].detail_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "单点突破",
+      "where": "generate",
+      "path": "sections[2].items[1].tag",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "集中兵力打赢哪一场小胜仗（35~60字）",
+      "where": "generate",
+      "path": "sections[2].items[1].detail_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "共识/分歧各 35~55 字",
+      "where": "generate",
+      "path": "synthesis_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "35~55字",
+      "where": "generate",
+      "kind": "length",
+      "status": "changed",
+      "old": "35~55字",
+      "new": "共识/分歧各 35~55 字",
+      "reason": "B1 配置化：旧 consensus/tension 两条 35~55字 合并写入 synthesis_hint",
+      "check": "共识/分歧各 35~55 字"
+    },
+    {
+      "text": "一句话核心判断（25字内）",
+      "where": "generate",
+      "kind": "length",
+      "status": "dropped",
+      "reason": "① 旧 council 的 25 字限制与写死的 stance（被 B2 新契约 verdict 30-60 字替代）"
+    },
+    {
+      "text": "1条具体落地动作（35字内）",
+      "where": "generate",
+      "kind": "length",
+      "status": "changed",
+      "old": "1条具体落地动作（35字内）",
+      "new": "action：≤40 字，可检查的动作",
+      "reason": "D16 / B2 智囊输出契约统一：action 统一为 ≤40 字可检查动作",
+      "check": "action：≤40 字"
+    },
+    {
+      "text": "唯一主要矛盾",
+      "where": "generate",
+      "path": "pillars[0].label",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "矛盾转化临界条件",
+      "where": "generate",
+      "path": "pillars[1].label",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "第一仗打哪里",
+      "where": "generate",
+      "path": "pillars[2].label",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "一、主要矛盾 vs 次要矛盾（主次分明）",
+      "where": "generate",
+      "path": "sections[0].heading",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "暂缓处理",
+      "where": "generate",
+      "path": "sections[0].items[1].tag",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "次要矛盾1（12字内）",
+      "where": "generate",
+      "path": "sections[0].items[1].name_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "为什么现在不该在它身上消耗精力（35~60字）",
+      "where": "generate",
+      "path": "sections[0].items[1].detail_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "暂缓处理",
+      "where": "generate",
+      "path": "sections[0].items[2].tag",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "次要矛盾2（12字内）",
+      "where": "generate",
+      "path": "sections[0].items[2].name_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "等主要矛盾解决后它会如何自然化解（35~60字）",
+      "where": "generate",
+      "path": "sections[0].items[2].detail_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "二、力量格局与转化条件（敌我友分析）",
+      "where": "generate",
+      "path": "sections[1].heading",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "核心根据地/优势（12字内）",
+      "where": "generate",
+      "path": "sections[1].items[0].name_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "统战",
+      "where": "generate",
+      "path": "sections[1].items[1].tag",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "可争取的中间力量（12字内）",
+      "where": "generate",
+      "path": "sections[1].items[1].name_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "如何把中立/观望方转化为助力（35~60字）",
+      "where": "generate",
+      "path": "sections[1].items[1].detail_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "转化条件",
+      "where": "generate",
+      "path": "sections[1].items[2].tag",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "矛盾转化的关键变量（12字内）",
+      "where": "generate",
+      "path": "sections[1].items[2].name_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "需要积累什么量变才能引发质变（35~60字）",
+      "where": "generate",
+      "path": "sections[1].items[2].detail_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "三、分阶段实践路线（以点带面）",
+      "where": "generate",
+      "path": "sections[2].heading",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "收缩蓄力",
+      "where": "generate",
+      "path": "sections[2].items[0].tag",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "阶段 1（12字内）",
+      "where": "generate",
+      "path": "sections[2].items[0].name_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "具体做什么、放弃什么（35~60字）",
+      "where": "generate",
+      "path": "sections[2].items[0].detail_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "阶段 2（12字内）",
+      "where": "generate",
+      "path": "sections[2].items[1].name_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "抽象扩张",
+      "where": "generate",
+      "path": "sections[2].items[2].tag",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "阶段 3（12字内）",
+      "where": "generate",
+      "path": "sections[2].items[2].name_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "如何总结规律并以点带面放大战果（35~60字）",
+      "where": "generate",
+      "path": "sections[2].items[2].detail_hint",
+      "kind": "length",
+      "status": "required"
+    }
+  ],
+  "agent6": [
+    {
+      "text": "你是芒格“一法多解”思维模型的结构化抽取助手。用户会输入多个同时面临的问题，请提取关键字段，未提及的留空 \"\"，不要编造。",
+      "where": "extract",
+      "kind": "wording",
+      "status": "changed",
+      "old": "你是芒格“一法多解”思维模型的结构化抽取助手。用户会输入多个同时面临的问题，请提取关键字段，未提及的留空 \"\"，不要编造。",
+      "new": "extract_note=\"用户会输入多个同时面临的问题\" + build_extract_prompt 统一反编造规则",
+      "reason": "B1 配置化重构：领域背景放入 extract_note，反编造留空规则收敛到 build_extract_prompt",
+      "check": "未提及的字段必须留空"
+    },
+    {
+      "text": "（未提及则留空）\"",
+      "where": "extract",
+      "kind": "wording",
+      "status": "changed",
+      "old": "（未提及则留空）\"",
+      "new": "build_extract_prompt 统一规则：未提及的字段必须留空字符串 \"\"，不得编造。",
+      "reason": "B1 配置化重构：字段留空指令收敛为 build_extract_prompt 顶部统一规则",
+      "check": "未提及的字段必须留空"
+    },
+    {
+      "text": "用户会输入多个同时面临的问题",
+      "where": "extract",
+      "path": "extract_note",
+      "kind": "wording",
+      "status": "required"
+    },
+    {
+      "text": "一句话提示用户最值得补充哪 1~2 项信息（35字以内）",
+      "where": "extract",
+      "path": "extract_summary_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "必须真正提出 **1 个具体、可落地的统一方法/核心机制**（而不是给每个问题分别写一个独立建议！）",
+      "where": "generate",
+      "path": "extra_rules[0]",
+      "kind": "wording",
+      "status": "required"
+    },
+    {
+      "text": "在 sections 第一部分中，逐一映射这个“统一方法”如何同时解决用户提到的每一个具体问题",
+      "where": "generate",
+      "path": "extra_rules[1]",
+      "kind": "wording",
+      "status": "required"
+    },
+    {
+      "text": "语言犀利务实",
+      "where": "generate",
+      "path": "style_note",
+      "kind": "wording",
+      "status": "required"
+    },
+    {
+      "text": "严格返回以下 JSON，语言犀利务实：",
+      "where": "generate",
+      "kind": "wording",
+      "status": "changed",
+      "old": "严格返回以下 JSON，语言犀利务实：",
+      "new": "style_note=\"语言犀利务实\" + build_generate_prompt 严格 JSON 契约",
+      "reason": "B1 配置化：语气要求搬入 style_note，JSON 返回格式由统一模板声明",
+      "check": "语言犀利务实"
+    },
+    {
+      "text": "核心一法名称，16字以内",
+      "where": "generate",
+      "path": "title_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "一句话说清用哪一个方法同时解决哪几个问题，35字以内",
+      "where": "generate",
+      "path": "summary_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "一句话穿透表象指出共同根因（35字以内）",
+      "where": "generate",
+      "path": "pillars[0].hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "一句话定义这个一石多鸟的核心机制（35字以内）",
+      "where": "generate",
+      "path": "pillars[1].hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "避免什么愚蠢错误就能防止这套机制失效（35字以内）",
+      "where": "generate",
+      "path": "pillars[2].hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "对应问题名称（12字内）",
+      "where": "generate",
+      "path": "sections[0].item_name_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "核心一法具体如何顺带把这个问题一并解决（35~60字）",
+      "where": "generate",
+      "path": "sections[0].detail_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "二、背后的多元思维模型（2~3 个）",
+      "where": "generate",
+      "path": "sections[1].heading",
+      "kind": "count",
+      "status": "required"
+    },
+    {
+      "text": "2-3",
+      "where": "generate",
+      "path": "sections[1].count",
+      "kind": "count",
+      "status": "required"
+    },
+    {
+      "text": "这个模型在此处如何产生叠加杠杆效应（35~60字）",
+      "where": "generate",
+      "path": "sections[1].detail_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "三、落地这个“一法”的执行步骤（3 步）",
+      "where": "generate",
+      "path": "sections[2].heading",
+      "kind": "count",
+      "status": "required"
+    },
+    {
+      "text": "3",
+      "where": "generate",
+      "path": "sections[2].count",
+      "kind": "count",
+      "status": "required"
+    },
+    {
+      "text": "第1步",
+      "where": "generate",
+      "path": "sections[2].item_tag",
+      "kind": "count",
+      "status": "required"
+    },
+    {
+      "text": "具体操作动作与检验标准（35~60字）",
+      "where": "generate",
+      "path": "sections[2].detail_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "共识/分歧各 35~55 字",
+      "where": "generate",
+      "path": "synthesis_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "35~55字",
+      "where": "generate",
+      "kind": "length",
+      "status": "changed",
+      "old": "35~55字",
+      "new": "共识/分歧各 35~55 字",
+      "reason": "B1 配置化：旧 consensus/tension 两条 35~55字 合并写入 synthesis_hint",
+      "check": "共识/分歧各 35~55 字"
+    },
+    {
+      "text": "一句话核心判断（25字内）",
+      "where": "generate",
+      "kind": "length",
+      "status": "dropped",
+      "reason": "① 旧 council 的 25 字限制与写死的 stance（被 B2 新契约 verdict 30-60 字替代）"
+    },
+    {
+      "text": "1条具体落地动作（35字内）",
+      "where": "generate",
+      "kind": "length",
+      "status": "changed",
+      "old": "1条具体落地动作（35字内）",
+      "new": "action：≤40 字，可检查的动作",
+      "reason": "D16 / B2 智囊输出契约统一：action 统一为 ≤40 字可检查动作",
+      "check": "action：≤40 字"
+    },
+    {
+      "text": "多个问题的共同根因",
+      "where": "generate",
+      "path": "pillars[0].label",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "核心“一法”（统一杠杆）",
+      "where": "generate",
+      "path": "pillars[1].label",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "逆向避坑（芒格）",
+      "where": "generate",
+      "path": "pillars[2].label",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "一、一法如何同时解决每个问题（逐项映射）",
+      "where": "generate",
+      "path": "sections[0].heading",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "同步解决",
+      "where": "generate",
+      "path": "sections[0].item_tag",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "跨学科模型",
+      "where": "generate",
+      "path": "sections[1].item_tag",
+      "kind": "structure",
+      "status": "required"
+    }
+  ],
+  "agent7": [
+    {
+      "text": "你是「双轨分析（芒格）」结构化抽取助手。请从用户输入中提取关键信息，未提及的字段务必留空 \"\"，不要编造。",
+      "where": "extract",
+      "kind": "wording",
+      "status": "changed",
+      "old": "你是「双轨分析（芒格）」结构化抽取助手。请从用户输入中提取关键信息，未提及的字段务必留空 \"\"，不要编造。",
+      "new": "build_extract_prompt 统一规则：只能抽取用户输入中明确提到的信息，未提及的字段必须留空字符串 \"\"，不得编造。",
+      "reason": "B1 配置化重构：extract 严格反编造规则收敛到 thinking_core.build_extract_prompt 统一模板",
+      "check": "未提及的字段必须留空"
+    },
+    {
+      "text": "（未提及则留空）\"",
+      "where": "extract",
+      "kind": "wording",
+      "status": "changed",
+      "old": "（未提及则留空）\"",
+      "new": "build_extract_prompt 统一规则：未提及的字段必须留空字符串 \"\"，不得编造。",
+      "reason": "B1 配置化重构：字段留空指令收敛为 build_extract_prompt 顶部统一规则",
+      "check": "未提及的字段必须留空"
+    },
+    {
+      "text": "一句话提示用户最值得补充哪 1~2 项关键信息（35字以内）",
+      "where": "extract",
+      "path": "extract_summary_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "紧扣用户的具体案例，拒绝空泛鸡汤与教科书式套话，直指要害",
+      "where": "generate",
+      "path": "style_note",
+      "kind": "wording",
+      "status": "required"
+    },
+    {
+      "text": "pillars 固定 3 项，标题分别为：第一轨：客观利益与概率、第二轨：潜意识误判排查、双轨校准后的最终判断",
+      "where": "generate",
+      "kind": "structure",
+      "status": "changed",
+      "old": "pillars 固定 3 项，标题分别为：第一轨：客观利益与概率、第二轨：潜意识误判排查、双轨校准后的最终判断",
+      "new": "config.pillars 3 项 + build_generate_prompt 支柱要求 + validate_result 强制 3 项并回填 label",
+      "reason": "B1 配置化：3 支柱标题与数量由 config.pillars 声明并由服务端强制校验",
+      "check": "pillars 必须恰好 3 条"
+    },
+    {
+      "text": "steps 为 4~5 步双轨决策执行清单（先做客观事实核验，再做心理误判隔离，最后给出冷静决策与边界）",
+      "where": "generate",
+      "kind": "structure",
+      "status": "dropped",
+      "reason": "④ 旧 steps 键在 JSON 结构中不存在，4-5 条数与领域指引已分别迁入 sections[1].count 与 sections[1].guidance"
+    },
+    {
+      "text": "council_synthesis 提炼 4 位智囊的「合议共识」与「关键张力」",
+      "where": "generate",
+      "kind": "structure",
+      "status": "changed",
+      "old": "council_synthesis 提炼 4 位智囊的「合议共识」与「关键张力」",
+      "new": "build_generate_prompt council_synthesis 契约（consensus_text + 有真实分歧时才填 tension_text）",
+      "reason": "B2 智囊输出契约：合议共识与分歧张力改为严格条件输出，立场一致时清空 tension_text",
+      "check": "consensus_text"
+    },
+    {
+      "text": "4 位智囊各自独立发声，给出立场标签、犀利判断与具体落地动作",
+      "where": "generate",
+      "kind": "wording",
+      "status": "dropped",
+      "reason": "③ D2 措辞决定：界面与 prompt 不再称“独立发声”，改为“4 个分析视角”"
+    },
+    {
+      "text": "先做客观事实核验，再做心理误判隔离，最后给出冷静决策与边界",
+      "where": "generate",
+      "path": "sections[1].guidance",
+      "kind": "wording",
+      "status": "required"
+    },
+    {
+      "text": "4-5",
+      "where": "generate",
+      "path": "sections[1].count",
+      "kind": "count",
+      "status": "required"
+    },
+    {
+      "text": "报告标题，18字以内",
+      "where": "generate",
+      "path": "title_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "一句话核心结论，45字以内",
+      "where": "generate",
+      "path": "summary_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "45~90字深度拆解",
+      "where": "generate",
+      "path": "pillars[0].hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "45~90字深度拆解",
+      "where": "generate",
+      "path": "pillars[1].hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "45~90字深度拆解",
+      "where": "generate",
+      "path": "pillars[2].hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "要点名称，14字以内",
+      "where": "generate",
+      "path": "sections[0].item_name_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "结合案例的具体分析（40~75字）",
+      "where": "generate",
+      "path": "sections[0].detail_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "行动步骤，14字以内",
+      "where": "generate",
+      "path": "sections[1].item_name_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "做什么、怎么验证、为什么（40~75字）",
+      "where": "generate",
+      "path": "sections[1].detail_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "共识/分歧各 35~60 字",
+      "where": "generate",
+      "path": "synthesis_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "35~60字",
+      "where": "generate",
+      "kind": "length",
+      "status": "changed",
+      "old": "35~60字",
+      "new": "共识/分歧各 35~60 字",
+      "reason": "B1 配置化：旧 consensus/tension 两条 35~60字 合并写入 synthesis_hint",
+      "check": "共识/分歧各 35~60 字"
+    },
+    {
+      "text": "4字以内立场标签",
+      "where": "generate",
+      "kind": "length",
+      "status": "dropped",
+      "reason": "① B2 新契约：stance 改为固定英文枚举 support/hold/oppose/need_info"
+    },
+    {
+      "text": "针对该案例的一针见血判断（30~55字）",
+      "where": "generate",
+      "kind": "length",
+      "status": "changed",
+      "old": "针对该案例的一针见血判断（30~55字）",
+      "new": "verdict：30-60 字，针对本案例，不得复述原则",
+      "reason": "D16 / B2 智囊输出契约统一：verdict 统一为 30-60 字",
+      "check": "verdict：30-60 字"
+    },
+    {
+      "text": "今天即可执行的具体动作（20~40字）",
+      "where": "generate",
+      "kind": "length",
+      "status": "changed",
+      "old": "今天即可执行的具体动作（20~40字）",
+      "new": "action：≤40 字，可检查的动作",
+      "reason": "D16 / B2 智囊输出契约统一：action 统一为 ≤40 字可检查动作，不恢复“今天即可执行”旧措辞",
+      "check": "action：≤40 字"
+    },
+    {
+      "text": "请结合上下文合理推演",
+      "where": "generate",
+      "kind": "wording",
+      "status": "dropped",
+      "reason": "② B3 有意舍弃：改为反编造规则，禁止模型自行脑补未填写字段"
+    },
+    {
+      "text": "第一轨：客观利益与概率",
+      "where": "generate",
+      "path": "pillars[0].label",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "第二轨：潜意识误判排查",
+      "where": "generate",
+      "path": "pillars[1].label",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "双轨校准后的最终判断",
+      "where": "generate",
+      "path": "pillars[2].label",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "一、核心拆解与关键发现",
+      "where": "generate",
+      "path": "sections[0].heading",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "核心洞察",
+      "where": "generate",
+      "path": "sections[0].item_tag",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "二、可执行行动与安全边界",
+      "where": "generate",
+      "path": "sections[1].heading",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "落地动作",
+      "where": "generate",
+      "path": "sections[1].item_tag",
+      "kind": "structure",
+      "status": "required"
+    }
+  ],
+  "agent8": [
+    {
+      "text": "你是「反向思考（事前验尸）」结构化抽取助手。请从用户输入中提取关键信息，未提及的字段务必留空 \"\"，不要编造。",
+      "where": "extract",
+      "kind": "wording",
+      "status": "changed",
+      "old": "你是「反向思考（事前验尸）」结构化抽取助手。请从用户输入中提取关键信息，未提及的字段务必留空 \"\"，不要编造。",
+      "new": "build_extract_prompt 统一规则：只能抽取用户输入中明确提到的信息，未提及的字段必须留空字符串 \"\"，不得编造。",
+      "reason": "B1 配置化重构：extract 严格反编造规则收敛到 thinking_core.build_extract_prompt 统一模板",
+      "check": "未提及的字段必须留空"
+    },
+    {
+      "text": "（未提及则留空）\"",
+      "where": "extract",
+      "kind": "wording",
+      "status": "changed",
+      "old": "（未提及则留空）\"",
+      "new": "build_extract_prompt 统一规则：未提及的字段必须留空字符串 \"\"，不得编造。",
+      "reason": "B1 配置化重构：字段留空指令收敛为 build_extract_prompt 顶部统一规则",
+      "check": "未提及的字段必须留空"
+    },
+    {
+      "text": "一句话提示用户最值得补充哪 1~2 项关键信息（35字以内）",
+      "where": "extract",
+      "path": "extract_summary_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "紧扣用户的具体案例，拒绝空泛鸡汤与教科书式套话，直指要害",
+      "where": "generate",
+      "path": "style_note",
+      "kind": "wording",
+      "status": "required"
+    },
+    {
+      "text": "pillars 固定 3 项，标题分别为：Top 1 致命死因、系统断裂点（Breakpoint）、工程学备份与安全边际",
+      "where": "generate",
+      "kind": "structure",
+      "status": "changed",
+      "old": "pillars 固定 3 项，标题分别为：Top 1 致命死因、系统断裂点（Breakpoint）、工程学备份与安全边际",
+      "new": "config.pillars 3 项 + build_generate_prompt 支柱要求 + validate_result 强制 3 项并回填 label",
+      "reason": "B1 配置化：3 支柱标题与数量由 config.pillars 声明并由服务端强制校验",
+      "check": "pillars 必须恰好 3 条"
+    },
+    {
+      "text": "steps 为 4~5 步防死与安全边际构建行动（按致命优先级排序，每步必须可落地、可检查）",
+      "where": "generate",
+      "kind": "structure",
+      "status": "dropped",
+      "reason": "④ 旧 steps 键在 JSON 结构中不存在，4-5 条数与领域指引已分别迁入 sections[1].count 与 sections[1].guidance"
+    },
+    {
+      "text": "council_synthesis 提炼 4 位智囊的「合议共识」与「关键张力」",
+      "where": "generate",
+      "kind": "structure",
+      "status": "changed",
+      "old": "council_synthesis 提炼 4 位智囊的「合议共识」与「关键张力」",
+      "new": "build_generate_prompt council_synthesis 契约（consensus_text + 有真实分歧时才填 tension_text）",
+      "reason": "B2 智囊输出契约：合议共识与分歧张力改为严格条件输出",
+      "check": "consensus_text"
+    },
+    {
+      "text": "4 位智囊各自独立发声，给出立场标签、犀利判断与具体落地动作",
+      "where": "generate",
+      "kind": "wording",
+      "status": "dropped",
+      "reason": "③ D2 措辞决定：界面与 prompt 不再称“独立发声”，改为“4 个分析视角”"
+    },
+    {
+      "text": "按致命优先级排序，每步必须可落地、可检查",
+      "where": "generate",
+      "path": "sections[1].guidance",
+      "kind": "wording",
+      "status": "required"
+    },
+    {
+      "text": "4-5",
+      "where": "generate",
+      "path": "sections[1].count",
+      "kind": "count",
+      "status": "required"
+    },
+    {
+      "text": "报告标题，18字以内",
+      "where": "generate",
+      "path": "title_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "一句话核心结论，45字以内",
+      "where": "generate",
+      "path": "summary_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "45~90字深度拆解",
+      "where": "generate",
+      "path": "pillars[0].hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "45~90字深度拆解",
+      "where": "generate",
+      "path": "pillars[1].hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "45~90字深度拆解",
+      "where": "generate",
+      "path": "pillars[2].hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "要点名称，14字以内",
+      "where": "generate",
+      "path": "sections[0].item_name_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "结合案例的具体分析（40~75字）",
+      "where": "generate",
+      "path": "sections[0].detail_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "行动步骤，14字以内",
+      "where": "generate",
+      "path": "sections[1].item_name_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "做什么、怎么验证、为什么（40~75字）",
+      "where": "generate",
+      "path": "sections[1].detail_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "共识/分歧各 35~60 字",
+      "where": "generate",
+      "path": "synthesis_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "35~60字",
+      "where": "generate",
+      "kind": "length",
+      "status": "changed",
+      "old": "35~60字",
+      "new": "共识/分歧各 35~60 字",
+      "reason": "B1 配置化：旧 consensus/tension 两条 35~60字 合并写入 synthesis_hint",
+      "check": "共识/分歧各 35~60 字"
+    },
+    {
+      "text": "4字以内立场标签",
+      "where": "generate",
+      "kind": "length",
+      "status": "dropped",
+      "reason": "① B2 新契约：stance 改为固定英文枚举 support/hold/oppose/need_info"
+    },
+    {
+      "text": "针对该案例的一针见血判断（30~55字）",
+      "where": "generate",
+      "kind": "length",
+      "status": "changed",
+      "old": "针对该案例的一针见血判断（30~55字）",
+      "new": "verdict：30-60 字，针对本案例，不得复述原则",
+      "reason": "D16 / B2 智囊输出契约统一：verdict 统一为 30-60 字",
+      "check": "verdict：30-60 字"
+    },
+    {
+      "text": "今天即可执行的具体动作（20~40字）",
+      "where": "generate",
+      "kind": "length",
+      "status": "changed",
+      "old": "今天即可执行的具体动作（20~40字）",
+      "new": "action：≤40 字，可检查的动作",
+      "reason": "D16 / B2 智囊输出契约统一：action 统一为 ≤40 字可检查动作，不恢复“今天即可执行”旧措辞",
+      "check": "action：≤40 字"
+    },
+    {
+      "text": "请结合上下文合理推演",
+      "where": "generate",
+      "kind": "wording",
+      "status": "dropped",
+      "reason": "② B3 有意舍弃：改为反编造规则，禁止模型自行脑补未填写字段"
+    },
+    {
+      "text": "Top 1 致命死因",
+      "where": "generate",
+      "path": "pillars[0].label",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "系统断裂点（Breakpoint）",
+      "where": "generate",
+      "path": "pillars[1].label",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "工程学备份与安全边际",
+      "where": "generate",
+      "path": "pillars[2].label",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "一、核心拆解与关键发现",
+      "where": "generate",
+      "path": "sections[0].heading",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "核心洞察",
+      "where": "generate",
+      "path": "sections[0].item_tag",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "二、可执行行动与安全边界",
+      "where": "generate",
+      "path": "sections[1].heading",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "落地动作",
+      "where": "generate",
+      "path": "sections[1].item_tag",
+      "kind": "structure",
+      "status": "required"
+    }
+  ],
+  "agent9": [
+    {
+      "text": "你是「激励机制诊断」结构化抽取助手。请从用户输入中提取关键信息，未提及的字段务必留空 \"\"，不要编造。",
+      "where": "extract",
+      "kind": "wording",
+      "status": "changed",
+      "old": "你是「激励机制诊断」结构化抽取助手。请从用户输入中提取关键信息，未提及的字段务必留空 \"\"，不要编造。",
+      "new": "build_extract_prompt 统一规则：只能抽取用户输入中明确提到的信息，未提及的字段必须留空字符串 \"\"，不得编造。",
+      "reason": "B1 配置化重构：extract 严格反编造规则收敛到 thinking_core.build_extract_prompt 统一模板",
+      "check": "未提及的字段必须留空"
+    },
+    {
+      "text": "（未提及则留空）\"",
+      "where": "extract",
+      "kind": "wording",
+      "status": "changed",
+      "old": "（未提及则留空）\"",
+      "new": "build_extract_prompt 统一规则：未提及的字段必须留空字符串 \"\"，不得编造。",
+      "reason": "B1 配置化重构：字段留空指令收敛为 build_extract_prompt 顶部统一规则",
+      "check": "未提及的字段必须留空"
+    },
+    {
+      "text": "一句话提示用户最值得补充哪 1~2 项关键信息（35字以内）",
+      "where": "extract",
+      "path": "extract_summary_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "第1条",
+      "where": "generate",
+      "path": "framework_intro",
+      "kind": "wording",
+      "status": "required"
+    },
+    {
+      "text": "紧扣用户的具体案例，拒绝空泛鸡汤与教科书式套话，直指要害",
+      "where": "generate",
+      "path": "style_note",
+      "kind": "wording",
+      "status": "required"
+    },
+    {
+      "text": "pillars 固定 3 项，标题分别为：真实激励地图（明面 vs 暗面）、核心激励扭曲点、联邦快递式重构杠杆",
+      "where": "generate",
+      "kind": "structure",
+      "status": "changed",
+      "old": "pillars 固定 3 项，标题分别为：真实激励地图（明面 vs 暗面）、核心激励扭曲点、联邦快递式重构杠杆",
+      "new": "config.pillars 3 项 + build_generate_prompt 支柱要求 + validate_result 强制 3 项并回填 label",
+      "reason": "B1 配置化：3 支柱标题与数量由 config.pillars 声明并由服务端强制校验",
+      "check": "pillars 必须恰好 3 条"
+    },
+    {
+      "text": "steps 为 4~5 步激励机制重构与防作弊落地步骤（把口号变成顺人性的硬规则）",
+      "where": "generate",
+      "kind": "structure",
+      "status": "dropped",
+      "reason": "④ 旧 steps 键在 JSON 结构中不存在，4-5 条数与领域指引已分别迁入 sections[1].count 与 sections[1].guidance"
+    },
+    {
+      "text": "council_synthesis 提炼 4 位智囊的「合议共识」与「关键张力」",
+      "where": "generate",
+      "kind": "structure",
+      "status": "changed",
+      "old": "council_synthesis 提炼 4 位智囊的「合议共识」与「关键张力」",
+      "new": "build_generate_prompt council_synthesis 契约（consensus_text + 有真实分歧时才填 tension_text）",
+      "reason": "B2 智囊输出契约：合议共识与分歧张力改为严格条件输出",
+      "check": "consensus_text"
+    },
+    {
+      "text": "4 位智囊各自独立发声，给出立场标签、犀利判断与具体落地动作",
+      "where": "generate",
+      "kind": "wording",
+      "status": "dropped",
+      "reason": "③ D2 措辞决定：界面与 prompt 不再称“独立发声”，改为“4 个分析视角”"
+    },
+    {
+      "text": "激励机制重构与防作弊落地步骤（把口号变成顺人性的硬规则）",
+      "where": "generate",
+      "path": "sections[1].guidance",
+      "kind": "wording",
+      "status": "required"
+    },
+    {
+      "text": "4-5",
+      "where": "generate",
+      "path": "sections[1].count",
+      "kind": "count",
+      "status": "required"
+    },
+    {
+      "text": "报告标题，18字以内",
+      "where": "generate",
+      "path": "title_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "一句话核心结论，45字以内",
+      "where": "generate",
+      "path": "summary_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "45~90字深度拆解",
+      "where": "generate",
+      "path": "pillars[0].hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "45~90字深度拆解",
+      "where": "generate",
+      "path": "pillars[1].hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "45~90字深度拆解",
+      "where": "generate",
+      "path": "pillars[2].hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "要点名称，14字以内",
+      "where": "generate",
+      "path": "sections[0].item_name_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "结合案例的具体分析（40~75字）",
+      "where": "generate",
+      "path": "sections[0].detail_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "行动步骤，14字以内",
+      "where": "generate",
+      "path": "sections[1].item_name_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "做什么、怎么验证、为什么（40~75字）",
+      "where": "generate",
+      "path": "sections[1].detail_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "共识/分歧各 35~60 字",
+      "where": "generate",
+      "path": "synthesis_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "35~60字",
+      "where": "generate",
+      "kind": "length",
+      "status": "changed",
+      "old": "35~60字",
+      "new": "共识/分歧各 35~60 字",
+      "reason": "B1 配置化：旧 consensus/tension 两条 35~60字 合并写入 synthesis_hint",
+      "check": "共识/分歧各 35~60 字"
+    },
+    {
+      "text": "4字以内立场标签",
+      "where": "generate",
+      "kind": "length",
+      "status": "dropped",
+      "reason": "① B2 新契约：stance 改为固定英文枚举 support/hold/oppose/need_info"
+    },
+    {
+      "text": "针对该案例的一针见血判断（30~55字）",
+      "where": "generate",
+      "kind": "length",
+      "status": "changed",
+      "old": "针对该案例的一针见血判断（30~55字）",
+      "new": "verdict：30-60 字，针对本案例，不得复述原则",
+      "reason": "D16 / B2 智囊输出契约统一：verdict 统一为 30-60 字",
+      "check": "verdict：30-60 字"
+    },
+    {
+      "text": "今天即可执行的具体动作（20~40字）",
+      "where": "generate",
+      "kind": "length",
+      "status": "changed",
+      "old": "今天即可执行的具体动作（20~40字）",
+      "new": "action：≤40 字，可检查的动作",
+      "reason": "D16 / B2 智囊输出契约统一：action 统一为 ≤40 字可检查动作，不恢复“今天即可执行”旧措辞",
+      "check": "action：≤40 字"
+    },
+    {
+      "text": "请结合上下文合理推演",
+      "where": "generate",
+      "kind": "wording",
+      "status": "dropped",
+      "reason": "② B3 有意舍弃：改为反编造规则，禁止模型自行脑补未填写字段"
+    },
+    {
+      "text": "真实激励地图（明面 vs 暗面）",
+      "where": "generate",
+      "path": "pillars[0].label",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "核心激励扭曲点",
+      "where": "generate",
+      "path": "pillars[1].label",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "联邦快递式重构杠杆",
+      "where": "generate",
+      "path": "pillars[2].label",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "一、核心拆解与关键发现",
+      "where": "generate",
+      "path": "sections[0].heading",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "核心洞察",
+      "where": "generate",
+      "path": "sections[0].item_tag",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "二、可执行行动与安全边界",
+      "where": "generate",
+      "path": "sections[1].heading",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "落地动作",
+      "where": "generate",
+      "path": "sections[1].item_tag",
+      "kind": "structure",
+      "status": "required"
+    }
+  ],
+  "agent10": [
+    {
+      "text": "你是「Lollapalooza 共振雷达」结构化抽取助手。请从用户输入中提取关键信息，未提及的字段务必留空 \"\"，不要编造。",
+      "where": "extract",
+      "kind": "wording",
+      "status": "changed",
+      "old": "你是「Lollapalooza 共振雷达」结构化抽取助手。请从用户输入中提取关键信息，未提及的字段务必留空 \"\"，不要编造。",
+      "new": "build_extract_prompt 统一规则：只能抽取用户输入中明确提到的信息，未提及的字段必须留空字符串 \"\"，不得编造。",
+      "reason": "B1 配置化重构：extract 严格反编造规则收敛到 thinking_core.build_extract_prompt 统一模板",
+      "check": "未提及的字段必须留空"
+    },
+    {
+      "text": "（未提及则留空）\"",
+      "where": "extract",
+      "kind": "wording",
+      "status": "changed",
+      "old": "（未提及则留空）\"",
+      "new": "build_extract_prompt 统一规则：未提及的字段必须留空字符串 \"\"，不得编造。",
+      "reason": "B1 配置化重构：字段留空指令收敛为 build_extract_prompt 顶部统一规则",
+      "check": "未提及的字段必须留空"
+    },
+    {
+      "text": "一句话提示用户最值得补充哪 1~2 项关键信息（35字以内）",
+      "where": "extract",
+      "path": "extract_summary_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "第25条",
+      "where": "generate",
+      "path": "framework_intro",
+      "kind": "wording",
+      "status": "required"
+    },
+    {
+      "text": "紧扣用户的具体案例，拒绝空泛鸡汤与教科书式套话，直指要害",
+      "where": "generate",
+      "path": "style_note",
+      "kind": "wording",
+      "status": "required"
+    },
+    {
+      "text": "pillars 固定 3 项，标题分别为：同向共振的 3~5 种力量、核爆机制（为何非线性质变）、本质定性：真复利 vs 情绪泡沫",
+      "where": "generate",
+      "kind": "structure",
+      "status": "changed",
+      "old": "pillars 固定 3 项，标题分别为：同向共振的 3~5 种力量、核爆机制（为何非线性质变）、本质定性：真复利 vs 情绪泡沫",
+      "new": "config.pillars 3 项 + build_generate_prompt 支柱要求 + validate_result 强制 3 项并回填 label",
+      "reason": "B1 配置化：3 支柱标题与数量由 config.pillars 声明并由服务端强制校验",
+      "check": "pillars 必须恰好 3 条"
+    },
+    {
+      "text": "steps 为 4~5 步应对或借势行动清单（如果是泡沫给出撤离/隔离步骤，如果是真复利给出借势/复用步骤）",
+      "where": "generate",
+      "kind": "structure",
+      "status": "dropped",
+      "reason": "④ 旧 steps 键在 JSON 结构中不存在，4-5 条数与领域指引已分别迁入 sections[1].count 与 sections[1].guidance"
+    },
+    {
+      "text": "council_synthesis 提炼 4 位智囊的「合议共识」与「关键张力」",
+      "where": "generate",
+      "kind": "structure",
+      "status": "changed",
+      "old": "council_synthesis 提炼 4 位智囊的「合议共识」与「关键张力」",
+      "new": "build_generate_prompt council_synthesis 契约（consensus_text + 有真实分歧时才填 tension_text）",
+      "reason": "B2 智囊输出契约：合议共识与分歧张力改为严格条件输出",
+      "check": "consensus_text"
+    },
+    {
+      "text": "4 位智囊各自独立发声，给出立场标签、犀利判断与具体落地动作",
+      "where": "generate",
+      "kind": "wording",
+      "status": "dropped",
+      "reason": "③ D2 措辞决定：界面与 prompt 不再称“独立发声”，改为“4 个分析视角”"
+    },
+    {
+      "text": "如果是泡沫给出撤离/隔离步骤，如果是真复利给出借势/复用步骤",
+      "where": "generate",
+      "path": "sections[1].guidance",
+      "kind": "wording",
+      "status": "required"
+    },
+    {
+      "text": "4-5",
+      "where": "generate",
+      "path": "sections[1].count",
+      "kind": "count",
+      "status": "required"
+    },
+    {
+      "text": "报告标题，18字以内",
+      "where": "generate",
+      "path": "title_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "一句话核心结论，45字以内",
+      "where": "generate",
+      "path": "summary_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "45~90字深度拆解",
+      "where": "generate",
+      "path": "pillars[0].hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "45~90字深度拆解",
+      "where": "generate",
+      "path": "pillars[1].hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "45~90字深度拆解",
+      "where": "generate",
+      "path": "pillars[2].hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "要点名称，14字以内",
+      "where": "generate",
+      "path": "sections[0].item_name_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "结合案例的具体分析（40~75字）",
+      "where": "generate",
+      "path": "sections[0].detail_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "行动步骤，14字以内",
+      "where": "generate",
+      "path": "sections[1].item_name_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "做什么、怎么验证、为什么（40~75字）",
+      "where": "generate",
+      "path": "sections[1].detail_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "共识/分歧各 35~60 字",
+      "where": "generate",
+      "path": "synthesis_hint",
+      "kind": "length",
+      "status": "required"
+    },
+    {
+      "text": "35~60字",
+      "where": "generate",
+      "kind": "length",
+      "status": "changed",
+      "old": "35~60字",
+      "new": "共识/分歧各 35~60 字",
+      "reason": "B1 配置化：旧 consensus/tension 两条 35~60字 合并写入 synthesis_hint",
+      "check": "共识/分歧各 35~60 字"
+    },
+    {
+      "text": "4字以内立场标签",
+      "where": "generate",
+      "kind": "length",
+      "status": "dropped",
+      "reason": "① B2 新契约：stance 改为固定英文枚举 support/hold/oppose/need_info"
+    },
+    {
+      "text": "针对该案例的一针见血判断（30~55字）",
+      "where": "generate",
+      "kind": "length",
+      "status": "changed",
+      "old": "针对该案例的一针见血判断（30~55字）",
+      "new": "verdict：30-60 字，针对本案例，不得复述原则",
+      "reason": "D16 / B2 智囊输出契约统一：verdict 统一为 30-60 字",
+      "check": "verdict：30-60 字"
+    },
+    {
+      "text": "今天即可执行的具体动作（20~40字）",
+      "where": "generate",
+      "kind": "length",
+      "status": "changed",
+      "old": "今天即可执行的具体动作（20~40字）",
+      "new": "action：≤40 字，可检查的动作",
+      "reason": "D16 / B2 智囊输出契约统一：action 统一为 ≤40 字可检查动作，不恢复“今天即可执行”旧措辞",
+      "check": "action：≤40 字"
+    },
+    {
+      "text": "请结合上下文合理推演",
+      "where": "generate",
+      "kind": "wording",
+      "status": "dropped",
+      "reason": "② B3 有意舍弃：改为反编造规则，禁止模型自行脑补未填写字段"
+    },
+    {
+      "text": "同向共振的 3~5 种力量",
+      "where": "generate",
+      "path": "pillars[0].label",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "核爆机制（为何非线性质变）",
+      "where": "generate",
+      "path": "pillars[1].label",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "本质定性：真复利 vs 情绪泡沫",
+      "where": "generate",
+      "path": "pillars[2].label",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "一、核心拆解与关键发现",
+      "where": "generate",
+      "path": "sections[0].heading",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "核心洞察",
+      "where": "generate",
+      "path": "sections[0].item_tag",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "二、可执行行动与安全边界",
+      "where": "generate",
+      "path": "sections[1].heading",
+      "kind": "structure",
+      "status": "required"
+    },
+    {
+      "text": "落地动作",
+      "where": "generate",
+      "path": "sections[1].item_tag",
+      "kind": "structure",
+      "status": "required"
+    }
+  ]
+}

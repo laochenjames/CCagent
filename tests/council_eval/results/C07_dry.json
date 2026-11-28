@@ -1,0 +1,124 @@
+{
+  "title": "Lollapalooza 效应（芒格） 模拟分析",
+  "summary": "干跑桩函数输出，仅用于验证管线与校验逻辑。",
+  "decision": "是否推进当前方案",
+  "assumptions": [],
+  "missing_info": [
+    "缺少关键量化数据"
+  ],
+  "pillars": [
+    {
+      "label": "同向共振的 3~5 种力量",
+      "value": "桩函数支柱内容"
+    },
+    {
+      "label": "核爆机制（为何非线性质变）",
+      "value": "桩函数支柱内容"
+    },
+    {
+      "label": "本质定性：真复利 vs 情绪泡沫",
+      "value": "桩函数支柱内容"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "一、核心拆解与关键发现",
+      "items": [
+        {
+          "name": "示例项1",
+          "tag": "核心洞察",
+          "detail": "桩函数详情"
+        }
+      ]
+    },
+    {
+      "heading": "二、可执行行动与安全边界",
+      "items": [
+        {
+          "name": "示例项1",
+          "tag": "落地动作",
+          "detail": "桩函数详情"
+        },
+        {
+          "name": "示例项2",
+          "tag": "落地动作",
+          "detail": "桩函数详情"
+        },
+        {
+          "name": "示例项3",
+          "tag": "落地动作",
+          "detail": "桩函数详情"
+        },
+        {
+          "name": "示例项4",
+          "tag": "落地动作",
+          "detail": "桩函数详情"
+        }
+      ]
+    }
+  ],
+  "council_synthesis": {
+    "consensus_text": "需先补充关键证据再决策。",
+    "tension_text": "推进节奏与风险控制存在分歧。",
+    "tension_between": [
+      "force_scanner",
+      "bubble_detector"
+    ]
+  },
+  "council_notes": [
+    {
+      "id": "force_scanner",
+      "name": "共振因子扫描仪",
+      "role": "多力叠加 · 同向共振",
+      "stance": "hold",
+      "verdict": "针对当前案例的模拟判断（共振因子扫描仪）。",
+      "based_on": "一款盲盒 IP 联名奶茶",
+      "grounded": true,
+      "confidence": "mid",
+      "would_change_if": "补充量化数据后调整",
+      "action": "先做小规模验证"
+    },
+    {
+      "id": "bubble_detector",
+      "name": "泡沫与反噬侦探",
+      "role": "狂热甄别 · 退潮预判",
+      "stance": "oppose",
+      "verdict": "针对当前案例的模拟判断（泡沫与反噬侦探）。",
+      "based_on": "一款盲盒 IP 联名奶茶",
+      "grounded": true,
+      "confidence": "mid",
+      "would_change_if": "补充量化数据后调整",
+      "action": "先做小规模验证"
+    },
+    {
+      "id": "flywheel_builder",
+      "name": "正向飞轮架构师",
+      "role": "临界质量 · 品牌复利",
+      "stance": "need_info",
+      "verdict": "针对当前案例的模拟判断（正向飞轮架构师）。",
+      "based_on": "一款盲盒 IP 联名奶茶",
+      "grounded": true,
+      "confidence": "mid",
+      "would_change_if": "补充量化数据后调整",
+      "action": "先做小规模验证"
+    },
+    {
+      "id": "sober_anchor",
+      "name": "冷静隔离官",
+      "role": "抽离群体 · 行动策略",
+      "stance": "support",
+      "verdict": "针对当前案例的模拟判断（冷静隔离官）。",
+      "based_on": "用户未提供",
+      "grounded": true,
+      "confidence": "mid",
+      "would_change_if": "补充量化数据后调整",
+      "action": "先做小规模验证"
+    }
+  ],
+  "stance_counts": {
+    "support": 1,
+    "hold": 1,
+    "oppose": 1,
+    "need_info": 1
+  }
+}

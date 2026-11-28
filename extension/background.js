@@ -124,6 +124,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       dispatchToSidePanel(windowId, {
         agentId: msg.agentId || lastAgentId,
         text: msg.text || "",
+        images: Array.isArray(msg.images) ? msg.images.slice(0, 2) : [],
         autoExtract: false,
       });
     });

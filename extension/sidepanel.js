@@ -31,13 +31,71 @@
   let state = {
     host: DEFAULT_HOST,
     agentId: "auto",
+    activeFrameId: "",
     byok: { provider: "xai", model: "", api_key: "" },
     autoExtract: false,
-    iframeReady: false,
     queuedPrefill: null,
     lastRoutedText: "",
     lastAltAgent: "",
   };
+
+  const MAX_CACHED_FRAMES = 5;
+  const framePool = new Map(); // agentId -> { el, ready, lastUsed }
+
+  function getActiveFrame() {
+    const entry = framePool.get(state.activeFrameId);
+    return entry ? entry.el : $("agent-frame");
+  }
+
+  function hideAllFrames() {
+    const baseFrame = $("agent-frame");
+    if (baseFrame) baseFrame.classList.add("hidden");
+    framePool.forEach((entry) => entry.el.classList.add("hidden"));
+  }
+
+  function clearFramePool() {
+    framePool.forEach((entry) => {
+      if (entry.el && entry.el.parentNode) entry.el.parentNode.removeChild(entry.el);
+    });
+    framePool.clear();
+    state.activeFrameId = "";
+  }
+
+  function evictOldFrames(keepId) {
+    while (framePool.size > MAX_CACHED_FRAMES) {
+      let oldestId = null;
+      let oldestTs = Infinity;
+      framePool.forEach((entry, id) => {
+        if (id !== keepId && entry.lastUsed < oldestTs) {
+          oldestTs = entry.lastUsed;
+          oldestId = id;
+        }
+      });
+      if (!oldestId) break;
+      const victim = framePool.get(oldestId);
+      if (victim && victim.el && victim.el.parentNode) {
+        victim.el.parentNode.removeChild(victim.el);
+      }
+      framePool.delete(oldestId);
+    }
+  }
+
+  function showLoadingBar(show, label) {
+    let bar = $("sp-loading-bar");
+    if (!bar) {
+      bar = document.createElement("div");
+      bar.id = "sp-loading-bar";
+      bar.className = "sp-loading-bar hidden";
+      const main = document.querySelector(".sp-main");
+      if (main) main.appendChild(bar);
+    }
+    if (show) {
+      bar.textContent = label ? `正在加载「${label}」…` : "正在加载…";
+      bar.classList.remove("hidden");
+    } else {
+      bar.classList.add("hidden");
+    }
+  }
 
   function agentUrl(agentId) {
     const base = (state.host || DEFAULT_HOST).replace(/\/+$/, "");
@@ -45,7 +103,7 @@
   }
 
   function postToFrame(msg) {
-    const frame = $("agent-frame");
+    const frame = getActiveFrame();
     if (!frame || !frame.contentWindow) return;
     try {
       frame.contentWindow.postMessage(msg, "*");
@@ -60,6 +118,7 @@
       postToFrame({
         type: "CCAGENT_PREFILL",
         text: state.queuedPrefill.text,
+        images: Array.isArray(state.queuedPrefill.images) ? state.queuedPrefill.images.slice(0, 2) : [],
         directGenerate:
           state.queuedPrefill.directGenerate !== undefined
             ? state.queuedPrefill.directGenerate
@@ -126,17 +185,18 @@
         routeAndLoad(prefillPayload.text, prefillPayload);
         return;
       }
+      hideAllFrames();
+      showLoadingBar(false);
       $("auto-panel").classList.remove("hidden");
-      $("agent-frame").classList.add("hidden");
       return;
     }
 
     $("auto-panel").classList.add("hidden");
-    $("agent-frame").classList.remove("hidden");
 
     const targetId = AGENT_PATHS[agentId] ? agentId : "agent4";
-    const sameAgent = state.agentId === targetId && state.iframeReady && $("agent-frame").src === agentUrl(targetId);
+    const targetUrl = agentUrl(targetId);
     state.agentId = keepAutoMode ? "auto" : targetId;
+    state.activeFrameId = targetId;
     $("agent-select").value = keepAutoMode ? "auto" : targetId;
     chrome.storage.local.set({ lastAgentId: state.agentId });
 
@@ -144,12 +204,45 @@
       state.queuedPrefill = prefillPayload;
     }
 
-    if (sameAgent) {
-      flushToFrame();
-    } else {
-      state.iframeReady = false;
-      $("agent-frame").src = agentUrl(targetId);
+    hideAllFrames();
+
+    let entry = framePool.get(targetId);
+    if (entry && entry.el.src === targetUrl) {
+      entry.lastUsed = Date.now();
+      entry.el.classList.remove("hidden");
+      showLoadingBar(!entry.ready, AGENT_LABELS[targetId]);
+      if (entry.ready) {
+        flushToFrame();
+      }
+      return;
     }
+
+    if (entry && entry.el && entry.el.parentNode) {
+      entry.el.parentNode.removeChild(entry.el);
+      framePool.delete(targetId);
+    }
+
+    const iframe = document.createElement("iframe");
+    iframe.className = "sp-agent-frame";
+    iframe.title = AGENT_LABELS[targetId] || targetId;
+    iframe.setAttribute("allow", "clipboard-write");
+    iframe.dataset.agentId = targetId;
+    const main = document.querySelector(".sp-main");
+    if (main) main.appendChild(iframe);
+
+    entry = { el: iframe, ready: false, lastUsed: Date.now() };
+    framePool.set(targetId, entry);
+    evictOldFrames(targetId);
+
+    showLoadingBar(true, AGENT_LABELS[targetId]);
+    iframe.addEventListener("load", () => {
+      entry.ready = true;
+      if (state.activeFrameId === targetId) {
+        showLoadingBar(false);
+        flushToFrame();
+      }
+    });
+    iframe.src = targetUrl;
   }
 
   function renderClipTray(items) {
@@ -189,8 +282,15 @@
   window.addEventListener("message", (event) => {
     const msg = event.data;
     if (msg && msg.type === "CCAGENT_IFRAME_READY") {
-      state.iframeReady = true;
-      flushToFrame();
+      framePool.forEach((entry, id) => {
+        if (entry.el.contentWindow === event.source) {
+          entry.ready = true;
+          if (state.activeFrameId === id) {
+            showLoadingBar(false);
+            flushToFrame();
+          }
+        }
+      });
     }
   });
 
@@ -309,6 +409,7 @@
 
     postToFrame({ type: "CCAGENT_SYNC_BYOK", byok: state.byok });
     if (hostChanged) {
+      clearFramePool();
       loadAgent(state.agentId, null);
     }
     $("cfg-status").textContent = "已保存并同步到当前 Agent";
@@ -346,6 +447,21 @@
       loadAgent(state.agentId, null);
     }
   }
+
+  window.addEventListener("message", async (e) => {
+    const msg = e.data;
+    if (!msg || msg.type !== "CCAGENT_COPY_IMAGE" || !msg.dataUrl) return;
+    let ok = false;
+    try {
+      const resp = await fetch(msg.dataUrl);
+      const blob = await resp.blob();
+      await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
+      ok = true;
+    } catch (_) {
+      ok = false;
+    }
+    postToFrame({ type: "CCAGENT_COPY_IMAGE_RESULT", ok });
+  });
 
   init();
 })();

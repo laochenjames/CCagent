@@ -1,0 +1,149 @@
+{
+  "title": "辩证抽象（矛盾论/实践论） 模拟分析",
+  "summary": "干跑桩函数输出，仅用于验证管线与校验逻辑。",
+  "decision": "是否推进当前方案",
+  "assumptions": [],
+  "missing_info": [
+    "缺少关键量化数据"
+  ],
+  "pillars": [
+    {
+      "label": "唯一主要矛盾",
+      "value": "桩函数支柱内容"
+    },
+    {
+      "label": "矛盾转化临界条件",
+      "value": "桩函数支柱内容"
+    },
+    {
+      "label": "第一仗打哪里",
+      "value": "桩函数支柱内容"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "一、主要矛盾 vs 次要矛盾（主次分明）",
+      "items": [
+        {
+          "name": "示例项1",
+          "tag": "主要矛盾",
+          "detail": "桩函数详情"
+        },
+        {
+          "name": "示例项2",
+          "tag": "暂缓处理",
+          "detail": "桩函数详情"
+        },
+        {
+          "name": "示例项3",
+          "tag": "暂缓处理",
+          "detail": "桩函数详情"
+        }
+      ]
+    },
+    {
+      "heading": "二、力量格局与转化条件（敌我友分析）",
+      "items": [
+        {
+          "name": "示例项1",
+          "tag": "依托",
+          "detail": "桩函数详情"
+        },
+        {
+          "name": "示例项2",
+          "tag": "统战",
+          "detail": "桩函数详情"
+        },
+        {
+          "name": "示例项3",
+          "tag": "转化条件",
+          "detail": "桩函数详情"
+        }
+      ]
+    },
+    {
+      "heading": "三、分阶段实践路线（以点带面）",
+      "items": [
+        {
+          "name": "示例项1",
+          "tag": "收缩蓄力",
+          "detail": "桩函数详情"
+        },
+        {
+          "name": "示例项2",
+          "tag": "单点突破",
+          "detail": "桩函数详情"
+        },
+        {
+          "name": "示例项3",
+          "tag": "抽象扩张",
+          "detail": "桩函数详情"
+        }
+      ]
+    }
+  ],
+  "council_synthesis": {
+    "consensus_text": "需先补充关键证据再决策。",
+    "tension_text": "推进节奏与风险控制存在分歧。",
+    "tension_between": [
+      "principal_hunter",
+      "united_front"
+    ]
+  },
+  "council_notes": [
+    {
+      "id": "principal_hunter",
+      "name": "主要矛盾猎手",
+      "role": "抓牛鼻子 · 分清主次",
+      "stance": "hold",
+      "verdict": "针对当前案例的模拟判断（主要矛盾猎手）。",
+      "based_on": "区域市场里两家头部竞品在",
+      "grounded": true,
+      "confidence": "mid",
+      "would_change_if": "补充量化数据后调整",
+      "action": "先做小规模验证"
+    },
+    {
+      "id": "united_front",
+      "name": "统战格局师",
+      "role": "敌我友划分 · 争取中间派",
+      "stance": "oppose",
+      "verdict": "针对当前案例的模拟判断（统战格局师）。",
+      "based_on": "区域市场里两家头部竞品在",
+      "grounded": true,
+      "confidence": "mid",
+      "would_change_if": "补充量化数据后调整",
+      "action": "先做小规模验证"
+    },
+    {
+      "id": "transformation_officer",
+      "name": "转化时机官",
+      "role": "动态演变 · 临界条件",
+      "stance": "need_info",
+      "verdict": "针对当前案例的模拟判断（转化时机官）。",
+      "based_on": "区域市场里两家头部竞品在",
+      "grounded": true,
+      "confidence": "mid",
+      "would_change_if": "补充量化数据后调整",
+      "action": "先做小规模验证"
+    },
+    {
+      "id": "practice_commander",
+      "name": "实践路线官",
+      "role": "集中兵力 · 以点带面",
+      "stance": "support",
+      "verdict": "针对当前案例的模拟判断（实践路线官）。",
+      "based_on": "用户未提供",
+      "grounded": true,
+      "confidence": "mid",
+      "would_change_if": "补充量化数据后调整",
+      "action": "先做小规模验证"
+    }
+  ],
+  "stance_counts": {
+    "support": 1,
+    "hold": 1,
+    "oppose": 1,
+    "need_info": 1
+  }
+}

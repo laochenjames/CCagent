@@ -71,7 +71,7 @@
     });
   }
 
-  function applyPrefill(text, autoExtract, directGenerate) {
+  function applyPrefill(text, autoExtract, directGenerate, images) {
     if (!text) return false;
     const el =
       document.getElementById("raw-input") ||
@@ -84,13 +84,14 @@
     el.focus();
     el.scrollIntoView({ behavior: "smooth", block: "center" });
 
+    window.__CCAGENT_IMAGES__ = Array.isArray(images) ? images.slice(0, 2) : [];
     if (directGenerate) {
       const triageBtn = document.getElementById("btn-run-triage");
       if (triageBtn && !triageBtn.disabled) {
         setTimeout(() => triageBtn.click(), 120);
         return true;
       }
-      window.dispatchEvent(new CustomEvent("ccagent:direct-generate", { detail: { text } }));
+      window.dispatchEvent(new CustomEvent("ccagent:direct-generate", { detail: { text, images: window.__CCAGENT_IMAGES__ } }));
       return true;
     }
 
@@ -130,7 +131,7 @@
     const msg = event.data;
     if (!msg || typeof msg !== "object") return;
     if (msg.type === "CCAGENT_PREFILL") {
-      applyPrefill(msg.text || "", Boolean(msg.autoExtract), Boolean(msg.directGenerate));
+      applyPrefill(msg.text || "", Boolean(msg.autoExtract), Boolean(msg.directGenerate), msg.images || []);
     } else if (msg.type === "CCAGENT_SYNC_BYOK") {
       syncByok(msg.byok);
     }

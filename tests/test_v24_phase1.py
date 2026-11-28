@@ -125,7 +125,7 @@ class TestV24Phase1(unittest.TestCase):
                         self.assertIn("SameSite=Lax", sc_header)
                         self.assertEqual(r.headers.get("X-Content-Type-Options"), "nosniff")
                         self.assertEqual(r.headers.get("Referrer-Policy"), "no-referrer")
-                        self.assertEqual(r.headers.get("X-Frame-Options"), "DENY")
+                        self.assertIn("frame-ancestors 'self' chrome-extension://*", r.headers.get("Content-Security-Policy", ""))
 
                     # Extract cookie A
                     c = http.cookies.SimpleCookie()

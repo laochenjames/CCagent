@@ -1,0 +1,149 @@
+{
+  "title": "第一性原理（马斯克） 模拟分析",
+  "summary": "干跑桩函数输出，仅用于验证管线与校验逻辑。",
+  "decision": "是否推进当前方案",
+  "assumptions": [],
+  "missing_info": [
+    "缺少关键量化数据"
+  ],
+  "pillars": [
+    {
+      "label": "被打破的核心伪常识",
+      "value": "桩函数支柱内容"
+    },
+    {
+      "label": "最硬的底层事实",
+      "value": "桩函数支柱内容"
+    },
+    {
+      "label": "7 天最小验证实验",
+      "value": "桩函数支柱内容"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "一、被爆破的隐含假设（3 项）",
+      "items": [
+        {
+          "name": "示例项1",
+          "tag": "伪常识",
+          "detail": "桩函数详情"
+        },
+        {
+          "name": "示例项2",
+          "tag": "伪常识",
+          "detail": "桩函数详情"
+        },
+        {
+          "name": "示例项3",
+          "tag": "伪常识",
+          "detail": "桩函数详情"
+        }
+      ]
+    },
+    {
+      "heading": "二、不可再分的底层事实（3 项）",
+      "items": [
+        {
+          "name": "示例项1",
+          "tag": "第一性原理",
+          "detail": "桩函数详情"
+        },
+        {
+          "name": "示例项2",
+          "tag": "第一性原理",
+          "detail": "桩函数详情"
+        },
+        {
+          "name": "示例项3",
+          "tag": "第一性原理",
+          "detail": "桩函数详情"
+        }
+      ]
+    },
+    {
+      "heading": "三、从底层重构的新方案（3~4 步）",
+      "items": [
+        {
+          "name": "示例项1",
+          "tag": "第1步",
+          "detail": "桩函数详情"
+        },
+        {
+          "name": "示例项2",
+          "tag": "第1步",
+          "detail": "桩函数详情"
+        },
+        {
+          "name": "示例项3",
+          "tag": "第1步",
+          "detail": "桩函数详情"
+        }
+      ]
+    }
+  ],
+  "council_synthesis": {
+    "consensus_text": "需先补充关键证据再决策。",
+    "tension_text": "推进节奏与风险控制存在分歧。",
+    "tension_between": [
+      "assumption_breaker",
+      "physics_floor"
+    ]
+  },
+  "council_notes": [
+    {
+      "id": "assumption_breaker",
+      "name": "假设爆破手",
+      "role": "破除类比 · 质疑惯例",
+      "stance": "hold",
+      "verdict": "针对当前案例的模拟判断（假设爆破手）。",
+      "based_on": "供应商报价一套工业视觉质",
+      "grounded": true,
+      "confidence": "mid",
+      "would_change_if": "补充量化数据后调整",
+      "action": "先做小规模验证"
+    },
+    {
+      "id": "physics_floor",
+      "name": "物理底线官",
+      "role": "不可再分 · 底层铁律",
+      "stance": "oppose",
+      "verdict": "针对当前案例的模拟判断（物理底线官）。",
+      "based_on": "供应商报价一套工业视觉质",
+      "grounded": true,
+      "confidence": "mid",
+      "would_change_if": "补充量化数据后调整",
+      "action": "先做小规模验证"
+    },
+    {
+      "id": "cost_rebuilder",
+      "name": "成本重构师",
+      "role": "从零重构 · 10x 路径",
+      "stance": "need_info",
+      "verdict": "针对当前案例的模拟判断（成本重构师）。",
+      "based_on": "供应商报价一套工业视觉质",
+      "grounded": true,
+      "confidence": "mid",
+      "would_change_if": "补充量化数据后调整",
+      "action": "先做小规模验证"
+    },
+    {
+      "id": "min_experiment",
+      "name": "极简执行官",
+      "role": "快速证伪 · 最小闭环",
+      "stance": "support",
+      "verdict": "针对当前案例的模拟判断（极简执行官）。",
+      "based_on": "用户未提供",
+      "grounded": true,
+      "confidence": "mid",
+      "would_change_if": "补充量化数据后调整",
+      "action": "先做小规模验证"
+    }
+  ],
+  "stance_counts": {
+    "support": 1,
+    "hold": 1,
+    "oppose": 1,
+    "need_info": 1
+  }
+}

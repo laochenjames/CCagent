@@ -1,0 +1,124 @@
+{
+  "title": "激励机制诊断（芒格） 模拟分析",
+  "summary": "干跑桩函数输出，仅用于验证管线与校验逻辑。",
+  "decision": "是否推进当前方案",
+  "assumptions": [],
+  "missing_info": [
+    "缺少关键量化数据"
+  ],
+  "pillars": [
+    {
+      "label": "真实激励地图（明面 vs 暗面）",
+      "value": "桩函数支柱内容"
+    },
+    {
+      "label": "核心激励扭曲点",
+      "value": "桩函数支柱内容"
+    },
+    {
+      "label": "联邦快递式重构杠杆",
+      "value": "桩函数支柱内容"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "一、核心拆解与关键发现",
+      "items": [
+        {
+          "name": "示例项1",
+          "tag": "核心洞察",
+          "detail": "桩函数详情"
+        }
+      ]
+    },
+    {
+      "heading": "二、可执行行动与安全边界",
+      "items": [
+        {
+          "name": "示例项1",
+          "tag": "落地动作",
+          "detail": "桩函数详情"
+        },
+        {
+          "name": "示例项2",
+          "tag": "落地动作",
+          "detail": "桩函数详情"
+        },
+        {
+          "name": "示例项3",
+          "tag": "落地动作",
+          "detail": "桩函数详情"
+        },
+        {
+          "name": "示例项4",
+          "tag": "落地动作",
+          "detail": "桩函数详情"
+        }
+      ]
+    }
+  ],
+  "council_synthesis": {
+    "consensus_text": "需先补充关键证据再决策。",
+    "tension_text": "推进节奏与风险控制存在分歧。",
+    "tension_between": [
+      "incentive_mapper",
+      "bureaucracy_auditor"
+    ]
+  },
+  "council_notes": [
+    {
+      "id": "incentive_mapper",
+      "name": "激励测绘师",
+      "role": "超级反应 · 利益真相",
+      "stance": "hold",
+      "verdict": "针对当前案例的模拟判断（激励测绘师）。",
+      "based_on": "渠道代理商要求独家代理我",
+      "grounded": true,
+      "confidence": "mid",
+      "would_change_if": "补充量化数据后调整",
+      "action": "先做小规模验证"
+    },
+    {
+      "id": "bureaucracy_auditor",
+      "name": "官僚陷阱审计师",
+      "role": "地盘意识 · 甩锅机制",
+      "stance": "oppose",
+      "verdict": "针对当前案例的模拟判断（官僚陷阱审计师）。",
+      "based_on": "渠道代理商要求独家代理我",
+      "grounded": true,
+      "confidence": "mid",
+      "would_change_if": "补充量化数据后调整",
+      "action": "先做小规模验证"
+    },
+    {
+      "id": "fedex_designer",
+      "name": "机制重构师",
+      "role": "联邦快递法 · 顺人性设计",
+      "stance": "need_info",
+      "verdict": "针对当前案例的模拟判断（机制重构师）。",
+      "based_on": "渠道代理商要求独家代理我",
+      "grounded": true,
+      "confidence": "mid",
+      "would_change_if": "补充量化数据后调整",
+      "action": "先做小规模验证"
+    },
+    {
+      "id": "gaming_redteam",
+      "name": "钻空子红队",
+      "role": "防作弊 · 二阶后果",
+      "stance": "support",
+      "verdict": "针对当前案例的模拟判断（钻空子红队）。",
+      "based_on": "用户未提供",
+      "grounded": true,
+      "confidence": "mid",
+      "would_change_if": "补充量化数据后调整",
+      "action": "先做小规模验证"
+    }
+  ],
+  "stance_counts": {
+    "support": 1,
+    "hold": 1,
+    "oppose": 1,
+    "need_info": 1
+  }
+}

@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,37 +8,118 @@
   <link rel="icon" type="image/png" href="/favicon.png">
   <style>
     body {
-      margin: 0; padding: 32px 16px 64px; background: #faf9f5; color: #1f2328;
+      margin: 0;
+      padding: 32px 16px 64px;
+      background: #faf9f5;
+      color: #1f2328;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
       line-height: 1.7;
     }
+
     main {
-      max-width: 820px; margin: 0 auto; background: #fff;
-      border: 1px solid #e5e2dc; border-radius: 12px; padding: 32px 36px;
+      max-width: 820px;
+      margin: 0 auto;
+      background: #fff;
+      border: 1px solid #e5e2dc;
+      border-radius: 12px;
+      padding: 32px 36px;
     }
-    h1 { margin-top: 0; font-size: 24px; }
-    h2 { margin-top: 28px; font-size: 17px; border-bottom: 1px solid #eee; padding-bottom: 6px; }
-    h3 { margin-top: 18px; font-size: 15px; color: #1f2328; }
-    p, li { font-size: 14px; color: #333; }
-    ul { padding-left: 20px; }
-    li { margin-bottom: 6px; }
-    .muted { color: #656d76; font-size: 12.5px; }
-    .lang-nav { margin: 12px 0 20px; font-size: 13px; }
-    .lang-nav a { margin-right: 16px; text-decoration: none; font-weight: 600; }
-    .divider { margin: 40px 0; border: none; border-top: 2px dashed #e5e2dc; }
-    table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13.5px; }
-    th, td { border: 1px solid #e5e2dc; padding: 8px 10px; text-align: left; vertical-align: top; }
-    th { background: #faf9f5; font-weight: 600; }
-    code { background: #f3f1ec; padding: 1px 5px; border-radius: 4px; font-size: 12.5px; }
-    a { color: #9a3412; }
+
+    h1 {
+      margin-top: 0;
+      font-size: 24px;
+    }
+
+    h2 {
+      margin-top: 28px;
+      font-size: 17px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 6px;
+    }
+
+    h3 {
+      margin-top: 18px;
+      font-size: 15px;
+      color: #1f2328;
+    }
+
+    p,
+    li {
+      font-size: 14px;
+      color: #333;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
+
+    .muted {
+      color: #656d76;
+      font-size: 12.5px;
+    }
+
+    .lang-nav {
+      margin: 12px 0 20px;
+      font-size: 13px;
+    }
+
+    .lang-nav a {
+      margin-right: 16px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .divider {
+      margin: 40px 0;
+      border: none;
+      border-top: 2px dashed #e5e2dc;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 13.5px;
+    }
+
+    th,
+    td {
+      border: 1px solid #e5e2dc;
+      padding: 8px 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #faf9f5;
+      font-weight: 600;
+    }
+
+    code {
+      background: #f3f1ec;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 12.5px;
+    }
+
+    a {
+      color: #9a3412;
+    }
   </style>
 </head>
+
 <body>
   <main>
     <h1>CCagent Privacy Policy / 隐私政策</h1>
     <p class="muted">
-      Effective &amp; Last Updated: 2026-11-28 · Product: CCagent Chrome Extension ("CCagent 智囊团侧边栏") &amp; Web Service (<code>https://ccagent.mycici.top</code>)<br>
-      Open Source Repository (MIT License): <a href="https://github.com/laochenjames/CCagent" target="_blank" rel="noopener">https://github.com/laochenjames/CCagent</a>
+      Effective &amp; Last Updated: 2026-11-28 · Product: CCagent Chrome Extension ("CCagent 智囊团侧边栏") &amp; Web Service
+      (<code>https://ccagent.mycici.top</code>)<br>
+      Open Source Repository (MIT License): <a href="https://github.com/laochenjames/CCagent" target="_blank"
+        rel="noopener">https://github.com/laochenjames/CCagent</a>
     </p>
     <div class="lang-nav">
       <a href="#en">English Version</a>
@@ -48,11 +130,16 @@
     <section id="en">
       <h2>1. Overview</h2>
       <p>
-        This Privacy Policy explains in detail how the <strong>CCagent</strong> Chrome Extension and its hosted web service (<code>https://ccagent.mycici.top</code>) collect, process, store, and share user data. We are committed to strict data minimization and full transparency.
+        This Privacy Policy explains in detail how the <strong>CCagent</strong> Chrome Extension and its hosted web
+        service (<code>https://ccagent.mycici.top</code>) collect, process, store, and share user data. We are committed
+        to strict data minimization and full transparency.
       </p>
 
       <h2>2. Data We Collect &amp; Access</h2>
-      <p>CCagent only accesses data when you explicitly trigger an action (clicking the injected <code>CC</code> button on a post on X/Twitter, using the right-click context menu, pressing <code>Alt+C</code>, or manually typing into the side panel). We <strong>do not</strong> passively track your browsing history, scrape pages in the background, or collect personal identity information (such as your name, email, or account credentials).</p>
+      <p>CCagent only accesses data when you explicitly trigger an action (clicking the injected <code>CC</code> button
+        on a post on X/Twitter, using the right-click context menu, pressing <code>Alt+C</code>, or manually typing into
+        the side panel). We <strong>do not</strong> passively track your browsing history, scrape pages in the
+        background, or collect personal identity information (such as your name, email, or account credentials).</p>
       <table>
         <thead>
           <tr>
@@ -64,12 +151,15 @@
         <tbody>
           <tr>
             <td><strong>User-Submitted Text</strong></td>
-            <td>Selected webpage text or the text of a specific X (Twitter) post you choose to analyze, plus optional follow-up notes you type.</td>
-            <td>Only when you click <code>CC</code>, use the context menu, press <code>Alt+C</code>, or submit text in the side panel.</td>
+            <td>Selected webpage text or the text of a specific X (Twitter) post you choose to analyze, plus optional
+              follow-up notes you type.</td>
+            <td>Only when you click <code>CC</code>, use the context menu, press <code>Alt+C</code>, or submit text in
+              the side panel.</td>
           </tr>
           <tr>
             <td><strong>Local Extension Settings (BYOK)</strong></td>
-            <td>Your preferred AI provider, model name, custom API base URL, and optional personal API key (e.g., Google Gemini, xAI Grok, DeepSeek).</td>
+            <td>Your preferred AI provider, model name, custom API base URL, and optional personal API key (e.g., Google
+              Gemini, xAI Grok, DeepSeek).</td>
             <td>Only if you voluntarily enter and save them in the extension settings.</td>
           </tr>
           <tr>
@@ -82,53 +172,85 @@
 
       <h2>3. How We Use &amp; Process User Data</h2>
       <ul>
-        <li><strong>Mental-Model Analysis &amp; Auto-Routing</strong>: Text you explicitly submit is sent over encrypted HTTPS to <code>https://ccagent.mycici.top</code> to (a) determine the most suitable Charlie Munger mental-model agent via <code>/api/route</code>, and (b) generate the structured analysis report displayed in your side panel.</li>
-        <li><strong>BYOK (Bring Your Own Key) Forwarding</strong>: If you configure your own API key, the extension passes your key over HTTPS in the request payload to our backend proxy, which forwards the request directly to your selected AI model provider to generate the response.</li>
-        <li><strong>Quota &amp; Service Reliability</strong>: Technical request metadata (IP address) is used solely to enforce free-tier rate limits and protect the service from abuse.</li>
-        <li><strong>No Secondary Use</strong>: We <strong>never</strong> use your data for advertising, behavioral profiling, marketing, creditworthiness evaluation, or training AI models.</li>
+        <li><strong>Mental-Model Analysis &amp; Auto-Routing</strong>: Text you explicitly submit is sent over encrypted
+          HTTPS to <code>https://ccagent.mycici.top</code> to (a) determine the most suitable Charlie Munger
+          mental-model agent via <code>/api/route</code>, and (b) generate the structured analysis report displayed in
+          your side panel.</li>
+        <li><strong>BYOK (Bring Your Own Key) Forwarding</strong>: If you configure your own API key, the extension
+          passes your key over HTTPS in the request payload to our backend proxy, which forwards the request directly to
+          your selected AI model provider to generate the response.</li>
+        <li><strong>Quota &amp; Service Reliability</strong>: Technical request metadata (IP address) is used solely to
+          enforce free-tier rate limits and protect the service from abuse.</li>
+        <li><strong>No Secondary Use</strong>: We <strong>never</strong> use your data for advertising, behavioral
+          profiling, marketing, creditworthiness evaluation, or training AI models.</li>
       </ul>
 
       <h2>4. How We Store &amp; Retain User Data</h2>
       <ul>
-        <li><strong>Local Browser Storage</strong>: Your extension preferences, selected agent, and optional BYOK API key are stored locally in your browser using <code>chrome.storage.local</code> and in-memory session variables. They remain on your device until you clear them or uninstall the extension.</li>
+        <li><strong>Local Browser Storage</strong>: Your extension preferences, selected agent, and optional BYOK API
+          key are stored locally in your browser using <code>chrome.storage.local</code> and in-memory session
+          variables. They remain on your device until you clear them or uninstall the extension.</li>
         <li><strong>Server-Side Processing (No Permanent Storage of Prompts or Keys)</strong>:
           <ul>
-            <li>Your optional BYOK API key is <strong>never</strong> written to disk, logged, or persisted on CCagent servers; it exists only in volatile memory for the duration of the single HTTP request.</li>
-            <li>Submitted text and generated analyses are processed in memory and returned directly to your browser. CCagent does not build user accounts or permanently archive your submitted tweets/texts on our servers.</li>
-            <li>Rate-limiting counters (hashed/IP-based quota counts) are retained only as long as necessary to enforce daily/periodic free quotas and are automatically cleared or rotated.</li>
+            <li>Your optional BYOK API key is <strong>never</strong> written to disk, logged, or persisted on CCagent
+              servers; it exists only in volatile memory for the duration of the single HTTP request.</li>
+            <li>Submitted text and generated analyses are processed in memory and returned directly to your browser.
+              CCagent does not build user accounts or permanently archive your submitted tweets/texts on our servers.
+            </li>
+            <li>Rate-limiting counters (hashed/IP-based quota counts) are retained only as long as necessary to enforce
+              daily/periodic free quotas and are automatically cleared or rotated.</li>
           </ul>
         </li>
       </ul>
 
       <h2>5. Third Parties With Whom User Data Is Shared</h2>
-      <p>We do <strong>not</strong> sell, rent, or trade user data to any third party. User-submitted text is shared <strong>only</strong> with the following infrastructure and AI model providers strictly to fulfill your analysis request:</p>
+      <p>We do <strong>not</strong> sell, rent, or trade user data to any third party. User-submitted text is shared
+        <strong>only</strong> with the following infrastructure and AI model providers strictly to fulfill your analysis
+        request:</p>
       <ul>
-        <li><strong>CCagent Hosted Backend (<code>https://ccagent.mycici.top</code>)</strong>: Receives your explicitly submitted text over HTTPS to perform routing and proxy requests to the AI provider.</li>
-        <li><strong>AI Model Providers (Third-Party Processors)</strong>: Depending on the active model or your BYOK configuration, the text you submit for analysis is transmitted to one of the following third-party AI APIs to generate the response:
+        <li><strong>CCagent Hosted Backend (<code>https://ccagent.mycici.top</code>)</strong>: Receives your explicitly
+          submitted text over HTTPS to perform routing and proxy requests to the AI provider.</li>
+        <li><strong>AI Model Providers (Third-Party Processors)</strong>: Depending on the active model or your BYOK
+          configuration, the text you submit for analysis is transmitted to one of the following third-party AI APIs to
+          generate the response:
           <ul>
-            <li><strong>Google LLC (Gemini API)</strong> — default hosted model provider and optional BYOK provider (<a href="https://ai.google.dev/gemini-api/terms" target="_blank" rel="noopener">Google Gemini API Terms</a>).</li>
-            <li><strong>xAI Corp. (Grok API)</strong> — only if selected by you via BYOK (<a href="https://x.ai/legal/privacy-policy" target="_blank" rel="noopener">xAI Privacy Policy</a>).</li>
-            <li><strong>DeepSeek (DeepSeek API)</strong> — only if selected by you via BYOK (<a href="https://platform.deepseek.com/downloads/DeepSeek%20Privacy%20Policy.html" target="_blank" rel="noopener">DeepSeek Privacy Policy</a>).</li>
-            <li><strong>User-Configured Custom Endpoint</strong> — only if you explicitly enter a custom OpenAI-compatible API Base URL in settings.</li>
+            <li><strong>Google LLC (Gemini API)</strong> — default hosted model provider and optional BYOK provider (<a
+                href="https://ai.google.dev/gemini-api/terms" target="_blank" rel="noopener">Google Gemini API
+                Terms</a>).</li>
+            <li><strong>xAI Corp. (Grok API)</strong> — only if selected by you via BYOK (<a
+                href="https://x.ai/legal/privacy-policy" target="_blank" rel="noopener">xAI Privacy Policy</a>).</li>
+            <li><strong>DeepSeek (DeepSeek API)</strong> — only if selected by you via BYOK (<a
+                href="https://platform.deepseek.com/downloads/DeepSeek%20Privacy%20Policy.html" target="_blank"
+                rel="noopener">DeepSeek Privacy Policy</a>).</li>
+            <li><strong>User-Configured Custom Endpoint</strong> — only if you explicitly enter a custom
+              OpenAI-compatible API Base URL in settings.</li>
           </ul>
         </li>
       </ul>
 
       <h2>6. Chrome Web Store Limited Use Compliance</h2>
       <p>
-        CCagent's use and transfer of information received from Google APIs and browser permissions strictly adheres to the <a href="https://developer.chrome.com/docs/webstore/program-policies/limited-use/" target="_blank" rel="noopener">Chrome Web Store User Data Policy</a>, including the Limited Use requirements. All data access is strictly limited to providing the user-facing mental-model analysis feature described in the store listing.
+        CCagent's use and transfer of information received from Google APIs and browser permissions strictly adheres to
+        the <a href="https://developer.chrome.com/docs/webstore/program-policies/limited-use/" target="_blank"
+          rel="noopener">Chrome Web Store User Data Policy</a>, including the Limited Use requirements. All data access
+        is strictly limited to providing the user-facing mental-model analysis feature described in the store listing.
       </p>
 
       <h2>7. User Control &amp; Data Deletion</h2>
       <ul>
-        <li>You can clear your saved API key and local preferences at any time inside the extension settings panel, or by uninstalling the CCagent extension (which automatically removes all <code>chrome.storage.local</code> data).</li>
-        <li>Because CCagent does not require user accounts or permanently store your submitted text on our servers, no server-side account deletion is needed. If you have any data deletion inquiry, please contact us below.</li>
+        <li>You can clear your saved API key and local preferences at any time inside the extension settings panel, or
+          by uninstalling the CCagent extension (which automatically removes all <code>chrome.storage.local</code>
+          data).</li>
+        <li>Because CCagent does not require user accounts or permanently store your submitted text on our servers, no
+          server-side account deletion is needed. If you have any data deletion inquiry, please contact us below.</li>
       </ul>
 
       <h2>8. Contact Us</h2>
       <p>
-        If you have questions about this Privacy Policy or how your data is handled, please open an issue on our open-source repository:
-        <a href="https://github.com/laochenjames/CCagent/issues" target="_blank" rel="noopener">https://github.com/laochenjames/CCagent/issues</a>.
+        If you have questions about this Privacy Policy or how your data is handled, please open an issue on our
+        open-source repository:
+        <a href="https://github.com/laochenjames/CCagent/issues" target="_blank"
+          rel="noopener">https://github.com/laochenjames/CCagent/issues</a>.
       </p>
     </section>
 
@@ -138,28 +260,34 @@
     <section id="zh">
       <h2>1. 概述</h2>
       <p>
-        本隐私政策详细说明 <strong>CCagent</strong> Chrome 浏览器扩展（“CCagent 智囊团侧边栏”）及其托管服务（<code>https://ccagent.mycici.top</code>）如何收集、处理、存储与共享用户数据。我们坚持数据最小化与完全透明原则，所有代码均已开源。
+        本隐私政策详细说明 <strong>CCagent</strong> Chrome 浏览器扩展（“CCagent
+        智囊团侧边栏”）及其托管服务（<code>https://ccagent.mycici.top</code>）如何收集、处理、存储与共享用户数据。我们坚持数据最小化与完全透明原则，所有代码均已开源。
       </p>
 
       <h2>2. 我们收集和访问的数据</h2>
-      <p>CCagent <strong>仅在你主动触发操作时</strong>（点击 X/Twitter 推文上的 <code>CC</code> 按钮、点击右键菜单、按下 <code>Alt+C</code> 快捷键，或在侧边栏手动输入）才会读取对应内容。本扩展<strong>不会</strong>在后台监控你的浏览记录、不会自动抓取未选中的网页，也不收集姓名、邮箱或账号密码等个人身份信息。</p>
+      <p>CCagent <strong>仅在你主动触发操作时</strong>（点击 X/Twitter 推文上的 <code>CC</code> 按钮、点击右键菜单、按下 <code>Alt+C</code>
+        快捷键，或在侧边栏手动输入）才会读取对应内容。本扩展<strong>不会</strong>在后台监控你的浏览记录、不会自动抓取未选中的网页，也不收集姓名、邮箱或账号密码等个人身份信息。</p>
       <ul>
         <li><strong>用户主动提交的文本</strong>：你主动选中或点击 <code>CC</code> 发送的网页文本 / X (Twitter) 推文内容，以及你在侧边栏中主动输入的补充内容。</li>
-        <li><strong>本地扩展设置（BYOK）</strong>：你自愿在设置中填写的 AI 服务商、模型名称、自定义 API Base URL 以及个人 API Key（如 Google Gemini、xAI Grok、DeepSeek）。</li>
+        <li><strong>本地扩展设置（BYOK）</strong>：你自愿在设置中填写的 AI 服务商、模型名称、自定义 API Base URL 以及个人 API Key（如 Google Gemini、xAI
+          Grok、DeepSeek）。</li>
         <li><strong>技术与限流数据</strong>：当你使用免费托管额度（未填写个人 API Key）时，服务器会临时处理请求 IP 地址与时间戳，仅用于防止滥用与统计免费调用配额。</li>
       </ul>
 
       <h2>3. 我们如何使用和处理数据</h2>
       <ul>
-        <li><strong>智能路由与思维模型分析</strong>：你主动提交的文本会通过 HTTPS 加密传输至 <code>https://ccagent.mycici.top</code>，用于（a）通过 <code>/api/route</code> 匹配最合适的查理·芒格思维模型，以及（b）生成结构化的深度分析报告并展示在侧边栏中。</li>
-        <li><strong>BYOK（自带密钥）转发</strong>：若你填写了个人 API Key，扩展会在你发起分析时通过 HTTPS 将密钥随请求转发至后端代理，仅用于代你向指定的 AI 模型服务商请求生成结果。</li>
+        <li><strong>智能路由与思维模型分析</strong>：你主动提交的文本会通过 HTTPS 加密传输至 <code>https://ccagent.mycici.top</code>，用于（a）通过
+          <code>/api/route</code> 匹配最合适的查理·芒格思维模型，以及（b）生成结构化的深度分析报告并展示在侧边栏中。</li>
+        <li><strong>BYOK（自带密钥）转发</strong>：若你填写了个人 API Key，扩展会在你发起分析时通过 HTTPS 将密钥随请求转发至后端代理，仅用于代你向指定的 AI 模型服务商请求生成结果。
+        </li>
         <li><strong>配额与防滥用</strong>：技术请求信息（如 IP）仅用于免费额度限流与保障服务稳定。</li>
         <li><strong>绝无二次用途</strong>：我们<strong>绝不</strong>将你的任何数据用于广告投放、用户画像、营销推广、信用评估或训练 AI 模型。</li>
       </ul>
 
       <h2>4. 数据的存储与保留</h2>
       <ul>
-        <li><strong>浏览器本地存储</strong>：你的扩展偏好设置、当前模型选择与可选的个人 API Key 仅存储在你的本地浏览器 <code>chrome.storage.local</code> 与会话内存中，直到你手动清除或卸载扩展。</li>
+        <li><strong>浏览器本地存储</strong>：你的扩展偏好设置、当前模型选择与可选的个人 API Key 仅存储在你的本地浏览器 <code>chrome.storage.local</code>
+          与会话内存中，直到你手动清除或卸载扩展。</li>
         <li><strong>服务端处理（不持久化存储文本与密钥）</strong>：
           <ul>
             <li>你的个人 API Key <strong>绝不会</strong>写入 CCagent 服务器磁盘、数据库或日志，仅在单次 HTTP 请求的内存中短暂使用并立即释放。</li>
@@ -185,19 +313,24 @@
 
       <h2>6. 有限使用承诺（Limited Use）</h2>
       <p>
-        CCagent 对所有浏览器权限与用户数据的访问和传输严格遵守 <a href="https://developer.chrome.com/docs/webstore/program-policies/limited-use/" target="_blank" rel="noopener">Chrome 应用商店用户数据政策（包括有限使用要求）</a>，仅用于提供面向用户的思维模型分析核心功能。
+        CCagent 对所有浏览器权限与用户数据的访问和传输严格遵守 <a
+          href="https://developer.chrome.com/docs/webstore/program-policies/limited-use/" target="_blank"
+          rel="noopener">Chrome 应用商店用户数据政策（包括有限使用要求）</a>，仅用于提供面向用户的思维模型分析核心功能。
       </p>
 
       <h2>7. 用户控制与数据删除</h2>
       <p>
-        你可以随时在扩展设置面板中清除保存的 API Key 与偏好设置，或直接卸载本扩展以彻底删除浏览器本地的 <code>chrome.storage.local</code> 数据。由于服务端不存储你的个人账号及历史文本，无需额外注销账号。
+        你可以随时在扩展设置面板中清除保存的 API Key 与偏好设置，或直接卸载本扩展以彻底删除浏览器本地的 <code>chrome.storage.local</code>
+        数据。由于服务端不存储你的个人账号及历史文本，无需额外注销账号。
       </p>
 
       <h2>8. 联系我们</h2>
       <p>
-        如有任何隐私相关疑问或数据删除请求，请通过 GitHub Issues 联系我们：<a href="https://github.com/laochenjames/CCagent/issues" target="_blank" rel="noopener">https://github.com/laochenjames/CCagent/issues</a>。
+        如有任何隐私相关疑问或数据删除请求，请通过 GitHub Issues 联系我们：<a href="https://github.com/laochenjames/CCagent/issues"
+          target="_blank" rel="noopener">https://github.com/laochenjames/CCagent/issues</a>。
       </p>
     </section>
   </main>
 </body>
+
 </html>

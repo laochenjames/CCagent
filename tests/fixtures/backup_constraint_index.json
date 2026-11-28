@@ -1,0 +1,916 @@
+{
+  "agent4": [
+    {
+      "text": "你是第一性原理分析的结构化抽取助手。请从用户输入中提取关键信息，未提及的字段留空 \"\"，不要编造。",
+      "where": "extract",
+      "kind": "wording"
+    },
+    {
+      "text": "35字以内",
+      "where": "extract",
+      "kind": "length"
+    },
+    {
+      "text": "1~2 项",
+      "where": "extract",
+      "kind": "count"
+    },
+    {
+      "text": "（未提及则留空）\"",
+      "where": "extract",
+      "kind": "wording"
+    },
+    {
+      "text": "16字以内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "35字以内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "被打破的核心伪常识",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "最硬的底层事实",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "7 天最小验证实验",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "3 项",
+      "where": "generate",
+      "kind": "count"
+    },
+    {
+      "text": "一、被爆破的隐含假设（3 项）",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "12字内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "35~60字",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "伪常识",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "二、不可再分的底层事实（3 项）",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "第一性原理",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "3~4 步",
+      "where": "generate",
+      "kind": "count"
+    },
+    {
+      "text": "三、从底层重构的新方案（3~4 步）",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "1步",
+      "where": "generate",
+      "kind": "count"
+    },
+    {
+      "text": "第1步",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "35~55字",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "25字内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "35字内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "1条",
+      "where": "generate",
+      "kind": "count"
+    }
+  ],
+  "agent5": [
+    {
+      "text": "你是辩证抽象分析（矛盾论/实践论方法）的结构化抽取助手。请从用户输入中提取关键信息，未提及的字段留空 \"\"，不要编造。",
+      "where": "extract",
+      "kind": "wording"
+    },
+    {
+      "text": "35字以内",
+      "where": "extract",
+      "kind": "length"
+    },
+    {
+      "text": "1~2 项",
+      "where": "extract",
+      "kind": "count"
+    },
+    {
+      "text": "（未提及则留空）\"",
+      "where": "extract",
+      "kind": "wording"
+    },
+    {
+      "text": "16字以内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "35字以内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "唯一主要矛盾",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "矛盾转化临界条件",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "第一仗打哪里",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "一、主要矛盾 vs 次要矛盾（主次分明）",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "12字内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "35~60字",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "主要矛盾",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "暂缓处理",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "二、力量格局与转化条件（敌我友分析）",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "依托",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "统战",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "转化条件",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "三、分阶段实践路线（以点带面）",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "收缩蓄力",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "单点突破",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "抽象扩张",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "35~55字",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "25字内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "35字内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "1条",
+      "where": "generate",
+      "kind": "count"
+    }
+  ],
+  "agent6": [
+    {
+      "text": "你是芒格“一法多解”思维模型的结构化抽取助手。用户会输入多个同时面临的问题，请提取关键字段，未提及的留空 \"\"，不要编造。",
+      "where": "extract",
+      "kind": "wording"
+    },
+    {
+      "text": "35字以内",
+      "where": "extract",
+      "kind": "length"
+    },
+    {
+      "text": "1~2 项",
+      "where": "extract",
+      "kind": "count"
+    },
+    {
+      "text": "（未提及则留空）\"",
+      "where": "extract",
+      "kind": "wording"
+    },
+    {
+      "text": "1 个",
+      "where": "generate",
+      "kind": "count"
+    },
+    {
+      "text": "必须真正提出 **1 个具体、可落地的统一方法/核心机制**（而不是给每个问题分别写一个独立建议！）",
+      "where": "generate",
+      "kind": "wording"
+    },
+    {
+      "text": "在 sections 第一部分中，逐一映射这个“统一方法”如何同时解决用户提到的每一个具体问题",
+      "where": "generate",
+      "kind": "wording"
+    },
+    {
+      "text": "严格返回以下 JSON，语言犀利务实：",
+      "where": "generate",
+      "kind": "wording"
+    },
+    {
+      "text": "16字以内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "35字以内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "多个问题的共同根因",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "核心“一法”（统一杠杆）",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "逆向避坑（芒格）",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "一、一法如何同时解决每个问题（逐项映射）",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "12字内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "35~60字",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "同步解决",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "2~3 个",
+      "where": "generate",
+      "kind": "count"
+    },
+    {
+      "text": "二、背后的多元思维模型（2~3 个）",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "跨学科模型",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "3 步",
+      "where": "generate",
+      "kind": "count"
+    },
+    {
+      "text": "三、落地这个“一法”的执行步骤（3 步）",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "1步",
+      "where": "generate",
+      "kind": "count"
+    },
+    {
+      "text": "第1步",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "35~55字",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "25字内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "35字内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "1条",
+      "where": "generate",
+      "kind": "count"
+    }
+  ],
+  "agent7": [
+    {
+      "text": "你是「双轨分析（芒格）」结构化抽取助手。请从用户输入中提取关键信息，未提及的字段务必留空 \"\"，不要编造。",
+      "where": "extract",
+      "kind": "wording"
+    },
+    {
+      "text": "35字以内",
+      "where": "extract",
+      "kind": "length"
+    },
+    {
+      "text": "1~2 项",
+      "where": "extract",
+      "kind": "count"
+    },
+    {
+      "text": "（未提及则留空）\"",
+      "where": "extract",
+      "kind": "wording"
+    },
+    {
+      "text": "紧扣用户的具体案例，拒绝空泛鸡汤与教科书式套话，直指要害",
+      "where": "generate",
+      "kind": "wording"
+    },
+    {
+      "text": "pillars 固定 3 项，标题分别为：第一轨：客观利益与概率、第二轨：潜意识误判排查、双轨校准后的最终判断",
+      "where": "generate",
+      "kind": "wording"
+    },
+    {
+      "text": "steps 为 4~5 步双轨决策执行清单（先做客观事实核验，再做心理误判隔离，最后给出冷静决策与边界）",
+      "where": "generate",
+      "kind": "wording"
+    },
+    {
+      "text": "council_synthesis 提炼 4 位智囊的「合议共识」与「关键张力」",
+      "where": "generate",
+      "kind": "wording"
+    },
+    {
+      "text": "4 位智囊各自独立发声，给出立场标签、犀利判断与具体落地动作",
+      "where": "generate",
+      "kind": "wording"
+    },
+    {
+      "text": "18字以内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "45字以内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "45~90字",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "第一轨：客观利益与概率",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "第二轨：潜意识误判排查",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "双轨校准后的最终判断",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "一、核心拆解与关键发现",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "14字以内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "40~75字",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "核心洞察",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "二、可执行行动与安全边界",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "落地动作",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "35~60字",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "4字以内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "30~55字",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "20~40字",
+      "where": "generate",
+      "kind": "length"
+    }
+  ],
+  "agent8": [
+    {
+      "text": "你是「反向思考（事前验尸）」结构化抽取助手。请从用户输入中提取关键信息，未提及的字段务必留空 \"\"，不要编造。",
+      "where": "extract",
+      "kind": "wording"
+    },
+    {
+      "text": "35字以内",
+      "where": "extract",
+      "kind": "length"
+    },
+    {
+      "text": "1~2 项",
+      "where": "extract",
+      "kind": "count"
+    },
+    {
+      "text": "（未提及则留空）\"",
+      "where": "extract",
+      "kind": "wording"
+    },
+    {
+      "text": "紧扣用户的具体案例，拒绝空泛鸡汤与教科书式套话，直指要害",
+      "where": "generate",
+      "kind": "wording"
+    },
+    {
+      "text": "pillars 固定 3 项，标题分别为：Top 1 致命死因、系统断裂点（Breakpoint）、工程学备份与安全边际",
+      "where": "generate",
+      "kind": "wording"
+    },
+    {
+      "text": "steps 为 4~5 步防死与安全边际构建行动（按致命优先级排序，每步必须可落地、可检查）",
+      "where": "generate",
+      "kind": "wording"
+    },
+    {
+      "text": "council_synthesis 提炼 4 位智囊的「合议共识」与「关键张力」",
+      "where": "generate",
+      "kind": "wording"
+    },
+    {
+      "text": "4 位智囊各自独立发声，给出立场标签、犀利判断与具体落地动作",
+      "where": "generate",
+      "kind": "wording"
+    },
+    {
+      "text": "18字以内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "45字以内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "45~90字",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "Top 1 致命死因",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "系统断裂点（Breakpoint）",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "工程学备份与安全边际",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "一、核心拆解与关键发现",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "14字以内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "40~75字",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "核心洞察",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "二、可执行行动与安全边界",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "落地动作",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "35~60字",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "4字以内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "30~55字",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "20~40字",
+      "where": "generate",
+      "kind": "length"
+    }
+  ],
+  "agent9": [
+    {
+      "text": "你是「激励机制诊断」结构化抽取助手。请从用户输入中提取关键信息，未提及的字段务必留空 \"\"，不要编造。",
+      "where": "extract",
+      "kind": "wording"
+    },
+    {
+      "text": "35字以内",
+      "where": "extract",
+      "kind": "length"
+    },
+    {
+      "text": "1~2 项",
+      "where": "extract",
+      "kind": "count"
+    },
+    {
+      "text": "（未提及则留空）\"",
+      "where": "extract",
+      "kind": "wording"
+    },
+    {
+      "text": "1条",
+      "where": "generate",
+      "kind": "count"
+    },
+    {
+      "text": "紧扣用户的具体案例，拒绝空泛鸡汤与教科书式套话，直指要害",
+      "where": "generate",
+      "kind": "wording"
+    },
+    {
+      "text": "pillars 固定 3 项，标题分别为：真实激励地图（明面 vs 暗面）、核心激励扭曲点、联邦快递式重构杠杆",
+      "where": "generate",
+      "kind": "wording"
+    },
+    {
+      "text": "steps 为 4~5 步激励机制重构与防作弊落地步骤（把口号变成顺人性的硬规则）",
+      "where": "generate",
+      "kind": "wording"
+    },
+    {
+      "text": "council_synthesis 提炼 4 位智囊的「合议共识」与「关键张力」",
+      "where": "generate",
+      "kind": "wording"
+    },
+    {
+      "text": "4 位智囊各自独立发声，给出立场标签、犀利判断与具体落地动作",
+      "where": "generate",
+      "kind": "wording"
+    },
+    {
+      "text": "18字以内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "45字以内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "45~90字",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "真实激励地图（明面 vs 暗面）",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "核心激励扭曲点",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "联邦快递式重构杠杆",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "一、核心拆解与关键发现",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "14字以内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "40~75字",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "核心洞察",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "二、可执行行动与安全边界",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "落地动作",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "35~60字",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "4字以内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "30~55字",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "20~40字",
+      "where": "generate",
+      "kind": "length"
+    }
+  ],
+  "agent10": [
+    {
+      "text": "你是「Lollapalooza 共振雷达」结构化抽取助手。请从用户输入中提取关键信息，未提及的字段务必留空 \"\"，不要编造。",
+      "where": "extract",
+      "kind": "wording"
+    },
+    {
+      "text": "35字以内",
+      "where": "extract",
+      "kind": "length"
+    },
+    {
+      "text": "1~2 项",
+      "where": "extract",
+      "kind": "count"
+    },
+    {
+      "text": "（未提及则留空）\"",
+      "where": "extract",
+      "kind": "wording"
+    },
+    {
+      "text": "25条",
+      "where": "generate",
+      "kind": "count"
+    },
+    {
+      "text": "紧扣用户的具体案例，拒绝空泛鸡汤与教科书式套话，直指要害",
+      "where": "generate",
+      "kind": "wording"
+    },
+    {
+      "text": "pillars 固定 3 项，标题分别为：同向共振的 3~5 种力量、核爆机制（为何非线性质变）、本质定性：真复利 vs 情绪泡沫",
+      "where": "generate",
+      "kind": "wording"
+    },
+    {
+      "text": "steps 为 4~5 步应对或借势行动清单（如果是泡沫给出撤离/隔离步骤，如果是真复利给出借势/复用步骤）",
+      "where": "generate",
+      "kind": "wording"
+    },
+    {
+      "text": "council_synthesis 提炼 4 位智囊的「合议共识」与「关键张力」",
+      "where": "generate",
+      "kind": "wording"
+    },
+    {
+      "text": "4 位智囊各自独立发声，给出立场标签、犀利判断与具体落地动作",
+      "where": "generate",
+      "kind": "wording"
+    },
+    {
+      "text": "18字以内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "45字以内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "45~90字",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "同向共振的 3~5 种力量",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "核爆机制（为何非线性质变）",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "本质定性：真复利 vs 情绪泡沫",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "一、核心拆解与关键发现",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "14字以内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "40~75字",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "核心洞察",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "二、可执行行动与安全边界",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "落地动作",
+      "where": "generate",
+      "kind": "structure"
+    },
+    {
+      "text": "35~60字",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "4字以内",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "30~55字",
+      "where": "generate",
+      "kind": "length"
+    },
+    {
+      "text": "20~40字",
+      "where": "generate",
+      "kind": "length"
+    }
+  ]
+}

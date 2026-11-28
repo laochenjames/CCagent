@@ -1,0 +1,134 @@
+{
+  "title": "一法多解（芒格多元模型） 模拟分析",
+  "summary": "干跑桩函数输出，仅用于验证管线与校验逻辑。",
+  "decision": "是否推进当前方案",
+  "assumptions": [],
+  "missing_info": [
+    "缺少关键量化数据"
+  ],
+  "pillars": [
+    {
+      "label": "多个问题的共同根因",
+      "value": "桩函数支柱内容"
+    },
+    {
+      "label": "核心“一法”（统一杠杆）",
+      "value": "桩函数支柱内容"
+    },
+    {
+      "label": "逆向避坑（芒格）",
+      "value": "桩函数支柱内容"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "一、一法如何同时解决每个问题（逐项映射）",
+      "items": [
+        {
+          "name": "示例项1",
+          "tag": "同步解决",
+          "detail": "桩函数详情"
+        }
+      ]
+    },
+    {
+      "heading": "二、背后的多元思维模型（2~3 个）",
+      "items": [
+        {
+          "name": "示例项1",
+          "tag": "跨学科模型",
+          "detail": "桩函数详情"
+        },
+        {
+          "name": "示例项2",
+          "tag": "跨学科模型",
+          "detail": "桩函数详情"
+        }
+      ]
+    },
+    {
+      "heading": "三、落地这个“一法”的执行步骤（3 步）",
+      "items": [
+        {
+          "name": "示例项1",
+          "tag": "第1步",
+          "detail": "桩函数详情"
+        },
+        {
+          "name": "示例项2",
+          "tag": "第1步",
+          "detail": "桩函数详情"
+        },
+        {
+          "name": "示例项3",
+          "tag": "第1步",
+          "detail": "桩函数详情"
+        }
+      ]
+    }
+  ],
+  "council_synthesis": {
+    "consensus_text": "需先补充关键证据再决策。",
+    "tension_text": "推进节奏与风险控制存在分歧。",
+    "tension_between": [
+      "root_detective",
+      "mental_models"
+    ]
+  },
+  "council_notes": [
+    {
+      "id": "root_detective",
+      "name": "共性根因侦探",
+      "role": "穿透表象 · 合并同类项",
+      "stance": "hold",
+      "verdict": "针对当前案例的模拟判断（共性根因侦探）。",
+      "based_on": "我们 8 人研发团队最近",
+      "grounded": true,
+      "confidence": "mid",
+      "would_change_if": "补充量化数据后调整",
+      "action": "先做小规模验证"
+    },
+    {
+      "id": "mental_models",
+      "name": "多元模型参谋",
+      "role": "跨学科模型 · Lollapalooza",
+      "stance": "oppose",
+      "verdict": "针对当前案例的模拟判断（多元模型参谋）。",
+      "based_on": "我们 8 人研发团队最近",
+      "grounded": true,
+      "confidence": "mid",
+      "would_change_if": "补充量化数据后调整",
+      "action": "先做小规模验证"
+    },
+    {
+      "id": "lever_designer",
+      "name": "杠杆设计师",
+      "role": "一石多鸟 · 机制化落地",
+      "stance": "need_info",
+      "verdict": "针对当前案例的模拟判断（杠杆设计师）。",
+      "based_on": "我们 8 人研发团队最近",
+      "grounded": true,
+      "confidence": "mid",
+      "would_change_if": "补充量化数据后调整",
+      "action": "先做小规模验证"
+    },
+    {
+      "id": "inversion_guard",
+      "name": "逆向避坑官",
+      "role": "反过来想 · 避开愚蠢",
+      "stance": "support",
+      "verdict": "针对当前案例的模拟判断（逆向避坑官）。",
+      "based_on": "用户未提供",
+      "grounded": true,
+      "confidence": "mid",
+      "would_change_if": "补充量化数据后调整",
+      "action": "先做小规模验证"
+    }
+  ],
+  "stance_counts": {
+    "support": 1,
+    "hold": 1,
+    "oppose": 1,
+    "need_info": 1
+  }
+}
