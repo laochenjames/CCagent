@@ -151,7 +151,7 @@ def resolve_llm_config(body=None, allow_body_base_url=False):
         using_server_key = True
 
     default_models = {
-        "gemini": env.get("GEMINI_MODEL") or "gemini-3.5-flash-lite",
+        "gemini": env.get("GEMINI_MODEL") or "gemini-4-hydrogen",
         "xai": env.get("XAI_MODEL") or "grok-3-mini",
         "deepseek": env.get("DEEPSEEK_MODEL") or "deepseek-chat",
     }
@@ -451,6 +451,20 @@ def call_llm_json(prompt, cfg, temperature=0.3, max_tokens=4096, tag="ThinkingAg
                 time.sleep(1.8 * (attempt + 1))
                 continue
             print(f"[{tag}Error] {provider} HTTP {e.code}", flush=True)
+            if (
+                provider == "gemini"
+                and model != "gemini-2.5-flash-lite"
+                and e.code in (404, 429, 500, 502, 503, 504)
+                and (deadline is None or (deadline - time.monotonic()) >= 8.0)
+            ):
+                logging.warning("[%s] Gemini model %s failed (HTTP %d); falling back to gemini-2.5-flash-lite.", tag, model, e.code)
+                fb_cfg = dict(cfg)
+                fb_cfg["model"] = "gemini-2.5-flash-lite"
+                return call_llm_json(
+                    prompt, fb_cfg, temperature=temperature, max_tokens=max_tokens, tag=tag,
+                    schema=schema, deadline=deadline, images=images,
+                    prefetched_inline_images=prefetched_inline_images, web_search=web_search,
+                )
             raise last_err
         except RuntimeError as e:
             if "MAX_TOKENS" in str(e):
