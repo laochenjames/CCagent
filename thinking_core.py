@@ -269,7 +269,7 @@ def _fetch_image_inline_data(url, timeout=8):
         return None
 
 
-def call_llm_json(prompt, cfg, temperature=0.3, max_tokens=4096, tag="ThinkingAgent", schema=None, deadline=None, images=None, prefetched_inline_images=None):
+def call_llm_json(prompt, cfg, temperature=0.3, max_tokens=4096, tag="ThinkingAgent", schema=None, deadline=None, images=None, prefetched_inline_images=None, web_search=False):
     if not cfg.get("api_key"):
         raise RuntimeError("未配置 API Key")
 
@@ -287,7 +287,7 @@ def call_llm_json(prompt, cfg, temperature=0.3, max_tokens=4096, tag="ThinkingAg
             "maxOutputTokens": max_tokens,
             "responseMimeType": "application/json",
         }
-        if schema:
+        if schema and not web_search:
             if _schema_unsupported.get(schema_key):
                 _METRICS["schema_skipped_total"] += 1
                 logging.warning(
@@ -310,6 +310,8 @@ def call_llm_json(prompt, cfg, temperature=0.3, max_tokens=4096, tag="ThinkingAg
             "contents": [{"role": "user", "parts": parts}],
             "generationConfig": gen_cfg,
         }
+        if web_search:
+            payload["tools"] = [{"google_search": {}}]
         headers = {
             "Content-Type": "application/json",
             "x-goog-api-key": cfg["api_key"],
@@ -1082,7 +1084,7 @@ def run_extract(config, raw_text, cfg):
     }
 
 
-def run_generate(config, raw_text, fields, cfg, images=None):
+def run_generate(config, raw_text, fields, cfg, images=None, web_search=False):
     deadline = time.monotonic() + _total_budget()
     schema = build_generate_schema(config)
     prompt = build_generate_prompt(config, raw_text, fields)
@@ -1093,6 +1095,7 @@ def run_generate(config, raw_text, fields, cfg, images=None):
     raw_res = call_llm_json(
         prompt, cfg, temperature=0.3, max_tokens=4096, tag=config["id"],
         schema=schema, deadline=deadline, images=clean_images, prefetched_inline_images=prefetched_inline,
+        web_search=web_search,
     )
     cleaned, errors = validate_result(config, raw_res, raw_text=raw_text, fields=fields, allow_under_min=False)
     if not errors:
@@ -1371,9 +1374,13 @@ def make_handler(
                 except ValueError as ve:
                     return self._send_json(400, {"error": str(ve)})
                 images = _sanitize_image_urls(body.get("images"))
+                req_web_search = bool(body.get("web_search"))
+                # Protect hosted server bill: web_search only enabled for BYOK or local (unless ALLOW_HOSTED_WEB_SEARCH=1)
+                allow_ws = (not cfg.get("hosted")) or (not cfg.get("using_server_key")) or (os.environ.get("ALLOW_HOSTED_WEB_SEARCH") == "1")
+                web_search = req_web_search and allow_ws
                 try:
                     if config is not None:
-                        result = normalize_result(run_generate(config, raw_text, fields, cfg, images=images))
+                        result = normalize_result(run_generate(config, raw_text, fields, cfg, images=images, web_search=web_search))
                     else:
                         result = normalize_result(generate_fn(raw_text, fields, cfg))
                 except Exception as e:

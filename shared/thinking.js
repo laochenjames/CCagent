@@ -422,12 +422,15 @@
       const imgs = Array.isArray(state.images) && state.images.length
         ? state.images
         : (Array.isArray(window.__CCAGENT_IMAGES__) ? window.__CCAGENT_IMAGES__ : []);
+      const webSearchChk = $("chk-web-search");
+      const webSearch = Boolean(webSearchChk && webSearchChk.checked);
       const data = await apiFetch("api/generate", {
         method: "POST",
         body: JSON.stringify({
           raw_text: state.rawText,
           fields: state.fields,
           images: imgs.slice(0, 2),
+          web_search: webSearch,
           ...getRequestAuthPayload(),
         }),
       });
@@ -533,6 +536,14 @@
 
     $("btn-extract").addEventListener("click", handleExtract);
     $("btn-generate").addEventListener("click", handleGenerate);
+    const genBtn = $("btn-generate");
+    if (genBtn && !$("chk-web-search")) {
+      const lbl = document.createElement("label");
+      lbl.className = "web-search-toggle";
+      lbl.title = "开启后使用 Gemini Google Search 联网查证最新事实与数据（托管模式仅 BYOK 可用）";
+      lbl.innerHTML = `<input type="checkbox" id="chk-web-search"> <span>联网查证（Gemini）</span>`;
+      genBtn.parentNode.insertBefore(lbl, genBtn);
+    }
     $("btn-edit-desc").addEventListener("click", () => {
       $("input-collapsed").classList.add("hidden");
       $("input-expanded").classList.remove("hidden");

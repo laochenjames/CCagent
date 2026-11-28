@@ -2,8 +2,9 @@
   const BTN_ATTR = "data-ccagent-injected";
 
   function extractTweet(article) {
-    const textEl = article.querySelector('[data-testid="tweetText"]');
-    const text = textEl ? textEl.innerText.trim() : "";
+    const textEls = article.querySelectorAll('[data-testid="tweetText"]');
+    const text = textEls[0] ? textEls[0].innerText.trim() : "";
+    const quoteText = textEls.length > 1 ? textEls[1].innerText.trim() : "";
     const userEl = article.querySelector('[data-testid="User-Name"]');
     const author = userEl ? userEl.innerText.replace(/\n+/g, " ").trim() : "";
     const timeLink = article.querySelector("time") && article.querySelector("time").closest("a");
@@ -23,6 +24,7 @@
     const parts = [];
     if (author) parts.push(`作者：${author}`);
     if (text) parts.push(text);
+    if (quoteText && quoteText !== text) parts.push(`【引用推文】\n${quoteText}`);
     if (url) parts.push(`链接：${url}`);
     return { formatted: parts.join("\n\n"), url, images };
   }
